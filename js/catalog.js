@@ -365,7 +365,12 @@
           (apps.length ? '<div class="product-modal-apps">' + apps.map((item) => '<span>' + escapeHtml(item.name) + '</span>').join('') + '</div>' : '') +
           '<div class="product-modal-actions">' +
             '<p class="product-card-price">Цена по запросу</p>' +
-            '<button type="button" class="btn-primary" data-action="request">Оставить заявку</button>' +
+            '<div class="product-modal-buttons">' +
+              '<button type="button" class="btn-secondary" data-add-to-request="' + escapeHtml(product.id) + '">' +
+                (window.isInRequestCart && window.isInRequestCart(product.id) ? 'В заявке' : 'Добавить в заявку') +
+              '</button>' +
+              '<button type="button" class="btn-primary" data-action="request">Оставить заявку</button>' +
+            '</div>' +
           '</div>' +
         '</div>' +
       '</div>';
@@ -397,6 +402,18 @@
     modalEl.addEventListener('click', (event) => {
       if (event.target === modalEl) {
         closeProductModal();
+        return;
+      }
+      const addBtn = event.target.closest('[data-add-to-request]');
+      if (addBtn) {
+        event.preventDefault();
+        event.stopPropagation();
+        const product = findById(allProducts, addBtn.getAttribute('data-add-to-request'));
+        if (product && window.addToRequestCart) {
+          window.addToRequestCart(product);
+          addBtn.textContent = 'В заявке';
+          if (window.showToast) window.showToast('Товар добавлен в заявку');
+        }
         return;
       }
       const requestBtn = event.target.closest('[data-action="request"]');

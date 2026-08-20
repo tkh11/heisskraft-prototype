@@ -2,6 +2,124 @@
   const MAX_FILE_SIZE = 10 * 1024 * 1024;
   const ACCEPTED_EXTENSIONS = ['pdf', 'doc', 'docx', 'xls', 'xlsx', 'jpg', 'jpeg', 'png', 'webp', 'txt', 'zip', 'rtf'];
   const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  const CART_KEY = 'heisskraft-request-cart';
+
+  function escapeHtml(value) {
+    return String(value == null ? '' : value).replace(/[&<>"']/g, (char) => ({
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#39;'
+    }[char]));
+  }
+
+  function loadCart() {
+    try {
+      const data = JSON.parse(sessionStorage.getItem(CART_KEY) || '[]');
+      return Array.isArray(data) ? data : [];
+    } catch (err) {
+      return [];
+    }
+  }
+
+  function cartQty(items) {
+    return items.reduce((sum, item) => sum + (Number(item.qty) || 1), 0);
+  }
+
+  function saveCart(items) {
+    sessionStorage.setItem(CART_KEY, JSON.stringify(items));
+    syncCartUI();
+  }
+
+  function syncBadges() {
+    const count = cartQty(loadCart());
+    document.querySelectorAll('.request-cart-count').forEach((badge) => {
+      badge.hidden = count < 1;
+      badge.textContent = count > 99 ? '99+' : String(count);
+    });
+    document.querySelectorAll('.request-cart-btn').forEach((btn) => {
+      const label = count
+        ? 'Открыть заявку, товаров: ' + count
+        : 'Открыть заявку';
+      btn.setAttribute('aria-label', label);
+    });
+  }
+
+  function renderCartList() {
+    const box = document.getElementById('requestCart');
+    const list = document.getElementById('requestCartList');
+    const sum = document.getElementById('requestCartSum');
+    if (!box || !list) return;
+    const items = loadCart();
+    box.hidden = items.length === 0;
+    if (sum) {
+      const count = cartQty(items);
+      sum.textContent = count ? count + ' шт.' : '';
+    }
+    list.innerHTML = items.map((item) => (
+      '<li class="request-cart-item" data-cart-id="' + escapeHtml(item.id) + '">' +
+        '<span class="request-cart-thumb">' +
+          (item.image ? '<img src="' + escapeHtml(item.image) + '" alt="">' : '') +
+        '</span>' +
+        '<span class="request-cart-info">' +
+          '<strong>' + escapeHtml(item.name) + '</strong>' +
+          (item.sku ? '<span>Артикул: ' + escapeHtml(item.sku) + '</span>' : '') +
+        '</span>' +
+        '<span class="request-cart-qty">' +
+          '<button type="button" class="request-cart-step" data-cart-step="-1" aria-label="Уменьшить количество">−</button>' +
+          '<span>' + escapeHtml(item.qty) + '</span>' +
+          '<button type="button" class="request-cart-step" data-cart-step="1" aria-label="Увеличить количество">+</button>' +
+        '</span>' +
+        '<button type="button" class="request-cart-remove" data-cart-remove aria-label="Удалить товар">Удалить</button>' +
+      '</li>'
+    )).join('');
+  }
+
+  function syncCartUI() {
+    syncBadges();
+    renderCartList();
+  }
+
+  function addToRequestCart(product) {
+    if (!product || !product.id) return loadCart();
+    const items = loadCart();
+    const existing = items.find((item) => item.id === product.id);
+    if (existing) {
+      existing.qty = (Number(existing.qty) || 1) + 1;
+    } else {
+      items.push({
+        id: product.id,
+        name: product.name || product.id,
+        sku: product.sku || '',
+        series: product.series || '',
+        image: product.image || '',
+        qty: 1
+      });
+    }
+    saveCart(items);
+    return items;
+  }
+
+  function changeCartQty(id, delta) {
+    const items = loadCart().map((item) => {
+      if (item.id !== id) return item;
+      return Object.assign({}, item, { qty: (Number(item.qty) || 1) + delta });
+    }).filter((item) => item.qty > 0);
+    saveCart(items);
+  }
+
+  function removeFromRequestCart(id) {
+    saveCart(loadCart().filter((item) => item.id !== id));
+  }
+
+  function clearRequestCart() {
+    saveCart([]);
+  }
+
+  function isInRequestCart(id) {
+    return loadCart().some((item) => item.id === id);
+  }
 
   const html = (
     '<div class="request-modal" id="requestModal" role="dialog" aria-modal="true" aria-labelledby="requestTitle" aria-hidden="true">' +
@@ -41,6 +159,13 @@
               '<label for="requestCity">Из какого вы города?*</label>' +
               '<input type="text" id="requestCity" name="city" autocomplete="address-level2" maxlength="80" required />' +
               '<span class="request-error" id="requestCityError" role="alert"></span>' +
+            '</div>' +
+            '<div class="request-cart" id="requestCart" hidden>' +
+              '<div class="request-cart-head">' +
+                '<span>Товары в заявке</span>' +
+                '<span class="request-cart-sum" id="requestCartSum"></span>' +
+              '</div>' +
+              '<ul class="request-cart-list" id="requestCartList"></ul>' +
             '</div>' +
             '<div class="request-field">' +
               '<label for="requestDetails">Детали обращения</label>' +
@@ -102,6 +227,19 @@
       if (event.target === modal) closeRequestForm();
     });
     form.addEventListener('submit', onSubmit);
+    const cartList = document.getElementById('requestCartList');
+    if (cartList) {
+      cartList.addEventListener('click', (event) => {
+        const row = event.target.closest('[data-cart-id]');
+        if (!row) return;
+        if (event.target.closest('[data-cart-remove]')) {
+          removeFromRequestCart(row.getAttribute('data-cart-id'));
+          return;
+        }
+        const step = event.target.closest('[data-cart-step]');
+        if (step) changeCartQty(row.getAttribute('data-cart-id'), Number(step.getAttribute('data-cart-step')));
+      });
+    }
     fields.phone.addEventListener('focus', onPhoneFocus);
     fields.phone.addEventListener('input', onPhoneInput);
     fields.phone.addEventListener('keydown', onPhoneKeydown);
@@ -370,6 +508,16 @@
     formData.append('details', fields.details.value.trim());
     formData.append('consent', 'true');
     formData.append('page', window.location.href);
+    const cartItems = loadCart();
+    if (cartItems.length) {
+      formData.append('products', JSON.stringify(cartItems));
+      cartItems.forEach((item, index) => {
+        formData.append('products[' + index + '][id]', item.id);
+        formData.append('products[' + index + '][name]', item.name);
+        formData.append('products[' + index + '][sku]', item.sku || '');
+        formData.append('products[' + index + '][qty]', String(item.qty || 1));
+      });
+    }
     if (fields.file.files && fields.file.files[0]) {
       formData.append('file', fields.file.files[0]);
     }
@@ -378,6 +526,7 @@
     try {
       await submitPayload(formData);
       setSending(false);
+      clearRequestCart();
       showSuccess();
     } catch (err) {
       setSending(false);
@@ -399,6 +548,7 @@
     closeOverlays();
     if (!modal.classList.contains('is-open')) lastFocus = document.activeElement;
     if (!successEl.hidden) resetView();
+    renderCartList();
     lockPage(true);
     modal.classList.add('is-open');
     modal.setAttribute('aria-hidden', 'false');
@@ -446,4 +596,9 @@
 
   window.openRequestForm = openRequestForm;
   window.closeRequestForm = closeRequestForm;
+  window.addToRequestCart = addToRequestCart;
+  window.removeFromRequestCart = removeFromRequestCart;
+  window.isInRequestCart = isInRequestCart;
+  syncCartUI();
+  document.addEventListener('layout:ready', syncBadges);
 })();
