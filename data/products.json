@@ -3,7 +3,7 @@
     "id": "hmh-2-20",
     "name": "HMH 2-20",
     "category": "water",
-    "image": "assets/catalog2.jpg",
+    "image": "assets/products/hmh-2-20.jpg",
     "description": "Горизонтальный многоступенчатый насос для водоснабжения частных домов и небольших объектов. Компактный корпус, низкий уровень шума, стабильный напор при переменном расходе.",
     "specs": {
       "flow": "2 м³/ч",
@@ -21,7 +21,7 @@
     "id": "hmh-4-50",
     "name": "HMH 4-50",
     "category": "water",
-    "image": "assets/catalog2.jpg",
+    "image": "assets/products/hmh-4-50.jpg",
     "description": "Насос для повышения давления в распределительных сетях. Стабильная характеристика Q–H, удобен для работы с частотным преобразователем.",
     "specs": {
       "flow": "4 м³/ч",
@@ -39,7 +39,7 @@
     "id": "hmc-25-40",
     "name": "HMC 25-40",
     "category": "heating",
-    "image": "assets/catalog3.jpg",
+    "image": "assets/products/hmc-25-40.jpg",
     "description": "Циркуляционный насос для систем отопления частных домов. Тихая работа, энергоэффективный двигатель, монтаж на трубопровод.",
     "specs": {
       "flow": "2,5 м³/ч",
@@ -57,7 +57,7 @@
     "id": "hmc-32-80",
     "name": "HMC 32-80",
     "category": "heating",
-    "image": "assets/catalog3.jpg",
+    "image": "assets/products/hmc-32-80.jpg",
     "description": "Циркуляционный насос для ИТП и систем отопления средних объектов. Три скорости, фланцевое присоединение.",
     "specs": {
       "flow": "8 м³/ч",
@@ -75,7 +75,7 @@
     "id": "hdf-8-7",
     "name": "HDF 8-7",
     "category": "drainage",
-    "image": "assets/catalog4.jpg",
+    "image": "assets/products/hdf-8-7.jpg",
     "description": "Дренажный насос для откачки чистой и слегка загрязнённой воды из приямков, подвалов и дренажных колодцев.",
     "specs": {
       "flow": "8 м³/ч",
@@ -93,7 +93,7 @@
     "id": "hff-15-10",
     "name": "HFF 15-10",
     "category": "drainage",
-    "image": "assets/catalog4.jpg",
+    "image": "assets/products/hff-15-10.jpg",
     "description": "Фекальный насос с измельчителем для канализации частных домов, септиков и КНС небольшой производительности.",
     "specs": {
       "flow": "15 м³/ч",
@@ -111,7 +111,7 @@
     "id": "hnf-32-160",
     "name": "HNF 32-160",
     "category": "fire",
-    "image": "assets/catalog5.jpg",
+    "image": "assets/products/hnf-32-160.jpg",
     "description": "Консольный насос для станций пожаротушения. Рассчитан на работу в составе насосной группы с резервированием.",
     "specs": {
       "flow": "20 м³/ч",
@@ -129,7 +129,7 @@
     "id": "hnf-50-250",
     "name": "HNF 50-250",
     "category": "fire",
-    "image": "assets/catalog5.jpg",
+    "image": "assets/products/hnf-50-250.jpg",
     "description": "Насос повышенной производительности для систем водяного и пенного пожаротушения промышленных объектов.",
     "specs": {
       "flow": "50 м³/ч",
@@ -147,7 +147,7 @@
     "id": "hwf-10",
     "name": "HWF 10",
     "category": "treatment",
-    "image": "assets/catalog6.jpg",
+    "image": "assets/products/hwf-10.jpg",
     "description": "Станция механической фильтрации для подготовки хозяйственно-питьевой воды. Сменные картриджи, компактный корпус.",
     "specs": {
       "flow": "1,5 м³/ч",
@@ -165,7 +165,7 @@
     "id": "hro-250",
     "name": "HRO 250",
     "category": "treatment",
-    "image": "assets/catalog6.jpg",
+    "image": "assets/products/hro-250.jpg",
     "description": "Установка обратного осмоса для водоподготовки малых объектов и лабораторий. Производительность 250 л/ч.",
     "specs": {
       "flow": "0,25 м³/ч",

@@ -90,7 +90,7 @@
     let lastFocus = null;
     let activeIndex = -1;
 
-    const products = [
+    const pages = [
       { name: 'Водоснабжение', category: 'Каталог', hint: 'Насосы и станции для воды', href: 'catalog.html?category=water', thumb: 'assets/catalog2.jpg' },
       { name: 'Отопление', category: 'Каталог', hint: 'Циркуляционные насосы', href: 'catalog.html?category=heating', thumb: 'assets/catalog3.jpg' },
       { name: 'Канализация / Дренаж', category: 'Каталог', hint: 'Дренажные и фекальные насосы', href: 'catalog.html?category=drainage', thumb: 'assets/catalog4.jpg' },
@@ -105,10 +105,24 @@
       { name: 'Оставить заявку', category: 'Действие', hint: 'Подбор оборудования под объект', action: 'request', thumb: 'assets/logo.svg', icon: true }
     ];
 
-    const fuse = typeof Fuse === 'function' ? new Fuse(products, { keys: ['name', 'category'] }) : null;
-    const popularQueries = ['Отопление', 'Водоснабжение', 'Контакты', 'Подрядчик'];
+    const categoryLabels = {
+      water: 'Водоснабжение',
+      heating: 'Отопление',
+      drainage: 'Канализация / Дренаж',
+      fire: 'Пожаротушение',
+      treatment: 'Водоподготовка'
+    };
+
+    const fuseOptions = {
+      keys: ['name', 'category', 'hint', 'searchText'],
+      threshold: 0.35,
+      ignoreLocation: true
+    };
+    let searchIndex = pages.slice();
+    let fuse = typeof Fuse === 'function' ? new Fuse(searchIndex, fuseOptions) : null;
+    const popularQueries = ['Отопление', 'Водоснабжение', 'HMH', 'Контакты'];
     const popularNames = ['Водоснабжение', 'Отопление', 'Контакты', 'Оставить заявку'];
-    let currentMatches = products.slice();
+    let currentMatches = searchIndex.slice();
 
     function normalize(s) {
       return (s || '').toLowerCase().replace(/ё/g, 'е').trim();
@@ -128,10 +142,13 @@
 
     function filterIndex(query) {
       const q = query.trim();
-      if (!q) return products.filter((item) => popularNames.includes(item.name));
+      if (!q) return searchIndex.filter((item) => popularNames.includes(item.name));
       if (fuse) return fuse.search(q).map((result) => result.item);
       const needle = q.toLowerCase().replace(/ё/g, 'е');
-      return products.filter((item) => (item.name + ' ' + item.category).toLowerCase().replace(/ё/g, 'е').includes(needle));
+      return searchIndex.filter((item) => {
+        const haystack = [item.name, item.category, item.hint, item.searchText].join(' ').toLowerCase().replace(/ё/g, 'е');
+        return haystack.includes(needle);
+      });
     }
 
     function renderHints() {
@@ -154,7 +171,7 @@
         searchResults.innerHTML =
           '<div class="search-empty">' +
             '<h3>Ничего не найдено</h3>' +
-            '<p>По запросу «' + escapeHtml(q) + '» нет разделов. Оставьте заявку — подберём оборудование.</p>' +
+            '<p>По запросу «' + escapeHtml(q) + '» нет разделов и товаров. Оставьте заявку — подберём оборудование.</p>' +
             '<button type="button" class="btn-primary" id="searchEmptyCta">Оставить заявку</button>' +
           '</div>';
         searchInput.removeAttribute('aria-activedescendant');
@@ -167,8 +184,8 @@
         currentMatches.map((item, i) => (
           '<button type="button" class="search-item' + (i === 0 ? ' is-active' : '') + '" role="option" tabindex="-1" id="search-opt-' + i + '" data-index="' + i + '" aria-selected="' + (i === 0) + '">' +
             '<span class="search-item-thumb' + (item.icon ? ' is-icon' : '') + '"><img src="' + item.thumb + '" alt=""></span>' +
-            '<span class="search-item-text"><strong>' + item.name + '</strong><span>' + item.hint + '</span></span>' +
-            '<span class="search-item-type">' + item.category + '</span>' +
+            '<span class="search-item-text"><strong>' + escapeHtml(item.name) + '</strong><span class="search-item-hint' + (item.category === 'Товар' ? ' is-clamped' : '') + '">' + escapeHtml(item.hint) + '</span></span>' +
+            '<span class="search-item-type">' + escapeHtml(item.category) + '</span>' +
           '</button>'
         )).join('');
 
@@ -324,6 +341,35 @@
         setActive((activeIndex - 1 + currentMatches.length) % currentMatches.length);
       }
     });
+
+    fetch(new URL('data/products.json', layoutRoot()))
+      .then((response) => {
+        if (!response.ok) throw new Error('Не удалось загрузить товары');
+        return response.json();
+      })
+      .then((catalogProducts) => {
+        if (!Array.isArray(catalogProducts)) return;
+        const catalogItems = catalogProducts.map((product) => {
+          const section = categoryLabels[product.category] || 'Каталог';
+          const specText = product.specs && typeof product.specs === 'object'
+            ? Object.values(product.specs).join(' ')
+            : '';
+          return {
+            name: product.name,
+            category: 'Товар',
+            hint: product.description || section,
+            href: 'catalog.html?category=' + encodeURIComponent(product.category) + '#' + encodeURIComponent(product.id),
+            thumb: product.image,
+            searchText: [product.name, product.id, section, product.description, specText].join(' ')
+          };
+        });
+        searchIndex = pages.concat(catalogItems);
+        fuse = typeof Fuse === 'function' ? new Fuse(searchIndex, fuseOptions) : null;
+        if (searchModal.classList.contains('is-open')) renderResults(searchInput.value);
+      })
+      .catch((err) => {
+        console.warn(err);
+      });
   }
 
   function initActions() {

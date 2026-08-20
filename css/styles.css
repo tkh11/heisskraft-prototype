@@ -944,17 +944,30 @@
       object-fit: contain;
     }
 
+    .search-item-text {
+      min-width: 0;
+    }
+
     .search-item-text strong {
       display: block;
       font-size: 15px;
       font-weight: 700;
     }
 
-    .search-item-text span {
+    .search-item-text span,
+    .search-item-hint {
       display: block;
       font-size: 13px;
       color: #4b5563;
       line-height: 1.4;
+    }
+
+    .search-item-hint.is-clamped {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
+      overflow: hidden;
     }
 
     .search-item-type {
@@ -1011,7 +1024,8 @@
     }
 
     .catalog-card.is-highlighted,
-    .profile-card.is-highlighted {
+    .profile-card.is-highlighted,
+    .product-card.is-highlighted {
       outline: 2px solid var(--red);
       outline-offset: 3px;
     }
