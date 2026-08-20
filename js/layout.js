@@ -98,6 +98,7 @@
       { name: 'Пожаротушение', category: 'Каталог', hint: 'Насосы и станции ПТ', href: 'catalog.html?category=fire', thumb: 'assets/catalog5.jpg' },
       { name: 'Водоподготовка', category: 'Каталог', hint: 'Фильтрация и обратный осмос', href: 'catalog.html?category=treatment', thumb: 'assets/catalog6.jpg' },
       { name: 'Полный каталог', category: 'Каталог', hint: 'Вся линейка HEISSKRAFT', href: 'catalog.html', thumb: 'assets/catalog1.jpg' },
+      { name: 'Подбор насосов', category: 'Страница', hint: 'Подбор по расходу и напору', href: 'pumps.html', thumb: 'assets/catalog2.jpg' },
       { name: 'Подрядчик', category: 'Профиль', hint: 'Комплектация и поддержка объектов', target: '[data-profile="contractor"]', thumb: 'assets/icon-contractor.svg', icon: true },
       { name: 'Проектировщик', category: 'Профиль', hint: 'BIM, спецификации, гидравлика', target: '[data-profile="designer"]', thumb: 'assets/icon-designer.svg', icon: true },
       { name: 'Частное лицо', category: 'Профиль', hint: 'Системы для частного дома', target: '[data-profile="private"]', thumb: 'assets/icon-private.svg', icon: true },
@@ -394,7 +395,6 @@
         about: 'Страница «О компании» — в разработке',
         requisites: 'Реквизиты организации — в разработке',
         docs: 'Раздел «Документация» — в разработке',
-        pumps: 'Подбор насосов — в разработке',
         privacy: 'Политика конфиденциальности — в разработке',
         personal: 'Обработка персональных данных — в разработке'
       };
@@ -414,6 +414,11 @@
     initSearch();
     initActions();
     document.dispatchEvent(new CustomEvent('layout:ready'));
+    const pageFile = (window.location.pathname.split('/').pop() || 'index.html');
+    document.querySelectorAll('.header-nav a[href], .mobile-menu-nav a[href]').forEach((link) => {
+      const href = (link.getAttribute('href') || '').split('?')[0];
+      if (href && href === pageFile) link.setAttribute('aria-current', 'page');
+    });
   }
 
   if (document.readyState === 'loading') {

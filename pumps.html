@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Подбор насосов — HEISSKRAFT</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <a class="visually-hidden" href="#pump-select">Перейти к подбору насосов</a>
+  <div id="page">
+    <div id="site-header"></div>
+
+    <main class="page-catalog page-pumps" id="pump-select">
+      <nav class="catalog-breadcrumb" aria-label="Навигация">
+        <a href="index.html">Главная</a>
+        <span aria-hidden="true">/</span>
+        <span>Подбор насосов</span>
+      </nav>
+      <h1 class="section-title">Подбор насосов HEISSKRAFT</h1>
+      <p class="catalog-lead">Подберите подходящее оборудование по рабочим параметрам системы</p>
+
+      <form class="pump-select-form" id="pumpSelectForm" novalidate>
+        <div class="pump-select-main">
+          <div class="pump-field">
+            <label for="pumpQ">Расход Q</label>
+            <div class="pump-input">
+              <input type="text" id="pumpQ" name="q" inputmode="decimal" autocomplete="off" aria-describedby="pumpQError" />
+              <span>м³/ч</span>
+            </div>
+            <span class="request-error" id="pumpQError" role="alert"></span>
+          </div>
+          <div class="pump-field">
+            <label for="pumpH">Напор H</label>
+            <div class="pump-input">
+              <input type="text" id="pumpH" name="h" inputmode="decimal" autocomplete="off" aria-describedby="pumpHError" />
+              <span>м</span>
+            </div>
+            <span class="request-error" id="pumpHError" role="alert"></span>
+          </div>
+          <button type="submit" class="btn-primary">Подобрать насос</button>
+        </div>
+
+        <details class="pump-select-extra">
+          <summary>Дополнительные параметры</summary>
+          <div class="catalog-filters">
+            <label>
+              Применение
+              <select id="pumpApplication" name="application">
+                <option value="">Не важно</option>
+              </select>
+            </label>
+            <label>
+              Конструкция
+              <select id="pumpConstruction" name="construction">
+                <option value="">Не важно</option>
+              </select>
+            </label>
+            <label>
+              Тип насоса
+              <select id="pumpType" name="pumpType">
+                <option value="">Не важно</option>
+              </select>
+            </label>
+          </div>
+        </details>
+      </form>
+
+      <div id="pumpResults" hidden></div>
+    </main>
+
+    <div class="pump-compare-bar" id="pumpCompareBar" hidden>
+      <span id="pumpCompareCount"></span>
+      <button type="button" class="btn-primary" data-pump-compare-open>Сравнить выбранные</button>
+    </div>
+
+    <div id="site-footer"></div>
+  </div>
+
+  <div class="product-modal" id="productModal" role="dialog" aria-modal="true" aria-labelledby="productModalTitle" aria-hidden="true">
+    <div class="product-modal-box" role="document">
+      <div class="search-box-header">
+        <h2 id="productModalTitle">Насос</h2>
+        <button type="button" class="search-close" id="productModalClose" aria-label="Закрыть">
+          <svg viewBox="0 0 18 18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M4 4l10 10M14 4L4 14"/>
+          </svg>
+        </button>
+      </div>
+      <div class="product-modal-body" id="productModalBody"></div>
+    </div>
+  </div>
+
+  <div class="product-modal" id="compareModal" role="dialog" aria-modal="true" aria-labelledby="compareModalTitle" aria-hidden="true">
+    <div class="product-modal-box" role="document">
+      <div class="search-box-header">
+        <h2 id="compareModalTitle">Сравнение насосов</h2>
+        <button type="button" class="search-close" id="compareModalClose" aria-label="Закрыть сравнение">
+          <svg viewBox="0 0 18 18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M4 4l10 10M14 4L4 14"/>
+          </svg>
+        </button>
+      </div>
+      <div class="product-modal-body" id="compareModalBody"></div>
+    </div>
+  </div>
+
+  <script src="js/layout.js"></script>
+  <script src="js/request-form.js"></script>
+  <script src="js/pump-data.js"></script>
+  <script src="js/pump-select.js"></script>
+  <script src="js/pumps.js"></script>
+</body>
+</html>

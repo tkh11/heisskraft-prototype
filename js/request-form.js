@@ -274,7 +274,7 @@
       document.body.style.overflow = 'hidden';
       return;
     }
-    const productOpen = document.getElementById('productModal') && document.getElementById('productModal').classList.contains('is-open');
+    const productOpen = document.querySelector('.product-modal.is-open');
     const searchOpen = document.getElementById('searchModal') && document.getElementById('searchModal').classList.contains('is-open');
     const menuOpen = document.getElementById('mobileMenu') && document.getElementById('mobileMenu').classList.contains('is-open');
     if (pageRoot && !productOpen) {
@@ -543,11 +543,19 @@
     );
   }
 
-  function openRequestForm() {
+  function openRequestForm(options) {
+    options = options || {};
     ensureModal();
     closeOverlays();
     if (!modal.classList.contains('is-open')) lastFocus = document.activeElement;
     if (!successEl.hidden) resetView();
+    if (options.product && !isInRequestCart(options.product.id)) addToRequestCart(options.product);
+    if (options.details && fields.details) {
+      const current = fields.details.value.trim();
+      fields.details.value = current
+        ? (current.indexOf(options.details) === -1 ? current + '\n\n' + options.details : current)
+        : options.details;
+    }
     renderCartList();
     lockPage(true);
     modal.classList.add('is-open');
