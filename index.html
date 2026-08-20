@@ -304,28 +304,46 @@
       background: var(--white);
       width: min(400px, 90vw);
       height: 100%;
-      padding: 32px 24px;
+      padding: 32px 24px 28px;
       transform: translateX(-100%);
       transition: transform 0.3s ease;
       display: flex;
       flex-direction: column;
-      gap: 16px;
     }
 
     .mobile-menu.is-open .mobile-menu-panel {
       transform: translateX(0);
     }
 
-    .mobile-menu-panel a {
+    .mobile-menu-nav {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .mobile-menu-nav a {
       font-size: 18px;
       font-weight: 600;
-      padding: 12px 0;
+      padding: 14px 0;
       border-bottom: 1px solid var(--border);
       transition: color 0.2s;
     }
 
-    .mobile-menu-panel a:hover {
+    .mobile-menu-nav a:hover {
       color: var(--red);
+    }
+
+    .mobile-menu-contacts {
+      margin-top: auto;
+      padding-top: 24px;
+    }
+
+    .mobile-menu-contacts a {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--gray);
+      padding: 4px 0;
+      line-height: 1.4;
     }
 
     /* ========== HERO ========== */
@@ -1482,12 +1500,16 @@
   <!-- Mobile menu -->
   <div class="mobile-menu" id="mobileMenu">
     <div class="mobile-menu-panel">
-      <a href="#profiles">Выбор профиля</a>
-      <a href="#catalog">Каталог продукции</a>
-      <a href="#footer">Контакты</a>
-      <a href="tel:+74952584542">+7 (495) 258-45-42</a>
-      <a href="mailto:info@heisskraft.ru">info@heisskraft.ru</a>
-      <a href="#" data-action="request">Оставить заявку</a>
+      <nav class="mobile-menu-nav" aria-label="Мобильное меню">
+        <a href="#catalog">Каталог продукции</a>
+        <a href="#" data-action="docs">Документация</a>
+        <a href="#" data-action="pumps">Подбор насосов</a>
+        <a href="#" data-action="request">Оставить заявку</a>
+      </nav>
+      <div class="mobile-menu-contacts">
+        <a href="tel:+74952584542">+7 (495) 258-45-42</a>
+        <a href="mailto:info@heisskraft.ru">info@heisskraft.ru</a>
+      </div>
     </div>
   </div>
 
@@ -2148,6 +2170,8 @@
         const messages = {
           about: 'Страница «О компании» — в разработке',
           requisites: 'Реквизиты организации — в разработке',
+          docs: 'Раздел «Документация» — в разработке',
+          pumps: 'Подбор насосов — в разработке',
           request: 'Форма заявки — скоро появится',
           privacy: 'Политика конфиденциальности — в разработке',
           personal: 'Обработка персональных данных — в разработке'
