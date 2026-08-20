@@ -42,7 +42,8 @@
 
     button:focus-visible,
     a:focus-visible,
-    input:focus-visible {
+    input:focus-visible,
+    textarea:focus-visible {
       outline: 2px solid var(--red);
       outline-offset: 3px;
     }
@@ -1054,7 +1055,7 @@
       border-radius: 12px;
       font-size: 15px;
       font-weight: 500;
-      z-index: 300;
+      z-index: 1300;
       opacity: 0;
       transition: transform 0.3s, opacity 0.3s;
       pointer-events: none;
@@ -2009,5 +2010,277 @@
       .product-modal-actions .btn-primary {
         width: 100%;
         justify-content: center;
+      }
+    }
+
+    /* ========== REQUEST FORM ========== */
+    .request-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 1200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: max(12px, env(safe-area-inset-top)) 12px max(16px, env(safe-area-inset-bottom));
+      background: rgba(17, 24, 39, 0.62);
+      backdrop-filter: blur(6px);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.25s, visibility 0.25s;
+      overflow: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .request-modal.is-open {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .request-modal-box {
+      background: white;
+      width: min(520px, 100%);
+      max-height: min(860px, calc(100dvh - 24px));
+      margin: auto;
+      border-radius: 16px;
+      padding: 20px 20px 16px;
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.28);
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+      overflow: hidden;
+      transform: translateY(-12px);
+      transition: transform 0.25s;
+    }
+
+    .request-modal.is-open .request-modal-box {
+      transform: translateY(0);
+    }
+
+    .request-modal-body {
+      flex: 1;
+      min-height: 0;
+      overflow-y: auto;
+      padding-right: 4px;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .request-lead {
+      font-size: 14px;
+      color: var(--gray);
+      margin-bottom: 18px;
+      line-height: 1.45;
+    }
+
+    .request-form-error {
+      margin: 0 0 14px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      background: #fef2f2;
+      color: #b91c1c;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .request-field {
+      margin-bottom: 14px;
+    }
+
+    .request-field label,
+    .request-file-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 6px;
+    }
+
+    .request-field input[type="text"],
+    .request-field input[type="tel"],
+    .request-field input[type="email"],
+    .request-field textarea {
+      width: 100%;
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      padding: 0 14px;
+      font-size: 16px;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      background: #fafafa;
+      color: var(--dark);
+    }
+
+    .request-field input[type="text"],
+    .request-field input[type="tel"],
+    .request-field input[type="email"] {
+      height: 48px;
+    }
+
+    .request-field textarea {
+      padding: 12px 14px;
+      min-height: 110px;
+      resize: vertical;
+      line-height: 1.45;
+    }
+
+    .request-field input:focus,
+    .request-field textarea:focus {
+      border-color: var(--red);
+      background: white;
+      box-shadow: 0 0 0 4px rgba(237, 28, 36, 0.12);
+    }
+
+    .request-field.has-error input,
+    .request-field.has-error textarea {
+      border-color: #dc2626;
+      background: #fff8f8;
+    }
+
+    .request-error {
+      display: block;
+      min-height: 0;
+      margin-top: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #dc2626;
+    }
+
+    .request-file-hint {
+      font-size: 12px;
+      color: var(--gray);
+      margin: -2px 0 8px;
+    }
+
+    .request-file {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .request-file-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 40px;
+      padding: 0 14px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: white;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      margin: 0;
+    }
+
+    .request-file-btn:hover {
+      background: #f3f4f6;
+    }
+
+    .request-file-picked {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .request-file-picked[hidden] {
+      display: none;
+    }
+
+    .request-file-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--dark);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      min-width: 0;
+    }
+
+    .request-file-remove {
+      flex-shrink: 0;
+      height: 32px;
+      padding: 0 10px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--red);
+    }
+
+    .request-file-remove:hover {
+      background: #fff5f5;
+    }
+
+    .request-consent .request-check {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--dark);
+      cursor: pointer;
+    }
+
+    .request-consent input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      margin-top: 2px;
+      flex-shrink: 0;
+      accent-color: var(--red);
+    }
+
+    .request-consent a {
+      color: var(--red);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .request-submit {
+      width: 100%;
+      margin-top: 4px;
+      text-transform: none;
+    }
+
+    .request-submit:disabled {
+      opacity: 0.72;
+      cursor: wait;
+      transform: none;
+    }
+
+    .request-success {
+      padding: 28px 8px 20px;
+      text-align: center;
+    }
+
+    .request-success p:first-child {
+      font-size: 20px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .request-success-note {
+      font-size: 14px;
+      color: var(--gray);
+    }
+
+    @media (max-width: 640px) {
+      .request-modal {
+        align-items: flex-start;
+        padding: max(8px, env(safe-area-inset-top)) 8px max(8px, env(safe-area-inset-bottom));
+      }
+
+      .request-modal-box {
+        width: 100%;
+        max-height: calc(100dvh - 16px);
+        border-radius: 14px;
+        padding: 16px 14px 12px;
+      }
+
+      .request-submit {
+        height: 48px;
       }
     }

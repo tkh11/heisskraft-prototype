@@ -266,8 +266,8 @@
     function openResult(item) {
       closeSearch();
       if (item.action === 'request') {
-        const requestLink = document.querySelector('[data-action="request"]');
-        if (requestLink) requestLink.click();
+        if (window.openRequestForm) window.openRequestForm();
+        else if (window.showToast) window.showToast('Форма заявки — скоро появится');
         return;
       }
       if (item.href) {
@@ -303,8 +303,8 @@
       const emptyCta = e.target.closest('#searchEmptyCta');
       if (emptyCta) {
         closeSearch();
-        const requestLink = document.querySelector('[data-action="request"]');
-        if (requestLink) requestLink.click();
+        if (window.openRequestForm) window.openRequestForm();
+        else if (window.showToast) window.showToast('Форма заявки — скоро появится');
         return;
       }
       const itemEl = e.target.closest('.search-item');
@@ -380,22 +380,28 @@
   }
 
   function initActions() {
-    document.querySelectorAll('[data-action]').forEach((el) => {
-      el.addEventListener('click', (e) => {
+    document.addEventListener('click', (e) => {
+      const el = e.target.closest('[data-action]');
+      if (!el) return;
+      const action = el.dataset.action;
+      if (action === 'request') {
         e.preventDefault();
-        const messages = {
-          about: 'Страница «О компании» — в разработке',
-          requisites: 'Реквизиты организации — в разработке',
-          docs: 'Раздел «Документация» — в разработке',
-          pumps: 'Подбор насосов — в разработке',
-          request: 'Форма заявки — скоро появится',
-          privacy: 'Политика конфиденциальности — в разработке',
-          personal: 'Обработка персональных данных — в разработке'
-        };
-        const message = messages[el.dataset.action];
-        if (!message) return;
-        showToast(message);
-      });
+        if (window.openRequestForm) window.openRequestForm();
+        else showToast('Форма заявки — скоро появится');
+        return;
+      }
+      const messages = {
+        about: 'Страница «О компании» — в разработке',
+        requisites: 'Реквизиты организации — в разработке',
+        docs: 'Раздел «Документация» — в разработке',
+        pumps: 'Подбор насосов — в разработке',
+        privacy: 'Политика конфиденциальности — в разработке',
+        personal: 'Обработка персональных данных — в разработке'
+      };
+      const message = messages[action];
+      if (!message) return;
+      e.preventDefault();
+      showToast(message);
     });
   }
 

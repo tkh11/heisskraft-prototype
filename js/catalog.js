@@ -401,9 +401,10 @@
       }
       const requestBtn = event.target.closest('[data-action="request"]');
       if (!requestBtn) return;
+      event.preventDefault();
+      event.stopPropagation();
       closeProductModal();
-      const requestLink = document.querySelector('.header-nav [data-action="request"]');
-      if (requestLink) requestLink.click();
+      if (window.openRequestForm) window.openRequestForm();
       else if (window.showToast) window.showToast('Форма заявки — скоро появится');
     });
   }
