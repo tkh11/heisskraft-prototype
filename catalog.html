@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Каталог — Горизонтальные многоступенчатые насосы HMH — HEISSKRAFT</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <a class="visually-hidden" href="#products">Перейти к товарам</a>
+  <div id="page">
+    <div id="site-header"></div>
+
+    <main class="page-catalog" id="products">
+      <nav class="catalog-breadcrumb" aria-label="Навигация">
+        <a href="index.html">Главная</a>
+        <span aria-hidden="true">/</span>
+        <span>Каталог</span>
+      </nav>
+      <h1 class="section-title" id="catalogTitle">Каталог продукции</h1>
+      <p class="catalog-lead" id="catalogLead">Насосное оборудование HEISSKRAFT. Выберите модель и оставьте заявку на подбор.</p>
+      <div class="catalog-status" id="catalogStatus">Загрузка товаров…</div>
+      <div class="product-grid" id="productGrid" hidden></div>
+    </main>
+
+    <div id="site-footer"></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/catalog.js"></script>
+</body>
+</html>
