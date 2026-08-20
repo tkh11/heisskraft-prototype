@@ -91,11 +91,12 @@
     let activeIndex = -1;
 
     const pages = [
-      { name: 'Водоснабжение', category: 'Каталог', hint: 'Насосы и станции для воды', href: 'catalog.html?category=water', thumb: 'assets/catalog2.jpg' },
-      { name: 'Отопление', category: 'Каталог', hint: 'Циркуляционные насосы', href: 'catalog.html?category=heating', thumb: 'assets/catalog3.jpg' },
-      { name: 'Канализация / Дренаж', category: 'Каталог', hint: 'Дренажные и фекальные насосы', href: 'catalog.html?category=drainage', thumb: 'assets/catalog4.jpg' },
-      { name: 'Пожаротушение', category: 'Каталог', hint: 'Насосные станции ПТ', href: 'catalog.html?category=fire', thumb: 'assets/catalog5.jpg' },
-      { name: 'Водоподготовка', category: 'Каталог', hint: 'Фильтрация и подготовка воды', href: 'catalog.html?category=treatment', thumb: 'assets/catalog6.jpg' },
+      { name: 'Насосы и насосные станции', category: 'Каталог', hint: 'Скважинные, циркуляционные и повысительные насосы', href: 'catalog.html?category=pumps', thumb: 'assets/catalog2.jpg' },
+      { name: 'Водоснабжение', category: 'Применение', hint: 'Фильтр по сфере применения', href: 'catalog.html?use=water', thumb: 'assets/catalog2.jpg' },
+      { name: 'Отопление', category: 'Применение', hint: 'Фильтр по сфере применения', href: 'catalog.html?use=heating', thumb: 'assets/catalog3.jpg' },
+      { name: 'Канализация и дренаж', category: 'Каталог', hint: 'Дренажные и фекальные насосы', href: 'catalog.html?category=drainage', thumb: 'assets/catalog4.jpg' },
+      { name: 'Пожаротушение', category: 'Каталог', hint: 'Насосы и станции ПТ', href: 'catalog.html?category=fire', thumb: 'assets/catalog5.jpg' },
+      { name: 'Водоподготовка', category: 'Каталог', hint: 'Фильтрация и обратный осмос', href: 'catalog.html?category=treatment', thumb: 'assets/catalog6.jpg' },
       { name: 'Полный каталог', category: 'Каталог', hint: 'Вся линейка HEISSKRAFT', href: 'catalog.html', thumb: 'assets/catalog1.jpg' },
       { name: 'Подрядчик', category: 'Профиль', hint: 'Комплектация и поддержка объектов', target: '[data-profile="contractor"]', thumb: 'assets/icon-contractor.svg', icon: true },
       { name: 'Проектировщик', category: 'Профиль', hint: 'BIM, спецификации, гидравлика', target: '[data-profile="designer"]', thumb: 'assets/icon-designer.svg', icon: true },
@@ -106,11 +107,17 @@
     ];
 
     const categoryLabels = {
-      water: 'Водоснабжение',
-      heating: 'Отопление',
-      drainage: 'Канализация / Дренаж',
+      pumps: 'Насосы и насосные станции',
+      pipes: 'Трубы и трубопроводные системы',
+      fittings: 'Фитинги',
+      valves: 'Трубопроводная арматура',
       fire: 'Пожаротушение',
-      treatment: 'Водоподготовка'
+      drainage: 'Канализация и дренаж',
+      treatment: 'Водоподготовка',
+      pneumatics: 'Пневматика',
+      automation: 'Автоматика',
+      mounting: 'Монтажное оборудование',
+      spares: 'Запчасти и комплектующие'
     };
 
     const fuseOptions = {
@@ -360,7 +367,7 @@
             hint: product.description || section,
             href: 'catalog.html?category=' + encodeURIComponent(product.category) + '#' + encodeURIComponent(product.id),
             thumb: product.image,
-            searchText: [product.name, product.id, section, product.description, specText].join(' ')
+            searchText: [product.name, product.series, product.sku, product.id, section, product.description, specText].join(' ')
           };
         });
         searchIndex = pages.concat(catalogItems);
@@ -385,7 +392,9 @@
           privacy: 'Политика конфиденциальности — в разработке',
           personal: 'Обработка персональных данных — в разработке'
         };
-        showToast(messages[el.dataset.action] || 'Раздел в разработке');
+        const message = messages[el.dataset.action];
+        if (!message) return;
+        showToast(message);
       });
     });
   }

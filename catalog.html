@@ -10,26 +10,52 @@
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
-  <a class="visually-hidden" href="#products">Перейти к товарам</a>
+  <a class="visually-hidden" href="#products">Перейти к каталогу</a>
   <div id="page">
     <div id="site-header"></div>
 
     <main class="page-catalog" id="products">
-      <nav class="catalog-breadcrumb" aria-label="Навигация">
-        <a href="index.html">Главная</a>
-        <span aria-hidden="true">/</span>
-        <a href="catalog.html">Каталог</a>
-        <span aria-hidden="true">/</span>
-        <span id="catalogCurrent">Полный каталог</span>
-      </nav>
-      <h1 class="section-title" id="catalogTitle">Полный каталог</h1>
-      <p class="catalog-lead" id="catalogLead">Насосное оборудование HEISSKRAFT. Выберите раздел и модель.</p>
-      <nav class="catalog-sections" id="catalogSections" aria-label="Разделы каталога"></nav>
-      <div class="catalog-status" id="catalogStatus">Загрузка товаров…</div>
+      <nav class="catalog-breadcrumb" id="catalogBreadcrumb" aria-label="Навигация"></nav>
+      <h1 class="section-title" id="catalogTitle">Каталог продукции</h1>
+      <p class="catalog-lead" id="catalogLead">Выберите оборудование или сферу применения.</p>
+
+      <div class="catalog-modes" role="tablist" aria-label="Способ навигации">
+        <a href="catalog.html" data-mode="equipment">По оборудованию</a>
+        <a href="catalog.html?view=application" data-mode="application">По применению</a>
+      </div>
+
+      <form class="catalog-find" id="catalogFind" role="search">
+        <label class="visually-hidden" for="catalogQuery">Поиск по названию, серии или артикулу</label>
+        <div class="search-field">
+          <svg class="search-field-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="7"/>
+            <path d="M20 20l-3.5-3.5" stroke-linecap="round"/>
+          </svg>
+          <input type="search" id="catalogQuery" name="q" placeholder="Название, серия или артикул…" autocomplete="off" />
+        </div>
+      </form>
+
+      <div id="catalogSubs"></div>
+      <form class="catalog-filters" id="catalogFilters" hidden></form>
+      <div class="catalog-status" id="catalogStatus">Загрузка каталога…</div>
       <div id="catalogContent" hidden></div>
     </main>
 
     <div id="site-footer"></div>
+  </div>
+
+  <div class="product-modal" id="productModal" role="dialog" aria-modal="true" aria-labelledby="productModalTitle" aria-hidden="true">
+    <div class="product-modal-box" role="document">
+      <div class="search-box-header">
+        <h2 id="productModalTitle">Товар</h2>
+        <button type="button" class="search-close" id="productModalClose" aria-label="Закрыть">
+          <svg viewBox="0 0 18 18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M4 4l10 10M14 4L4 14"/>
+          </svg>
+        </button>
+      </div>
+      <div class="product-modal-body" id="productModalBody"></div>
+    </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>

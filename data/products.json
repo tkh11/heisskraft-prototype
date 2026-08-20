@@ -2,181 +2,377 @@
   {
     "id": "hmh-2-20",
     "name": "HMH 2-20",
-    "category": "water",
+    "series": "HMH",
+    "sku": "HK-HMH-2-20",
+    "category": "pumps",
+    "subcategory": "multistage-h",
+    "applications": [
+      "water",
+      "process"
+    ],
+    "pumpType": "Горизонтальный многоступенчатый",
     "image": "assets/products/hmh-2-20.jpg",
-    "description": "Горизонтальный многоступенчатый насос для водоснабжения частных домов и небольших объектов. Компактный корпус, низкий уровень шума, стабильный напор при переменном расходе.",
+    "description": "Горизонтальный многоступенчатый насос для водоснабжения частных домов и небольших объектов.",
     "specs": {
       "flow": "2 м³/ч",
       "head": "20 м",
       "power": "0,37 кВт",
-      "stages": 2,
-      "inlet": "1\"",
-      "outlet": "1\"",
-      "maxPressure": "10 бар",
-      "maxTemp": "80 °C",
-      "material": "Нержавеющая сталь AISI 304"
+      "connection": "1\"",
+      "pressure": "10 бар"
     }
   },
   {
     "id": "hmh-4-50",
     "name": "HMH 4-50",
-    "category": "water",
+    "series": "HMH",
+    "sku": "HK-HMH-4-50",
+    "category": "pumps",
+    "subcategory": "booster",
+    "applications": [
+      "water"
+    ],
+    "pumpType": "Горизонтальный многоступенчатый",
     "image": "assets/products/hmh-4-50.jpg",
-    "description": "Насос для повышения давления в распределительных сетях. Стабильная характеристика Q–H, удобен для работы с частотным преобразователем.",
+    "description": "Насос для повышения давления в распределительных сетях. Удобен для работы с частотным преобразователем.",
     "specs": {
       "flow": "4 м³/ч",
       "head": "50 м",
       "power": "1,1 кВт",
-      "stages": 5,
-      "inlet": "1¼\"",
-      "outlet": "1\"",
-      "maxPressure": "16 бар",
-      "maxTemp": "90 °C",
-      "material": "Нержавеющая сталь AISI 304"
+      "connection": "1¼\"",
+      "pressure": "16 бар"
+    }
+  },
+  {
+    "id": "hms-4-14",
+    "name": "HMS 4-14",
+    "series": "HMS",
+    "sku": "HK-HMS-4-14",
+    "category": "pumps",
+    "subcategory": "borehole",
+    "applications": [
+      "water"
+    ],
+    "pumpType": "Скважинный",
+    "image": "assets/products/hmh-2-20.jpg",
+    "description": "Скважинный насос для подъёма воды из скважин в системах автономного водоснабжения.",
+    "specs": {
+      "flow": "4 м³/ч",
+      "head": "80 м",
+      "power": "1,5 кВт",
+      "connection": "1¼\"",
+      "pressure": "16 бар"
+    }
+  },
+  {
+    "id": "hns-2-40",
+    "name": "HNS 2-40",
+    "series": "HNS",
+    "sku": "HK-HNS-2-40",
+    "category": "pumps",
+    "subcategory": "stations",
+    "applications": [
+      "water"
+    ],
+    "pumpType": "Насосная станция",
+    "image": "assets/products/hmh-4-50.jpg",
+    "description": "Компактная насосная станция повышения давления с гидроаккумулятором и автоматикой.",
+    "specs": {
+      "flow": "2,4 м³/ч",
+      "head": "40 м",
+      "power": "0,75 кВт",
+      "connection": "1\"",
+      "pressure": "8 бар"
     }
   },
   {
     "id": "hmc-25-40",
     "name": "HMC 25-40",
-    "category": "heating",
+    "series": "HMC",
+    "sku": "HK-HMC-25-40",
+    "category": "pumps",
+    "subcategory": "circulation",
+    "applications": [
+      "heating",
+      "hvac"
+    ],
+    "pumpType": "Циркуляционный",
     "image": "assets/products/hmc-25-40.jpg",
-    "description": "Циркуляционный насос для систем отопления частных домов. Тихая работа, энергоэффективный двигатель, монтаж на трубопровод.",
+    "description": "Циркуляционный насос для систем отопления частных домов.",
     "specs": {
       "flow": "2,5 м³/ч",
       "head": "4 м",
       "power": "0,04 кВт",
-      "stages": 1,
-      "inlet": "1\"",
-      "outlet": "1\"",
-      "maxPressure": "10 бар",
-      "maxTemp": "110 °C",
-      "material": "Чугун"
+      "connection": "1\"",
+      "pressure": "10 бар"
     }
   },
   {
     "id": "hmc-32-80",
     "name": "HMC 32-80",
-    "category": "heating",
+    "series": "HMC",
+    "sku": "HK-HMC-32-80",
+    "category": "pumps",
+    "subcategory": "circulation",
+    "applications": [
+      "heating",
+      "hvac",
+      "process"
+    ],
+    "pumpType": "Циркуляционный",
     "image": "assets/products/hmc-32-80.jpg",
-    "description": "Циркуляционный насос для ИТП и систем отопления средних объектов. Три скорости, фланцевое присоединение.",
+    "description": "Циркуляционный насос для ИТП и систем отопления средних объектов.",
     "specs": {
       "flow": "8 м³/ч",
       "head": "8 м",
       "power": "0,15 кВт",
-      "stages": 1,
-      "inlet": "1¼\"",
-      "outlet": "1¼\"",
-      "maxPressure": "10 бар",
-      "maxTemp": "110 °C",
-      "material": "Чугун"
+      "connection": "1¼\"",
+      "pressure": "10 бар"
     }
   },
   {
     "id": "hdf-8-7",
     "name": "HDF 8-7",
+    "series": "HDF",
+    "sku": "HK-HDF-8-7",
     "category": "drainage",
+    "subcategory": "drain-pumps",
+    "applications": [
+      "sewer"
+    ],
+    "pumpType": "Дренажный",
     "image": "assets/products/hdf-8-7.jpg",
-    "description": "Дренажный насос для откачки чистой и слегка загрязнённой воды из приямков, подвалов и дренажных колодцев.",
+    "description": "Дренажный насос для откачки чистой и слегка загрязнённой воды.",
     "specs": {
       "flow": "8 м³/ч",
       "head": "7 м",
       "power": "0,25 кВт",
-      "stages": 1,
-      "inlet": "1½\"",
-      "outlet": "1½\"",
-      "maxPressure": "2 бар",
-      "maxTemp": "40 °C",
-      "material": "Нержавеющая сталь AISI 304"
+      "connection": "1½\"",
+      "pressure": "2 бар"
     }
   },
   {
     "id": "hff-15-10",
     "name": "HFF 15-10",
+    "series": "HFF",
+    "sku": "HK-HFF-15-10",
     "category": "drainage",
+    "subcategory": "sewage-pumps",
+    "applications": [
+      "sewer"
+    ],
+    "pumpType": "Фекальный",
     "image": "assets/products/hff-15-10.jpg",
-    "description": "Фекальный насос с измельчителем для канализации частных домов, септиков и КНС небольшой производительности.",
+    "description": "Фекальный насос с измельчителем для канализации частных домов и КНС.",
     "specs": {
       "flow": "15 м³/ч",
       "head": "10 м",
       "power": "0,75 кВт",
-      "stages": 1,
-      "inlet": "2\"",
-      "outlet": "2\"",
-      "maxPressure": "3 бар",
-      "maxTemp": "40 °C",
-      "material": "Чугун"
+      "connection": "2\"",
+      "pressure": "3 бар"
     }
   },
   {
     "id": "hnf-32-160",
     "name": "HNF 32-160",
+    "series": "HNF",
+    "sku": "HK-HNF-32-160",
     "category": "fire",
+    "subcategory": "fire-pumps",
+    "applications": [
+      "fire"
+    ],
+    "pumpType": "Консольный",
     "image": "assets/products/hnf-32-160.jpg",
-    "description": "Консольный насос для станций пожаротушения. Рассчитан на работу в составе насосной группы с резервированием.",
+    "description": "Консольный насос для станций пожаротушения.",
     "specs": {
       "flow": "20 м³/ч",
       "head": "40 м",
       "power": "5,5 кВт",
-      "stages": 1,
-      "inlet": "DN50",
-      "outlet": "DN32",
-      "maxPressure": "16 бар",
-      "maxTemp": "70 °C",
-      "material": "Чугун"
+      "connection": "DN32",
+      "pressure": "16 бар"
     }
   },
   {
     "id": "hnf-50-250",
     "name": "HNF 50-250",
+    "series": "HNF",
+    "sku": "HK-HNF-50-250",
     "category": "fire",
+    "subcategory": "fire-pumps",
+    "applications": [
+      "fire",
+      "process"
+    ],
+    "pumpType": "Консольный",
     "image": "assets/products/hnf-50-250.jpg",
-    "description": "Насос повышенной производительности для систем водяного и пенного пожаротушения промышленных объектов.",
+    "description": "Насос повышенной производительности для систем водяного пожаротушения.",
     "specs": {
       "flow": "50 м³/ч",
       "head": "70 м",
       "power": "15 кВт",
-      "stages": 1,
-      "inlet": "DN80",
-      "outlet": "DN50",
-      "maxPressure": "16 бар",
-      "maxTemp": "70 °C",
-      "material": "Чугун"
+      "connection": "DN50",
+      "pressure": "16 бар"
     }
   },
   {
     "id": "hwf-10",
     "name": "HWF 10",
+    "series": "HWF",
+    "sku": "HK-HWF-10",
     "category": "treatment",
+    "subcategory": "filters",
+    "applications": [
+      "water"
+    ],
     "image": "assets/products/hwf-10.jpg",
-    "description": "Станция механической фильтрации для подготовки хозяйственно-питьевой воды. Сменные картриджи, компактный корпус.",
+    "description": "Станция механической фильтрации для подготовки хозяйственно-питьевой воды.",
     "specs": {
       "flow": "1,5 м³/ч",
-      "head": "—",
-      "power": "—",
-      "stages": 1,
-      "inlet": "1\"",
-      "outlet": "1\"",
-      "maxPressure": "6 бар",
-      "maxTemp": "40 °C",
-      "material": "Полипропилен"
+      "connection": "1\"",
+      "pressure": "6 бар"
     }
   },
   {
     "id": "hro-250",
     "name": "HRO 250",
+    "series": "HRO",
+    "sku": "HK-HRO-250",
     "category": "treatment",
+    "subcategory": "ro",
+    "applications": [
+      "water",
+      "process"
+    ],
     "image": "assets/products/hro-250.jpg",
-    "description": "Установка обратного осмоса для водоподготовки малых объектов и лабораторий. Производительность 250 л/ч.",
+    "description": "Установка обратного осмоса для водоподготовки малых объектов. Производительность 250 л/ч.",
     "specs": {
       "flow": "0,25 м³/ч",
-      "head": "—",
       "power": "0,37 кВт",
-      "stages": 1,
-      "inlet": "½\"",
-      "outlet": "½\"",
-      "maxPressure": "10 бар",
-      "maxTemp": "35 °C",
-      "material": "Нержавеющая сталь AISI 304"
+      "connection": "½\"",
+      "pressure": "10 бар"
     }
+  },
+  {
+    "id": "hpp-20",
+    "name": "HPP 20",
+    "series": "HPP",
+    "sku": "HK-HPP-20",
+    "category": "pipes",
+    "subcategory": "ppr",
+    "applications": [
+      "water",
+      "heating"
+    ],
+    "image": "assets/catalog1.jpg",
+    "description": "Полипропиленовая труба для систем водоснабжения и отопления.",
+    "specs": {
+      "connection": "DN20",
+      "pressure": "20 бар"
+    }
+  },
+  {
+    "id": "hft-25",
+    "name": "HFT 25",
+    "series": "HFT",
+    "sku": "HK-HFT-25",
+    "category": "fittings",
+    "subcategory": "threaded",
+    "applications": [
+      "water",
+      "heating"
+    ],
+    "image": "assets/catalog1.jpg",
+    "description": "Резьбовой фитинг для сборки трубопроводных систем.",
+    "specs": {
+      "connection": "1\"",
+      "pressure": "16 бар"
+    }
+  },
+  {
+    "id": "hvb-25",
+    "name": "HVB 25",
+    "series": "HVB",
+    "sku": "HK-HVB-25",
+    "category": "valves",
+    "subcategory": "ball",
+    "applications": [
+      "water",
+      "heating",
+      "fire"
+    ],
+    "image": "assets/catalog3.jpg",
+    "description": "Шаровый кран для систем водоснабжения, отопления и пожаротушения.",
+    "specs": {
+      "connection": "1\"",
+      "pressure": "16 бар"
+    }
+  },
+  {
+    "id": "hpc-150",
+    "name": "HPC 150",
+    "series": "HPC",
+    "sku": "HK-HPC-150",
+    "category": "pneumatics",
+    "subcategory": "compressors",
+    "applications": [
+      "process"
+    ],
+    "image": "assets/catalog1.jpg",
+    "description": "Поршневой компрессор для технологических и монтажных задач.",
+    "specs": {
+      "pressure": "8 бар",
+      "power": "1,5 кВт"
+    }
+  },
+  {
+    "id": "hfd-2",
+    "name": "HFD 2.2",
+    "series": "HFD",
+    "sku": "HK-HFD-2.2",
+    "category": "automation",
+    "subcategory": "vfd",
+    "applications": [
+      "water",
+      "heating",
+      "fire",
+      "process"
+    ],
+    "image": "assets/catalog3.jpg",
+    "description": "Частотный преобразователь для насосных групп и станций.",
+    "specs": {
+      "power": "2,2 кВт"
+    }
+  },
+  {
+    "id": "hmb-100",
+    "name": "HMB 100",
+    "series": "HMB",
+    "sku": "HK-HMB-100",
+    "category": "mounting",
+    "subcategory": "brackets",
+    "applications": [
+      "water",
+      "heating",
+      "process"
+    ],
+    "image": "assets/catalog1.jpg",
+    "description": "Монтажная рама для установки насосов и насосных станций.",
+    "specs": {}
+  },
+  {
+    "id": "hms-seal",
+    "name": "HMS Seal 12",
+    "series": "HMS",
+    "sku": "HK-SEAL-12",
+    "category": "spares",
+    "subcategory": "seals",
+    "applications": [
+      "water",
+      "heating",
+      "process"
+    ],
+    "image": "assets/products/hmh-2-20.jpg",
+    "description": "Торцевое уплотнение для многоступенчатых насосов серии HMH.",
+    "specs": {}
   }
 ]

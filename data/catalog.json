@@ -1,0 +1,122 @@
+{
+  "categories": [
+    {
+      "id": "pumps",
+      "name": "Насосы и насосные станции",
+      "lead": "Скважинные, повысительные, циркуляционные и многоступенчатые насосы, а также готовые насосные станции.",
+      "image": "assets/catalog2.jpg",
+      "subcategories": [
+        { "id": "borehole", "name": "Скважинные насосы", "image": "assets/catalog2.jpg" },
+        { "id": "booster", "name": "Повысительные насосы", "image": "assets/catalog2.jpg" },
+        { "id": "multistage-h", "name": "Горизонтальные многоступенчатые", "image": "assets/catalog2.jpg" },
+        { "id": "circulation", "name": "Циркуляционные насосы", "image": "assets/catalog3.jpg" },
+        { "id": "stations", "name": "Насосные станции", "image": "assets/catalog1.jpg" }
+      ]
+    },
+    {
+      "id": "pipes",
+      "name": "Трубы и трубопроводные системы",
+      "lead": "Трубы и системы для сетей водоснабжения, отопления и технологических контуров.",
+      "image": "assets/catalog1.jpg",
+      "subcategories": [
+        { "id": "ppr", "name": "ПП-Р трубы", "image": "assets/catalog1.jpg" },
+        { "id": "steel", "name": "Стальные трубы", "image": "assets/catalog1.jpg" }
+      ]
+    },
+    {
+      "id": "fittings",
+      "name": "Фитинги",
+      "lead": "Соединительные элементы для сборки трубопроводных систем.",
+      "image": "assets/catalog1.jpg",
+      "subcategories": [
+        { "id": "threaded", "name": "Резьбовые фитинги", "image": "assets/catalog1.jpg" },
+        { "id": "press", "name": "Пресс-фитинги", "image": "assets/catalog1.jpg" }
+      ]
+    },
+    {
+      "id": "valves",
+      "name": "Трубопроводная арматура",
+      "lead": "Запорная, регулирующая и предохранительная арматура.",
+      "image": "assets/catalog3.jpg",
+      "subcategories": [
+        { "id": "ball", "name": "Шаровые краны", "image": "assets/catalog3.jpg" },
+        { "id": "check", "name": "Обратные клапаны", "image": "assets/catalog3.jpg" }
+      ]
+    },
+    {
+      "id": "fire",
+      "name": "Пожаротушение",
+      "lead": "Насосы, станции и комплектующие для систем водяного пожаротушения.",
+      "image": "assets/catalog5.jpg",
+      "subcategories": [
+        { "id": "fire-pumps", "name": "Насосы ПТ", "image": "assets/catalog5.jpg" },
+        { "id": "fire-stations", "name": "Станции пожаротушения", "image": "assets/catalog5.jpg" }
+      ]
+    },
+    {
+      "id": "drainage",
+      "name": "Канализация и дренаж",
+      "lead": "Дренажные и фекальные насосы, КНС и оборудование для отвода стоков.",
+      "image": "assets/catalog4.jpg",
+      "subcategories": [
+        { "id": "drain-pumps", "name": "Дренажные насосы", "image": "assets/catalog4.jpg" },
+        { "id": "sewage-pumps", "name": "Фекальные насосы", "image": "assets/catalog4.jpg" }
+      ]
+    },
+    {
+      "id": "treatment",
+      "name": "Водоподготовка",
+      "lead": "Фильтрация, умягчение и установки обратного осмоса.",
+      "image": "assets/catalog6.jpg",
+      "subcategories": [
+        { "id": "filters", "name": "Фильтры", "image": "assets/catalog6.jpg" },
+        { "id": "ro", "name": "Обратный осмос", "image": "assets/catalog6.jpg" }
+      ]
+    },
+    {
+      "id": "pneumatics",
+      "name": "Пневматика",
+      "lead": "Компрессоры и пневмооборудование для инженерных и технологических систем.",
+      "image": "assets/catalog1.jpg",
+      "subcategories": [
+        { "id": "compressors", "name": "Компрессоры", "image": "assets/catalog1.jpg" }
+      ]
+    },
+    {
+      "id": "automation",
+      "name": "Автоматика",
+      "lead": "Шкафы управления, частотные преобразователи и блоки автоматики.",
+      "image": "assets/catalog3.jpg",
+      "subcategories": [
+        { "id": "vfd", "name": "Частотные преобразователи", "image": "assets/catalog3.jpg" },
+        { "id": "cabinets", "name": "Шкафы управления", "image": "assets/catalog3.jpg" }
+      ]
+    },
+    {
+      "id": "mounting",
+      "name": "Монтажное оборудование",
+      "lead": "Крепёж, основания и комплекты для монтажа насосов и трубопроводов.",
+      "image": "assets/catalog1.jpg",
+      "subcategories": [
+        { "id": "brackets", "name": "Кронштейны и рамы", "image": "assets/catalog1.jpg" }
+      ]
+    },
+    {
+      "id": "spares",
+      "name": "Запчасти и комплектующие",
+      "lead": "Торцевые уплотнения, рабочие колёса, мембраны и расходные материалы.",
+      "image": "assets/catalog2.jpg",
+      "subcategories": [
+        { "id": "seals", "name": "Торцевые уплотнения", "image": "assets/catalog2.jpg" }
+      ]
+    }
+  ],
+  "applications": [
+    { "id": "water", "name": "Водоснабжение", "lead": "Оборудование, применяемое в системах холодного и горячего водоснабжения.", "image": "assets/catalog2.jpg" },
+    { "id": "heating", "name": "Отопление", "lead": "Насосы, трубы и арматура для систем отопления и ИТП.", "image": "assets/catalog3.jpg" },
+    { "id": "sewer", "name": "Канализация", "lead": "Оборудование для отвода сточных и дренажных вод.", "image": "assets/catalog4.jpg" },
+    { "id": "fire", "name": "Пожаротушение", "lead": "Насосы, арматура и автоматика для систем пожаротушения.", "image": "assets/catalog5.jpg" },
+    { "id": "hvac", "name": "Кондиционирование", "lead": "Циркуляция и автоматика для контуров холодоснабжения и HVAC.", "image": "assets/catalog3.jpg" },
+    { "id": "process", "name": "Технологические системы", "lead": "Оборудование для промышленных и технологических контуров.", "image": "assets/catalog1.jpg" }
+  ]
+}
