@@ -3,7 +3,7 @@
     {
       id: 'full',
       name: 'Полный каталог',
-      lead: 'Вся линейка насосного оборудования HEISSKRAFT: водоснабжение, отопление, канализация, пожаротушение и водоподготовка.'
+      lead: 'Вся линейка продукции HEISSKRAFT: водоснабжение, отопление, канализация, пожаротушение и водоподготовка.'
     },
     {
       id: 'water',
@@ -116,6 +116,14 @@
     contentEl.innerHTML = items.length
       ? productGrid(items)
       : '<p class="catalog-status">В этом разделе пока нет товаров.</p>';
+
+    const targetId = decodeURIComponent((window.location.hash || '').replace(/^#/, ''));
+    if (!targetId) return;
+    const target = document.getElementById(targetId);
+    if (!target) return;
+    target.classList.add('is-highlighted');
+    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    window.setTimeout(() => target.classList.remove('is-highlighted'), 2400);
   }
 
   contentEl.addEventListener('click', (event) => {
