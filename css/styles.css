@@ -213,7 +213,6 @@
         z-index: 0;
         overflow: hidden;
         color: var(--red);
-        border-color: transparent;
         background: #fff;
       }
 
@@ -234,8 +233,8 @@
         content: "";
         position: absolute;
         z-index: -1;
-        inset: 1.5px;
-        border-radius: 8.5px;
+        inset: 2px;
+        border-radius: 8px;
         background: #fff;
         pointer-events: none;
       }
@@ -246,10 +245,6 @@
     }
 
     @media (min-width: 1025px) and (prefers-reduced-motion: reduce) {
-      body.is-pumps-page .header-nav a[href*="pumps"] {
-        border-color: var(--red);
-      }
-
       body.is-pumps-page .header-nav a[href*="pumps"]::before,
       body.is-pumps-page .header-nav a[href*="pumps"]::after {
         content: none;
