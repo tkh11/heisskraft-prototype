@@ -405,6 +405,21 @@
     });
   }
 
+  function pageFileName(path) {
+    let name = String(path || '').split('?')[0].split('#')[0].split('/').pop();
+    if (!name) return 'index.html';
+    if (name.indexOf('.') === -1) name += '.html';
+    return name;
+  }
+
+  function markCurrentNav() {
+    const pageFile = pageFileName(window.location.pathname);
+    document.querySelectorAll('.header-nav a[href], .mobile-menu-nav a[href]').forEach((link) => {
+      const href = pageFileName(link.getAttribute('href') || '');
+      if (href && href === pageFile) link.setAttribute('aria-current', 'page');
+    });
+  }
+
   async function loadLayout() {
     await Promise.all([
       loadPartial('#site-header', 'header.html'),
@@ -414,11 +429,7 @@
     initSearch();
     initActions();
     document.dispatchEvent(new CustomEvent('layout:ready'));
-    const pageFile = (window.location.pathname.split('/').pop() || 'index.html');
-    document.querySelectorAll('.header-nav a[href], .mobile-menu-nav a[href]').forEach((link) => {
-      const href = (link.getAttribute('href') || '').split('?')[0];
-      if (href && href === pageFile) link.setAttribute('aria-current', 'page');
-    });
+    markCurrentNav();
   }
 
   if (document.readyState === 'loading') {
