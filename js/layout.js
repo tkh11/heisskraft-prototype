@@ -406,7 +406,8 @@
   }
 
   function pageFileName(path) {
-    let name = String(path || '').split('?')[0].split('#')[0].split('/').pop();
+    let name = String(path || '').split('?')[0].split('#')[0].replace(/\/+$/, '');
+    name = name.split('/').pop();
     if (!name) return 'index.html';
     if (name.indexOf('.') === -1) name += '.html';
     return name;
@@ -414,6 +415,7 @@
 
   function markCurrentNav() {
     const pageFile = pageFileName(window.location.pathname);
+    if (pageFile === 'pumps.html') document.body.classList.add('is-pumps-page');
     document.querySelectorAll('.header-nav a[href], .mobile-menu-nav a[href]').forEach((link) => {
       const href = pageFileName(link.getAttribute('href') || '');
       if (href && href === pageFile) link.setAttribute('aria-current', 'page');
