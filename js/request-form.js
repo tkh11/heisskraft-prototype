@@ -14,6 +14,11 @@
     }[char]));
   }
 
+  function cssEscape(value) {
+    if (window.CSS && typeof CSS.escape === 'function') return CSS.escape(value);
+    return String(value).replace(/[^a-zA-Z0-9_-]/g, '\\$&');
+  }
+
   function loadCart() {
     try {
       const data = JSON.parse(sessionStorage.getItem(CART_KEY) || '[]');
@@ -23,8 +28,68 @@
     }
   }
 
+  const UNDO_MS = 5000;
+  const pendingRemovals = {};
+  let pendingTick = null;
+
   function cartQty(items) {
     return items.reduce((sum, item) => sum + (Number(item.qty) || 1), 0);
+  }
+
+  function getRequestCartQty(id) {
+    if (pendingRemovals[id]) return 0;
+    const item = loadCart().find((entry) => entry.id === id);
+    return item ? Number(item.qty) || 1 : 0;
+  }
+
+  function productFromDataset(el) {
+    const wrap = el.closest('[data-request-control]') || el;
+    const id = el.getAttribute('data-add-to-request') || wrap.getAttribute('data-request-control');
+    if (!id) return null;
+    return {
+      id: id,
+      name: wrap.getAttribute('data-product-name') || id,
+      sku: wrap.getAttribute('data-product-sku') || '',
+      series: wrap.getAttribute('data-product-series') || '',
+      image: wrap.getAttribute('data-product-image') || ''
+    };
+  }
+
+  function requestQtyInnerHtml(id) {
+    const qty = getRequestCartQty(id);
+    if (qty < 1) {
+      return '<button type="button" class="btn-secondary request-qty-add" data-add-to-request="' + escapeHtml(id) + '">Добавить в заявку</button>';
+    }
+    return (
+      '<div class="request-qty is-in-cart">' +
+        '<button type="button" class="request-qty-btn" data-cart-step="-1" aria-label="Уменьшить количество">−</button>' +
+        '<span class="request-qty-meta">' +
+          '<span class="request-qty-status">В заявке</span>' +
+          '<span class="request-qty-value" aria-live="polite">' + qty + '</span>' +
+        '</span>' +
+        '<button type="button" class="request-qty-btn" data-cart-step="1" aria-label="Увеличить количество">+</button>' +
+      '</div>'
+    );
+  }
+
+  function requestQtyWrapHtml(product) {
+    const item = product && typeof product === 'object' ? product : { id: product };
+    if (!item.id) return '';
+    return (
+      '<div class="request-qty-wrap" data-request-control="' + escapeHtml(item.id) + '"' +
+        ' data-product-name="' + escapeHtml(item.name || '') + '"' +
+        ' data-product-sku="' + escapeHtml(item.sku || '') + '"' +
+        ' data-product-series="' + escapeHtml(item.series || '') + '"' +
+        ' data-product-image="' + escapeHtml(item.image || '') + '">' +
+        requestQtyInnerHtml(item.id) +
+      '</div>'
+    );
+  }
+
+  function syncQtyControls() {
+    document.querySelectorAll('[data-request-control]').forEach((el) => {
+      el.innerHTML = requestQtyInnerHtml(el.getAttribute('data-request-control'));
+    });
   }
 
   function saveCart(items) {
@@ -33,7 +98,7 @@
   }
 
   function syncBadges() {
-    const count = cartQty(loadCart());
+    const count = cartQty(loadCart().filter((item) => !pendingRemovals[item.id]));
     document.querySelectorAll('.request-cart-count').forEach((badge) => {
       badge.hidden = count < 1;
       badge.textContent = count > 99 ? '99+' : String(count);
@@ -46,6 +111,81 @@
     });
   }
 
+  function pendingSeconds(id) {
+    const pending = pendingRemovals[id];
+    if (!pending) return 0;
+    return Math.max(1, Math.ceil((pending.endsAt - Date.now()) / 1000));
+  }
+
+  function pendingElapsed(id) {
+    const pending = pendingRemovals[id];
+    if (!pending) return 0;
+    return Math.min(UNDO_MS, Math.max(0, UNDO_MS - (pending.endsAt - Date.now())));
+  }
+
+  function stopPendingTick() {
+    if (!pendingTick) return;
+    clearInterval(pendingTick);
+    pendingTick = null;
+  }
+
+  function startPendingTick() {
+    if (pendingTick) return;
+    pendingTick = setInterval(() => {
+      Object.keys(pendingRemovals).forEach((id) => {
+        const timeEl = document.querySelector('.request-cart-item[data-cart-id="' + cssEscape(id) + '"] .request-cart-undo-time');
+        if (timeEl) timeEl.textContent = pendingSeconds(id);
+      });
+      if (!Object.keys(pendingRemovals).length) stopPendingTick();
+    }, 250);
+  }
+
+  function confirmRemove(id) {
+    const pending = pendingRemovals[id];
+    if (pending) {
+      clearTimeout(pending.timer);
+      delete pendingRemovals[id];
+    }
+    if (!Object.keys(pendingRemovals).length) stopPendingTick();
+    saveCart(loadCart().filter((item) => item.id !== id));
+  }
+
+  function undoRemove(id) {
+    const pending = pendingRemovals[id];
+    if (!pending) return;
+    clearTimeout(pending.timer);
+    delete pendingRemovals[id];
+    if (!Object.keys(pendingRemovals).length) stopPendingTick();
+    renderCartList();
+    syncBadges();
+    syncQtyControls();
+  }
+
+  function scheduleRemove(id) {
+    if (pendingRemovals[id]) return;
+    const item = loadCart().find((entry) => entry.id === id);
+    if (!item) return;
+    pendingRemovals[id] = {
+      endsAt: Date.now() + UNDO_MS,
+      timer: setTimeout(() => confirmRemove(id), UNDO_MS)
+    };
+    startPendingTick();
+    renderCartList();
+    syncBadges();
+    syncQtyControls();
+  }
+
+  function flushPendingRemovals() {
+    const ids = Object.keys(pendingRemovals);
+    if (!ids.length) return;
+    ids.forEach((id) => {
+      clearTimeout(pendingRemovals[id].timer);
+      delete pendingRemovals[id];
+    });
+    stopPendingTick();
+    saveCart(loadCart().filter((item) => ids.indexOf(item.id) === -1));
+  }
+
   function renderCartList() {
     const box = document.getElementById('requestCart');
     const list = document.getElementById('requestCartList');
@@ -54,39 +194,57 @@
     const items = loadCart();
     box.hidden = items.length === 0;
     if (sum) {
-      const count = cartQty(items);
-      sum.textContent = count ? count + ' шт.' : '';
+      const visibleCount = cartQty(items.filter((item) => !pendingRemovals[item.id]));
+      sum.textContent = visibleCount ? visibleCount + ' шт.' : (items.length ? 'Удаление…' : '');
     }
-    list.innerHTML = items.map((item) => (
-      '<li class="request-cart-item" data-cart-id="' + escapeHtml(item.id) + '">' +
-        '<span class="request-cart-thumb">' +
-          (item.image ? '<img src="' + escapeHtml(item.image) + '" alt="">' : '') +
-        '</span>' +
-        '<span class="request-cart-info">' +
-          '<strong>' + escapeHtml(item.name) + '</strong>' +
-          (item.sku ? '<span>Артикул: ' + escapeHtml(item.sku) + '</span>' : '') +
-        '</span>' +
-        '<span class="request-cart-qty">' +
-          '<button type="button" class="request-cart-step" data-cart-step="-1" aria-label="Уменьшить количество">−</button>' +
-          '<span>' + escapeHtml(item.qty) + '</span>' +
-          '<button type="button" class="request-cart-step" data-cart-step="1" aria-label="Увеличить количество">+</button>' +
-        '</span>' +
-        '<button type="button" class="request-cart-remove" data-cart-remove aria-label="Удалить товар">Удалить</button>' +
-      '</li>'
-    )).join('');
+    list.innerHTML = items.map((item) => {
+      const pending = Boolean(pendingRemovals[item.id]);
+      return (
+        '<li class="request-cart-item' + (pending ? ' is-pending' : '') + '" data-cart-id="' + escapeHtml(item.id) + '">' +
+          '<span class="request-cart-thumb">' +
+            (item.image ? '<img src="' + escapeHtml(item.image) + '" alt="">' : '') +
+          '</span>' +
+          '<span class="request-cart-info">' +
+            '<strong>' + escapeHtml(item.name) + '</strong>' +
+            (item.sku ? '<span>Артикул: ' + escapeHtml(item.sku) + '</span>' : '') +
+          '</span>' +
+          '<span class="request-cart-qty">' +
+            '<button type="button" class="request-cart-step" data-cart-step="-1" aria-label="Уменьшить количество"' + (pending ? ' disabled' : '') + '>−</button>' +
+            '<span>' + escapeHtml(item.qty) + '</span>' +
+            '<button type="button" class="request-cart-step" data-cart-step="1" aria-label="Увеличить количество"' + (pending ? ' disabled' : '') + '>+</button>' +
+          '</span>' +
+          '<button type="button" class="request-cart-remove" data-cart-remove aria-label="Удалить товар"' + (pending ? ' disabled' : '') + '>Удалить</button>' +
+          (pending
+            ? '<div class="request-cart-undo">' +
+                '<p>Товар будет удалён через <span class="request-cart-undo-time">' + pendingSeconds(item.id) + '</span> с</p>' +
+                '<button type="button" class="request-cart-undo-btn" data-cart-undo>Отменить</button>' +
+                '<span class="request-cart-undo-bar"><span style="animation-delay:-' + (pendingElapsed(item.id) / 1000) + 's"></span></span>' +
+              '</div>'
+            : '') +
+        '</li>'
+      );
+    }).join('');
   }
 
   function syncCartUI() {
     syncBadges();
     renderCartList();
+    syncQtyControls();
   }
 
   function addToRequestCart(product) {
     if (!product || !product.id) return loadCart();
+    if (pendingRemovals[product.id]) {
+      undoRemove(product.id);
+      return loadCart();
+    }
     const items = loadCart();
     const existing = items.find((item) => item.id === product.id);
     if (existing) {
       existing.qty = (Number(existing.qty) || 1) + 1;
+      if (product.name) existing.name = product.name;
+      if (product.sku) existing.sku = product.sku;
+      if (product.image) existing.image = product.image;
     } else {
       items.push({
         id: product.id,
@@ -101,23 +259,49 @@
     return items;
   }
 
-  function changeCartQty(id, delta) {
-    const items = loadCart().map((item) => {
-      if (item.id !== id) return item;
-      return Object.assign({}, item, { qty: (Number(item.qty) || 1) + delta });
-    }).filter((item) => item.qty > 0);
-    saveCart(items);
+  function changeCartQty(id, delta, options) {
+    if (pendingRemovals[id]) {
+      if (delta > 0) undoRemove(id);
+      else return;
+    }
+    const items = loadCart();
+    const current = items.find((item) => item.id === id);
+    if (!current) return;
+    const next = (Number(current.qty) || 1) + delta;
+    if (next < 1) {
+      if (options && options.undo) scheduleRemove(id);
+      else removeFromRequestCart(id);
+      return;
+    }
+    saveCart(items.map((item) => (
+      item.id === id ? Object.assign({}, item, { qty: next }) : item
+    )));
   }
 
-  function removeFromRequestCart(id) {
+  function removeFromRequestCart(id, options) {
+    if (options && options.undo) {
+      scheduleRemove(id);
+      return;
+    }
+    if (pendingRemovals[id]) {
+      clearTimeout(pendingRemovals[id].timer);
+      delete pendingRemovals[id];
+      if (!Object.keys(pendingRemovals).length) stopPendingTick();
+    }
     saveCart(loadCart().filter((item) => item.id !== id));
   }
 
   function clearRequestCart() {
+    Object.keys(pendingRemovals).forEach((id) => {
+      clearTimeout(pendingRemovals[id].timer);
+      delete pendingRemovals[id];
+    });
+    stopPendingTick();
     saveCart([]);
   }
 
   function isInRequestCart(id) {
+    if (pendingRemovals[id]) return false;
     return loadCart().some((item) => item.id === id);
   }
 
@@ -232,12 +416,17 @@
       cartList.addEventListener('click', (event) => {
         const row = event.target.closest('[data-cart-id]');
         if (!row) return;
+        const id = row.getAttribute('data-cart-id');
+        if (event.target.closest('[data-cart-undo]')) {
+          undoRemove(id);
+          return;
+        }
         if (event.target.closest('[data-cart-remove]')) {
-          removeFromRequestCart(row.getAttribute('data-cart-id'));
+          removeFromRequestCart(id, { undo: true });
           return;
         }
         const step = event.target.closest('[data-cart-step]');
-        if (step) changeCartQty(row.getAttribute('data-cart-id'), Number(step.getAttribute('data-cart-step')));
+        if (step) changeCartQty(id, Number(step.getAttribute('data-cart-step')), { undo: true });
       });
     }
     fields.phone.addEventListener('focus', onPhoneFocus);
@@ -499,6 +688,7 @@
     if (sending) return;
     showFormError('');
     if (!validateForm()) return;
+    flushPendingRemovals();
 
     const formData = new FormData();
     formData.append('name', fields.name.value.trim());
@@ -602,11 +792,28 @@
     }
   }, true);
 
+  document.addEventListener('click', (event) => {
+    const wrap = event.target.closest('[data-request-control]');
+    if (!wrap) return;
+    const addBtn = event.target.closest('[data-add-to-request]');
+    if (addBtn) {
+      event.preventDefault();
+      const product = productFromDataset(addBtn);
+      if (product) addToRequestCart(product);
+      return;
+    }
+    const step = event.target.closest('[data-cart-step]');
+    if (!step) return;
+    event.preventDefault();
+    changeCartQty(wrap.getAttribute('data-request-control'), Number(step.getAttribute('data-cart-step')));
+  });
+
   window.openRequestForm = openRequestForm;
   window.closeRequestForm = closeRequestForm;
   window.addToRequestCart = addToRequestCart;
   window.removeFromRequestCart = removeFromRequestCart;
   window.isInRequestCart = isInRequestCart;
+  window.requestQtyWrapHtml = requestQtyWrapHtml;
   syncCartUI();
   document.addEventListener('layout:ready', syncBadges);
 })();

@@ -7,6 +7,7 @@
   const resultsEl = document.getElementById('pumpResults');
   const compareBar = document.getElementById('pumpCompareBar');
   const compareCountEl = document.getElementById('pumpCompareCount');
+  const compareOpenBtn = document.getElementById('pumpCompareOpen');
   const modalEl = document.getElementById('productModal');
   const modalTitleEl = document.getElementById('productModalTitle');
   const modalBodyEl = document.getElementById('productModalBody');
@@ -131,9 +132,16 @@
   function renderCompareBar() {
     if (!compareBar) return;
     const count = selected.length;
-    compareBar.hidden = count === 0;
+    const hasResults = listPumps().length > 0;
+    compareBar.hidden = !hasResults;
+    if (compareOpenBtn) {
+      compareOpenBtn.disabled = count < 1;
+      compareOpenBtn.setAttribute('aria-disabled', count < 1 ? 'true' : 'false');
+    }
     if (compareCountEl) {
-      compareCountEl.textContent = count ? 'Выбрано: ' + count + ' из ' + MAX_COMPARE : '';
+      compareCountEl.textContent = count
+        ? 'Выбрано: ' + count + ' из ' + MAX_COMPARE
+        : 'Выберите насос для сравнения';
     }
   }
 
@@ -149,6 +157,7 @@
     if (!matches.length && !showingNearest) {
       resultsEl.hidden = false;
       resultsEl.innerHTML = emptyState();
+      renderCompareBar();
       resultsEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
       return;
     }
@@ -161,6 +170,7 @@
       '<h2 class="catalog-group-title">' + escapeHtml(title) + '</h2>' +
       (matches.length ? '' : '<p class="catalog-lead">Точного покрытия рабочей точки нет. Показаны ближайшие модели по номинальным Q и H.</p>') +
       '<div class="product-grid pump-result-grid">' + list.map(pumpCard).join('') + '</div>';
+    renderCompareBar();
     resultsEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
@@ -243,28 +253,42 @@
     return formatRu(pump.duty.q, 'м³/ч') + ' / ' + formatRu(pump.duty.h, 'м');
   }
 
-  function consultText(pump) {
+  function consultText(pumps) {
     const parts = ['Подбор насоса HEISSKRAFT.'];
     if (lastQuery) {
       const duty = selectApi.validateDuty(lastQuery.qRaw, lastQuery.hRaw);
       if (duty.ok) parts.push('Рабочая точка: Q = ' + formatRu(duty.q, 'м³/ч') + ', H = ' + formatRu(duty.h, 'м') + '.');
     }
-    if (pump) parts.push('Модель: ' + pump.name + (pump.sku ? ' (' + pump.sku + ')' : '') + '.');
+    const list = (pumps || []).filter(Boolean);
+    if (list.length === 1) {
+      parts.push('Модель: ' + list[0].name + (list[0].sku ? ' (' + list[0].sku + ')' : '') + '.');
+    } else if (list.length > 1) {
+      parts.push('Модели для сравнения: ' + list.map((pump) => (
+        pump.name + (pump.sku ? ' (' + pump.sku + ')' : '')
+      )).join(', ') + '.');
+    }
     parts.push('Прошу коммерческое предложение / консультацию инженера.');
     return parts.join(' ');
   }
 
-  function openRequest(pump, consult) {
-    closeModal();
-    closeCompare();
-    if (pump && window.addToRequestCart) {
+  function addPumpsToRequest(pumps) {
+    if (!window.addToRequestCart) return;
+    (pumps || []).forEach((pump) => {
+      if (!pump) return;
       const product = pump.source || pump;
       if (!window.isInRequestCart || !window.isInRequestCart(product.id)) {
         window.addToRequestCart(product);
       }
-    }
+    });
+  }
+
+  function openRequest(pumps) {
+    const list = Array.isArray(pumps) ? pumps.filter(Boolean) : (pumps ? [pumps] : []);
+    closeModal();
+    closeCompare();
+    addPumpsToRequest(list);
     if (window.openRequestForm) {
-      window.openRequestForm({ details: consultText(consult ? null : pump) });
+      window.openRequestForm({ details: consultText(list) });
     } else if (window.showToast) {
       window.showToast('Форма заявки — скоро появится');
     }
@@ -425,7 +449,6 @@
     lastResult = selectApi.selectPumps(catalog.pumps, lastQuery);
     showingNearest = Boolean(showNearest);
     renderResults();
-    renderCompareBar();
   }
 
   if (form) {
@@ -467,14 +490,14 @@
         return;
       }
       if (event.target.closest('[data-pump-consult]')) {
-        openRequest(null, true);
+        openRequest([]);
       }
     });
   }
 
   if (compareBar) {
     compareBar.addEventListener('click', function (event) {
-      if (event.target.closest('[data-pump-compare-open]')) openCompare();
+      if (event.target.closest('[data-pump-compare-open]') && selected.length) openCompare();
     });
   }
 
@@ -489,7 +512,7 @@
         return;
       }
       if (event.target.closest('[data-pump-quote]') && openPump) {
-        openRequest(openPump, false);
+        openRequest(openPump);
       }
     });
   }
@@ -501,7 +524,7 @@
         closeCompare();
         return;
       }
-      if (event.target.closest('[data-pump-consult]')) openRequest(selected[0] || null, true);
+      if (event.target.closest('[data-pump-consult]')) openRequest(selected.slice());
     });
   }
   if (compareClose) compareClose.addEventListener('click', closeCompare);
