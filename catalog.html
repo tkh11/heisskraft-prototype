@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Каталог — Горизонтальные многоступенчатые насосы HMH — HEISSKRAFT</title>
+  <title>Каталог продукции — HEISSKRAFT</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -18,12 +18,15 @@
       <nav class="catalog-breadcrumb" aria-label="Навигация">
         <a href="index.html">Главная</a>
         <span aria-hidden="true">/</span>
-        <span>Каталог</span>
+        <a href="catalog.html">Каталог</a>
+        <span aria-hidden="true">/</span>
+        <span id="catalogCurrent">Полный каталог</span>
       </nav>
-      <h1 class="section-title" id="catalogTitle">Каталог продукции</h1>
-      <p class="catalog-lead" id="catalogLead">Насосное оборудование HEISSKRAFT. Выберите модель и оставьте заявку на подбор.</p>
+      <h1 class="section-title" id="catalogTitle">Полный каталог</h1>
+      <p class="catalog-lead" id="catalogLead">Насосное оборудование HEISSKRAFT. Выберите раздел и модель.</p>
+      <nav class="catalog-sections" id="catalogSections" aria-label="Разделы каталога"></nav>
       <div class="catalog-status" id="catalogStatus">Загрузка товаров…</div>
-      <div class="product-grid" id="productGrid" hidden></div>
+      <div id="catalogContent" hidden></div>
     </main>
 
     <div id="site-footer"></div>

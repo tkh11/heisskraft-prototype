@@ -1540,7 +1540,57 @@
       max-width: 720px;
       color: var(--gray);
       font-size: 16px;
-      margin-bottom: 28px;
+      margin-bottom: 20px;
+    }
+
+    .catalog-sections {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 32px;
+    }
+
+    .catalog-sections a {
+      display: inline-flex;
+      align-items: center;
+      height: 36px;
+      padding: 0 14px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--dark);
+      white-space: nowrap;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+    }
+
+    .catalog-sections a:hover {
+      background: #f3f4f6;
+    }
+
+    .catalog-sections a.is-active {
+      background: var(--red);
+      border-color: var(--red);
+      color: var(--white);
+    }
+
+    .catalog-group {
+      margin-bottom: 40px;
+    }
+
+    .catalog-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .catalog-group-title {
+      font-size: 22px;
+      font-weight: 800;
+      text-align: left;
+      margin-bottom: 16px;
+    }
+
+    .catalog-group-title a:hover {
+      color: var(--red);
     }
 
     .catalog-status {
@@ -1554,12 +1604,14 @@
 
     .product-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 24px;
+      width: 100%;
       max-width: 1728px;
     }
 
     .product-card {
+      min-width: 0;
       background: white;
       border: 1px solid var(--border);
       border-radius: 16px;
@@ -1599,7 +1651,7 @@
       flex: 1;
     }
 
-    .product-card-body h2 {
+    .product-card-body h3 {
       font-size: 22px;
       font-weight: 800;
       line-height: 1.2;
@@ -1620,6 +1672,12 @@
       border-radius: 12px;
     }
 
+    @media (min-width: 641px) {
+      .page-catalog .product-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+
     @media (max-width: 640px) {
       .page-catalog {
         padding: 20px var(--container-pad) 40px;
@@ -1627,6 +1685,19 @@
 
       .page-catalog .section-title {
         font-size: 22px;
+      }
+
+      .catalog-sections {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        margin-left: calc(var(--container-pad) * -1);
+        margin-right: calc(var(--container-pad) * -1);
+        padding: 0 var(--container-pad) 4px;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .catalog-group-title {
+        font-size: 18px;
       }
 
       .product-grid {
@@ -1644,7 +1715,7 @@
         gap: 8px;
       }
 
-      .product-card-body h2 {
+      .product-card-body h3 {
         font-size: 16px;
       }
 

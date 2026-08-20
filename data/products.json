@@ -2,7 +2,7 @@
   {
     "id": "hmh-2-20",
     "name": "HMH 2-20",
-    "category": "Gorizontalnye mnogostupenchatye nasosy HMH",
+    "category": "water",
     "image": "assets/catalog2.jpg",
     "description": "Горизонтальный многоступенчатый насос для водоснабжения частных домов и небольших объектов. Компактный корпус, низкий уровень шума, стабильный напор при переменном расходе.",
     "specs": {
@@ -18,45 +18,9 @@
     }
   },
   {
-    "id": "hmh-2-40",
-    "name": "HMH 2-40",
-    "category": "Gorizontalnye mnogostupenchatye nasosy HMH",
-    "image": "assets/catalog2.jpg",
-    "description": "Модель с увеличенным напором для систем повышения давления и подачи воды на верхние этажи. Подходит для квартирных и коттеджных сетей.",
-    "specs": {
-      "flow": "2 м³/ч",
-      "head": "40 м",
-      "power": "0,55 кВт",
-      "stages": 4,
-      "inlet": "1\"",
-      "outlet": "1\"",
-      "maxPressure": "10 бар",
-      "maxTemp": "80 °C",
-      "material": "Нержавеющая сталь AISI 304"
-    }
-  },
-  {
-    "id": "hmh-4-30",
-    "name": "HMH 4-30",
-    "category": "Gorizontalnye mnogostupenchatye nasosy HMH",
-    "image": "assets/catalog2.jpg",
-    "description": "Среднерасходный насос для хозяйственно-питьевого водоснабжения. Используется в насосных станциях первого подъёма и системах фильтрации.",
-    "specs": {
-      "flow": "4 м³/ч",
-      "head": "30 м",
-      "power": "0,75 кВт",
-      "stages": 3,
-      "inlet": "1¼\"",
-      "outlet": "1\"",
-      "maxPressure": "10 бар",
-      "maxTemp": "90 °C",
-      "material": "Нержавеющая сталь AISI 304"
-    }
-  },
-  {
     "id": "hmh-4-50",
     "name": "HMH 4-50",
-    "category": "Gorizontalnye mnogostupenchatye nasosy HMH",
+    "category": "water",
     "image": "assets/catalog2.jpg",
     "description": "Насос для повышения давления в распределительных сетях. Стабильная характеристика Q–H, удобен для работы с частотным преобразователем.",
     "specs": {
@@ -72,111 +36,147 @@
     }
   },
   {
-    "id": "hmh-8-20",
-    "name": "HMH 8-20",
-    "category": "Gorizontalnye mnogostupenchatye nasosy HMH",
-    "image": "assets/catalog2.jpg",
-    "description": "Горизонтальный многоступенчатый насос повышенной производительности для водоснабжения малых коммерческих объектов и ИТП.",
+    "id": "hmc-25-40",
+    "name": "HMC 25-40",
+    "category": "heating",
+    "image": "assets/catalog3.jpg",
+    "description": "Циркуляционный насос для систем отопления частных домов. Тихая работа, энергоэффективный двигатель, монтаж на трубопровод.",
+    "specs": {
+      "flow": "2,5 м³/ч",
+      "head": "4 м",
+      "power": "0,04 кВт",
+      "stages": 1,
+      "inlet": "1\"",
+      "outlet": "1\"",
+      "maxPressure": "10 бар",
+      "maxTemp": "110 °C",
+      "material": "Чугун"
+    }
+  },
+  {
+    "id": "hmc-32-80",
+    "name": "HMC 32-80",
+    "category": "heating",
+    "image": "assets/catalog3.jpg",
+    "description": "Циркуляционный насос для ИТП и систем отопления средних объектов. Три скорости, фланцевое присоединение.",
     "specs": {
       "flow": "8 м³/ч",
-      "head": "20 м",
-      "power": "0,75 кВт",
-      "stages": 2,
-      "inlet": "1½\"",
+      "head": "8 м",
+      "power": "0,15 кВт",
+      "stages": 1,
+      "inlet": "1¼\"",
       "outlet": "1¼\"",
       "maxPressure": "10 бар",
-      "maxTemp": "90 °C",
-      "material": "Нержавеющая сталь AISI 304"
+      "maxTemp": "110 °C",
+      "material": "Чугун"
     }
   },
   {
-    "id": "hmh-8-40",
-    "name": "HMH 8-40",
-    "category": "Gorizontalnye mnogostupenchatye nasosy HMH",
-    "image": "assets/catalog2.jpg",
-    "description": "Универсальная модель линейки HMH для циркуляции и повышения давления. Применяется в системах горячего и холодного водоснабжения.",
+    "id": "hdf-8-7",
+    "name": "HDF 8-7",
+    "category": "drainage",
+    "image": "assets/catalog4.jpg",
+    "description": "Дренажный насос для откачки чистой и слегка загрязнённой воды из приямков, подвалов и дренажных колодцев.",
     "specs": {
       "flow": "8 м³/ч",
-      "head": "40 м",
-      "power": "1,5 кВт",
-      "stages": 4,
+      "head": "7 м",
+      "power": "0,25 кВт",
+      "stages": 1,
       "inlet": "1½\"",
-      "outlet": "1¼\"",
-      "maxPressure": "16 бар",
-      "maxTemp": "90 °C",
+      "outlet": "1½\"",
+      "maxPressure": "2 бар",
+      "maxTemp": "40 °C",
       "material": "Нержавеющая сталь AISI 304"
     }
   },
   {
-    "id": "hmh-12-30",
-    "name": "HMH 12-30",
-    "category": "Gorizontalnye mnogostupenchatye nasosy HMH",
-    "image": "assets/catalog2.jpg",
-    "description": "Насос для объектов среднего расхода: гостиницы, торговые центры, производственные цеха. Горизонтальная компоновка упрощает обслуживание.",
+    "id": "hff-15-10",
+    "name": "HFF 15-10",
+    "category": "drainage",
+    "image": "assets/catalog4.jpg",
+    "description": "Фекальный насос с измельчителем для канализации частных домов, септиков и КНС небольшой производительности.",
     "specs": {
-      "flow": "12 м³/ч",
-      "head": "30 м",
-      "power": "2,2 кВт",
-      "stages": 3,
-      "inlet": "2\"",
-      "outlet": "1½\"",
-      "maxPressure": "16 бар",
-      "maxTemp": "105 °C",
-      "material": "Нержавеющая сталь AISI 304"
-    }
-  },
-  {
-    "id": "hmh-12-60",
-    "name": "HMH 12-60",
-    "category": "Gorizontalnye mnogostupenchatye nasosy HMH",
-    "image": "assets/catalog2.jpg",
-    "description": "Высоконапорная модель для многоэтажных зданий и станций повышения давления. Рассчитана на непрерывную работу в составе насосной группы.",
-    "specs": {
-      "flow": "12 м³/ч",
-      "head": "60 м",
-      "power": "4,0 кВт",
-      "stages": 6,
-      "inlet": "2\"",
-      "outlet": "1½\"",
-      "maxPressure": "16 бар",
-      "maxTemp": "105 °C",
-      "material": "Нержавеющая сталь AISI 316"
-    }
-  },
-  {
-    "id": "hmh-16-40",
-    "name": "HMH 16-40",
-    "category": "Gorizontalnye mnogostupenchatye nasosy HMH",
-    "image": "assets/catalog2.jpg",
-    "description": "Промышленный горизонтальный насос для сетей водоснабжения и технологических контуров. Высокий КПД и коррозионностойкие гидравлические детали.",
-    "specs": {
-      "flow": "16 м³/ч",
-      "head": "40 м",
-      "power": "3,0 кВт",
-      "stages": 4,
+      "flow": "15 м³/ч",
+      "head": "10 м",
+      "power": "0,75 кВт",
+      "stages": 1,
       "inlet": "2\"",
       "outlet": "2\"",
-      "maxPressure": "16 бар",
-      "maxTemp": "105 °C",
-      "material": "Нержавеющая сталь AISI 316"
+      "maxPressure": "3 бар",
+      "maxTemp": "40 °C",
+      "material": "Чугун"
     }
   },
   {
-    "id": "hmh-20-50",
-    "name": "HMH 20-50",
-    "category": "Gorizontalnye mnogostupenchatye nasosy HMH",
-    "image": "assets/catalog2.jpg",
-    "description": "Топовая модель серии HMH для крупных объектов и насосных станций. Обеспечивает высокий расход при значительном напоре, совместима с шкафами управления HEISSKRAFT.",
+    "id": "hnf-32-160",
+    "name": "HNF 32-160",
+    "category": "fire",
+    "image": "assets/catalog5.jpg",
+    "description": "Консольный насос для станций пожаротушения. Рассчитан на работу в составе насосной группы с резервированием.",
     "specs": {
       "flow": "20 м³/ч",
-      "head": "50 м",
+      "head": "40 м",
       "power": "5,5 кВт",
-      "stages": 5,
-      "inlet": "2½\"",
-      "outlet": "2\"",
-      "maxPressure": "25 бар",
-      "maxTemp": "105 °C",
-      "material": "Нержавеющая сталь AISI 316"
+      "stages": 1,
+      "inlet": "DN50",
+      "outlet": "DN32",
+      "maxPressure": "16 бар",
+      "maxTemp": "70 °C",
+      "material": "Чугун"
+    }
+  },
+  {
+    "id": "hnf-50-250",
+    "name": "HNF 50-250",
+    "category": "fire",
+    "image": "assets/catalog5.jpg",
+    "description": "Насос повышенной производительности для систем водяного и пенного пожаротушения промышленных объектов.",
+    "specs": {
+      "flow": "50 м³/ч",
+      "head": "70 м",
+      "power": "15 кВт",
+      "stages": 1,
+      "inlet": "DN80",
+      "outlet": "DN50",
+      "maxPressure": "16 бар",
+      "maxTemp": "70 °C",
+      "material": "Чугун"
+    }
+  },
+  {
+    "id": "hwf-10",
+    "name": "HWF 10",
+    "category": "treatment",
+    "image": "assets/catalog6.jpg",
+    "description": "Станция механической фильтрации для подготовки хозяйственно-питьевой воды. Сменные картриджи, компактный корпус.",
+    "specs": {
+      "flow": "1,5 м³/ч",
+      "head": "—",
+      "power": "—",
+      "stages": 1,
+      "inlet": "1\"",
+      "outlet": "1\"",
+      "maxPressure": "6 бар",
+      "maxTemp": "40 °C",
+      "material": "Полипропилен"
+    }
+  },
+  {
+    "id": "hro-250",
+    "name": "HRO 250",
+    "category": "treatment",
+    "image": "assets/catalog6.jpg",
+    "description": "Установка обратного осмоса для водоподготовки малых объектов и лабораторий. Производительность 250 л/ч.",
+    "specs": {
+      "flow": "0,25 м³/ч",
+      "head": "—",
+      "power": "0,37 кВт",
+      "stages": 1,
+      "inlet": "½\"",
+      "outlet": "½\"",
+      "maxPressure": "10 бар",
+      "maxTemp": "35 °C",
+      "material": "Нержавеющая сталь AISI 304"
     }
   }
 ]

@@ -91,13 +91,12 @@
     let activeIndex = -1;
 
     const products = [
-      { name: 'Водоснабжение', category: 'Каталог', hint: 'Насосы и станции для воды', href: 'catalog.html', thumb: 'assets/catalog2.jpg' },
-      { name: 'Отопление', category: 'Каталог', hint: 'Циркуляционные насосы', target: '[data-category="heating"]', thumb: 'assets/catalog3.jpg' },
-      { name: 'Канализация / Дренаж', category: 'Каталог', hint: 'Дренажные и фекальные насосы', target: '[data-category="drainage"]', thumb: 'assets/catalog4.jpg' },
-      { name: 'Пожаротушение', category: 'Каталог', hint: 'Насосные станции ПТ', target: '[data-category="fire"]', thumb: 'assets/catalog5.jpg' },
-      { name: 'Водоподготовка', category: 'Каталог', hint: 'Фильтрация и подготовка воды', target: '[data-category="treatment"]', thumb: 'assets/catalog6.jpg' },
+      { name: 'Водоснабжение', category: 'Каталог', hint: 'Насосы и станции для воды', href: 'catalog.html?category=water', thumb: 'assets/catalog2.jpg' },
+      { name: 'Отопление', category: 'Каталог', hint: 'Циркуляционные насосы', href: 'catalog.html?category=heating', thumb: 'assets/catalog3.jpg' },
+      { name: 'Канализация / Дренаж', category: 'Каталог', hint: 'Дренажные и фекальные насосы', href: 'catalog.html?category=drainage', thumb: 'assets/catalog4.jpg' },
+      { name: 'Пожаротушение', category: 'Каталог', hint: 'Насосные станции ПТ', href: 'catalog.html?category=fire', thumb: 'assets/catalog5.jpg' },
+      { name: 'Водоподготовка', category: 'Каталог', hint: 'Фильтрация и подготовка воды', href: 'catalog.html?category=treatment', thumb: 'assets/catalog6.jpg' },
       { name: 'Полный каталог', category: 'Каталог', hint: 'Вся линейка HEISSKRAFT', href: 'catalog.html', thumb: 'assets/catalog1.jpg' },
-      { name: 'HMH', category: 'Каталог', hint: 'Горизонтальные многоступенчатые насосы', href: 'catalog.html', thumb: 'assets/catalog2.jpg' },
       { name: 'Подрядчик', category: 'Профиль', hint: 'Комплектация и поддержка объектов', target: '[data-profile="contractor"]', thumb: 'assets/icon-contractor.svg', icon: true },
       { name: 'Проектировщик', category: 'Профиль', hint: 'BIM, спецификации, гидравлика', target: '[data-profile="designer"]', thumb: 'assets/icon-designer.svg', icon: true },
       { name: 'Частное лицо', category: 'Профиль', hint: 'Системы для частного дома', target: '[data-profile="private"]', thumb: 'assets/icon-private.svg', icon: true },
