@@ -87,7 +87,10 @@
     return list.sort((a, b) => a.label.localeCompare(b.label, 'ru'));
   }
 
-  function loadPumpCatalog() {
+  function loadJsonPair() {
+    if (global.Heisskraft) {
+      return Promise.all([global.Heisskraft.catalog(), global.Heisskraft.products()]);
+    }
     return Promise.all([
       fetch('data/catalog.json').then((response) => {
         if (!response.ok) throw new Error('Не удалось загрузить структуру каталога');
@@ -97,7 +100,11 @@
         if (!response.ok) throw new Error('Не удалось загрузить каталог насосов');
         return response.json();
       })
-    ]).then(([catalog, products]) => {
+    ]);
+  }
+
+  function loadPumpCatalog() {
+    return loadJsonPair().then(([catalog, products]) => {
       const taxonomy = catalog && typeof catalog === 'object'
         ? catalog
         : { categories: [], applications: [] };

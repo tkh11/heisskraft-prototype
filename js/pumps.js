@@ -99,7 +99,7 @@
     return (
       '<article class="product-card pump-result-card' + (pump.optimal ? ' is-optimal' : '') + '">' +
         (pump.optimal ? '<span class="pump-badge">Оптимальный выбор</span>' : '') +
-        '<div class="product-card-img"><img src="' + escapeHtml(pump.image) + '" alt="" width="600" height="800" loading="lazy" /></div>' +
+        '<div class="product-card-img"><img src="' + escapeHtml(pump.image) + '" alt="" width="600" height="800" loading="lazy" decoding="async" /></div>' +
         '<div class="product-card-body">' +
           '<h3>' + escapeHtml(pump.name) + '</h3>' +
           (pump.series ? '<p class="product-card-desc">Серия ' + escapeHtml(pump.series) + '</p>' : '') +
@@ -335,7 +335,7 @@
     modalBodyEl.innerHTML =
       '<div class="product-modal-layout">' +
         '<div class="product-modal-photo">' +
-          '<img src="' + escapeHtml(pump.image) + '" alt="' + escapeHtml(pump.name) + '" />' +
+          '<img src="' + escapeHtml(pump.image) + '" alt="' + escapeHtml(pump.name) + '" width="600" height="800" />' +
         '</div>' +
         '<div>' +
           '<div class="product-modal-meta">' +
@@ -416,9 +416,11 @@
         '<button type="button" class="btn-primary" data-pump-consult>Получить консультацию</button>' +
       '</div>';
     lockPage(true);
-    compareModal.classList.add('is-open');
     compareModal.setAttribute('aria-hidden', 'false');
-    if (compareClose) compareClose.focus();
+    window.requestAnimationFrame(function () {
+      compareModal.classList.add('is-open');
+      if (compareClose) compareClose.focus();
+    });
   }
 
   function toggleCompare(pump) {

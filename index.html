@@ -4,10 +4,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>HEISSKRAFT — Насосное оборудование</title>
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="icon" href="assets/logo-mark.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" /></noscript>
   <link rel="stylesheet" href="css/styles.css" />
+  <script defer src="js/data.js"></script>
+  <script defer src="js/layout.js"></script>
+  <script defer src="js/hero.js"></script>
+  <script defer src="js/request-form.js"></script>
+  <script defer src="js/home.js"></script>
 </head>
 <body>
   <a class="visually-hidden" href="#profiles">Перейти к содержимому</a>
@@ -103,7 +112,7 @@
   <section class="hero" id="hero" aria-roledescription="карусель" aria-label="Галерея Heisskraft">
     <div class="hero-slides">
       <div class="hero-slide is-active" data-slide="lakhta">
-        <img src="assets/hero.jpg" alt="Лахта-центр" width="1920" height="1280" />
+        <img src="assets/hero.jpg" alt="Лахта-центр" width="1920" height="1280" fetchpriority="high" decoding="async" />
       </div>
       <div class="hero-slide" data-slide="warranty">
         <video muted loop playsinline preload="metadata">
@@ -197,42 +206,42 @@
     <div class="catalog-grid">
       <a href="catalog.html" class="catalog-card" data-category="full">
         <div class="catalog-img">
-          <img src="assets/catalog1.jpg" alt="Полный каталог" width="600" height="400" loading="lazy" />
+          <img src="assets/catalog1.jpg" alt="Полный каталог" width="600" height="400" loading="lazy" decoding="async" />
         </div>
         <h3>Полный каталог</h3>
       </a>
 
       <a href="catalog.html?use=water" class="catalog-card" data-category="water">
         <div class="catalog-img">
-          <img src="assets/catalog2.jpg" alt="Водоснабжение" width="600" height="400" loading="lazy" />
+          <img src="assets/catalog2.jpg" alt="Водоснабжение" width="600" height="400" loading="lazy" decoding="async" />
         </div>
         <h3>Водоснабжение</h3>
       </a>
 
       <a href="catalog.html?use=heating" class="catalog-card" data-category="heating">
         <div class="catalog-img">
-          <img src="assets/catalog3.jpg" alt="Отопление" width="600" height="400" loading="lazy" />
+          <img src="assets/catalog3.jpg" alt="Отопление" width="600" height="400" loading="lazy" decoding="async" />
         </div>
         <h3>Отопление</h3>
       </a>
 
       <a href="catalog.html?category=drainage" class="catalog-card" data-category="drainage">
         <div class="catalog-img">
-          <img src="assets/catalog4.jpg" alt="Канализация / Дренаж" width="600" height="400" loading="lazy" />
+          <img src="assets/catalog4.jpg" alt="Канализация / Дренаж" width="600" height="400" loading="lazy" decoding="async" />
         </div>
         <h3>Канализация / Дренаж</h3>
       </a>
 
       <a href="catalog.html?category=fire" class="catalog-card" data-category="fire">
         <div class="catalog-img">
-          <img src="assets/catalog5.jpg" alt="Пожаротушение" width="600" height="400" loading="lazy" />
+          <img src="assets/catalog5.jpg" alt="Пожаротушение" width="600" height="400" loading="lazy" decoding="async" />
         </div>
         <h3>Пожаротушение</h3>
       </a>
 
       <a href="catalog.html?category=treatment" class="catalog-card" data-category="treatment">
         <div class="catalog-img">
-          <img src="assets/catalog6.jpg" alt="Водоподготовка" width="600" height="400" loading="lazy" />
+          <img src="assets/catalog6.jpg" alt="Водоподготовка" width="600" height="400" loading="lazy" decoding="async" />
         </div>
         <h3>Водоподготовка</h3>
       </a>
@@ -267,144 +276,12 @@
           <p>Использование материалов сайта без согласования запрещено.</p>
         </div>
         <div class="footer-logo">
-          <img src="assets/footer-logo.svg" alt="HEISSKRAFT" width="311" height="31" />
+          <img src="assets/footer-logo.svg" alt="HEISSKRAFT" width="311" height="31" loading="lazy" decoding="async" />
         </div>
       </div>
     </footer>
   </div>
 
   </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
-  <script src="js/layout.js"></script>
-  <script src="js/request-form.js"></script>
-  <script>
-    (function initHeroSlider() {
-      const hero = document.getElementById('hero');
-      if (!hero) return;
-
-      const allSlides = Array.from(hero.querySelectorAll('.hero-slide'));
-      const allTitles = Array.from(hero.querySelectorAll('.hero-titles .hero-title'));
-      const dotsRoot = hero.querySelector('.hero-dots');
-      const videos = Array.from(hero.querySelectorAll('video'));
-      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const mobileMq = window.matchMedia('(max-width: 640px)');
-      const queues = {
-        desktop: ['lakhta', 'market', 'production'],
-        mobile: ['lakhta', 'production', 'warranty']
-      };
-      let queue = [];
-      let index = 0;
-      let timer = null;
-      let inView = false;
-
-      function currentQueue() {
-        return mobileMq.matches ? queues.mobile : queues.desktop;
-      }
-
-      function videoAllowed(video) {
-        if (video.classList.contains('hero-media-desktop')) return !mobileMq.matches;
-        if (video.classList.contains('hero-media-mobile')) return mobileMq.matches;
-        return true;
-      }
-
-      function syncMedia() {
-        videos.forEach((video) => {
-          const active = video.closest('.hero-slide').classList.contains('is-active') && videoAllowed(video);
-          if (active && inView) {
-            video.muted = true;
-            video.loop = true;
-            const play = video.play();
-            if (play) play.catch(() => {});
-          } else {
-            video.pause();
-            if (!active) video.currentTime = 0;
-          }
-        });
-      }
-
-      function go(next) {
-        if (!queue.length) return;
-        index = (next + queue.length) % queue.length;
-        const activeId = queue[index];
-        allSlides.forEach((slide) => {
-          slide.classList.toggle('is-active', slide.dataset.slide === activeId);
-        });
-        allTitles.forEach((title) => {
-          title.classList.toggle('is-active', title.dataset.slide === activeId);
-        });
-        Array.from(dotsRoot.querySelectorAll('button')).forEach((dot, i) => {
-          const on = i === index;
-          dot.classList.toggle('is-active', on);
-          if (on) dot.setAttribute('aria-current', 'true');
-          else dot.removeAttribute('aria-current');
-        });
-        syncMedia();
-      }
-
-      function stop() {
-        if (timer) {
-          clearInterval(timer);
-          timer = null;
-        }
-      }
-
-      function start() {
-        stop();
-        if (reduceMotion || !inView || queue.length < 2) return;
-        timer = setInterval(() => go(index + 1), 5000);
-      }
-
-      function applySet() {
-        queue = currentQueue();
-        allSlides.forEach((slide) => {
-          slide.classList.toggle('is-disabled', !queue.includes(slide.dataset.slide));
-        });
-        dotsRoot.innerHTML = queue.map((_, i) => (
-          '<button type="button" aria-label="Слайд ' + (i + 1) + '"' +
-          (i === 0 ? ' class="is-active" aria-current="true"' : '') +
-          '></button>'
-        )).join('');
-        dotsRoot.querySelectorAll('button').forEach((dot, i) => {
-          dot.addEventListener('click', () => {
-            go(i);
-            start();
-          });
-        });
-        go(0);
-        start();
-      }
-
-      mobileMq.addEventListener('change', applySet);
-
-      const observer = new IntersectionObserver((entries) => {
-        inView = entries.some((entry) => entry.isIntersecting && entry.intersectionRatio > 0.25);
-        if (inView) {
-          syncMedia();
-          start();
-        } else {
-          stop();
-          videos.forEach((video) => video.pause());
-        }
-      }, { threshold: [0, 0.25, 0.5] });
-
-      observer.observe(hero);
-      applySet();
-    })();
-
-    document.querySelectorAll('.profile-card').forEach(card => {
-      card.addEventListener('click', () => {
-        const name = card.querySelector('h3').textContent;
-        if (window.showToast) window.showToast('Раздел «' + name + '» — скоро будет доступен');
-      });
-      card.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          card.click();
-        }
-      });
-    });
-
-  </script>
 </body>
 </html>

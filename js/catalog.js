@@ -133,7 +133,7 @@
     if (!items || !items.length) return '';
     return '<div class="catalog-grid catalog-nav-grid">' + items.map((item) => (
       '<a class="catalog-card" href="' + makeHref(item) + '">' +
-        '<div class="catalog-img"><img src="' + escapeHtml(item.image) + '" alt="" width="600" height="400" loading="lazy" /></div>' +
+        '<div class="catalog-img"><img src="' + escapeHtml(item.image) + '" alt="" width="600" height="400" loading="lazy" decoding="async" /></div>' +
         '<h3>' + escapeHtml(item.name) + '</h3>' +
       '</a>'
     )).join('') + '</div>';
@@ -153,7 +153,7 @@
     return (
       '<article class="product-card" id="' + escapeHtml(product.id) + '">' +
         '<div class="product-card-img">' +
-          '<img src="' + escapeHtml(product.image) + '" alt="' + escapeHtml(product.name) + '" width="600" height="800" loading="lazy" />' +
+          '<img src="' + escapeHtml(product.image) + '" alt="' + escapeHtml(product.name) + '" width="600" height="800" loading="lazy" decoding="async" />' +
         '</div>' +
         '<div class="product-card-body">' +
           '<h3>' + escapeHtml(title) + '</h3>' +
@@ -303,7 +303,7 @@
     const showPumpFilters = filtered.some((product) => product.pumpType) || beforeFilters.some((product) => product.pumpType);
     renderFilters(beforeFilters, state, showPumpFilters && (state.category === 'pumps' || beforeFilters.some((product) => product.pumpType)));
     contentEl.innerHTML = productGrid(filtered);
-    highlightHash();
+    window.requestAnimationFrame(highlightHash);
   }
 
   const modalEl = document.getElementById('productModal');
@@ -354,7 +354,7 @@
     modalBodyEl.innerHTML =
       '<div class="product-modal-layout">' +
         '<div class="product-modal-photo">' +
-          '<img src="' + escapeHtml(product.image) + '" alt="' + escapeHtml(product.name) + '" />' +
+          '<img src="' + escapeHtml(product.image) + '" alt="' + escapeHtml(product.name) + '" width="600" height="800" />' +
         '</div>' +
         '<div>' +
           '<div class="product-modal-meta">' +
@@ -453,24 +453,40 @@
 
   window.addEventListener('popstate', render);
 
-  Promise.all([
-    fetch('data/catalog.json').then((response) => {
-      if (!response.ok) throw new Error('Не удалось загрузить структуру каталога');
-      return response.json();
-    }),
-    fetch('data/products.json').then((response) => {
-      if (!response.ok) throw new Error('Не удалось загрузить товары');
-      return response.json();
-    })
-  ]).then(([catalog, products]) => {
+  function dataApi() {
+    return window.Heisskraft || null;
+  }
+
+  function loadCatalogData() {
+    const api = dataApi();
+    if (api) return Promise.all([api.catalog(), api.products()]);
+    return Promise.all([
+      fetch('data/catalog.json').then((response) => {
+        if (!response.ok) throw new Error('Не удалось загрузить структуру каталога');
+        return response.json();
+      }),
+      fetch('data/products.json').then((response) => {
+        if (!response.ok) throw new Error('Не удалось загрузить товары');
+        return response.json();
+      })
+    ]);
+  }
+
+  function buildProductFuse() {
+    if (typeof Fuse !== 'function' || !allProducts.length) return;
+    productFuse = new Fuse(allProducts, { keys: ['name', 'series', 'sku', 'id', 'description'], threshold: 0.35, ignoreLocation: true });
+  }
+
+  loadCatalogData().then(([catalog, products]) => {
     taxonomy = catalog && typeof catalog === 'object' ? catalog : { categories: [], applications: [] };
     if (!Array.isArray(taxonomy.categories)) taxonomy.categories = [];
     if (!Array.isArray(taxonomy.applications)) taxonomy.applications = [];
     allProducts = Array.isArray(products) ? products : [];
-    productFuse = typeof Fuse === 'function'
-      ? new Fuse(allProducts, { keys: ['name', 'series', 'sku', 'id', 'description'], threshold: 0.35, ignoreLocation: true })
-      : null;
+    buildProductFuse();
     render();
+    if (typeof Fuse !== 'function' && dataApi() && typeof dataApi().loadFuse === 'function') {
+      dataApi().loadFuse().then(buildProductFuse).catch(() => {});
+    }
   }).catch((err) => {
     if (statusEl) {
       statusEl.hidden = false;

@@ -202,7 +202,7 @@
       return (
         '<li class="request-cart-item' + (pending ? ' is-pending' : '') + '" data-cart-id="' + escapeHtml(item.id) + '">' +
           '<span class="request-cart-thumb">' +
-            (item.image ? '<img src="' + escapeHtml(item.image) + '" alt="">' : '') +
+            (item.image ? '<img src="' + escapeHtml(item.image) + '" alt="" width="48" height="48" loading="lazy">' : '') +
           '</span>' +
           '<span class="request-cart-info">' +
             '<strong>' + escapeHtml(item.name) + '</strong>' +
@@ -748,12 +748,14 @@
     }
     renderCartList();
     lockPage(true);
-    modal.classList.add('is-open');
     modal.setAttribute('aria-hidden', 'false');
-    window.setTimeout(() => {
-      if (form.hidden) document.getElementById('requestClose').focus();
-      else fields.name.focus();
-    }, 40);
+    window.requestAnimationFrame(function () {
+      modal.classList.add('is-open');
+      window.setTimeout(() => {
+        if (form.hidden) document.getElementById('requestClose').focus();
+        else fields.name.focus();
+      }, 40);
+    });
   }
 
   function closeRequestForm() {

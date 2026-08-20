@@ -1,28 +1,60 @@
 (function () {
   function layoutRoot() {
+    if (window.Heisskraft && typeof window.Heisskraft.siteRoot === 'function') {
+      return window.Heisskraft.siteRoot();
+    }
     const script = document.querySelector('script[src*="layout.js"]');
     if (script && script.src) return new URL('../', script.src);
     return new URL('.', window.location.href);
   }
 
-  async function loadPartial(selector, url) {
-    const host = document.querySelector(selector);
-    if (!host) return;
-    try {
-      const response = await fetch(new URL(url, layoutRoot()));
+  function loadText(url) {
+    if (window.Heisskraft && typeof window.Heisskraft.loadText === 'function') {
+      return window.Heisskraft.loadText(url);
+    }
+    return fetch(new URL(url, layoutRoot())).then((response) => {
       if (!response.ok) throw new Error('Не удалось загрузить ' + url);
-      host.innerHTML = await response.text();
-    } catch (err) {
-      if (!host.innerHTML.trim()) {
-        console.warn(err);
-      }
+      return response.text();
+    });
+  }
+
+  function loadProducts() {
+    if (window.Heisskraft && typeof window.Heisskraft.products === 'function') {
+      return window.Heisskraft.products();
     }
-    if (selector === '#site-header') {
-      ['searchModal', 'toast'].forEach((id) => {
-        const el = document.getElementById(id);
-        if (el) document.body.appendChild(el);
-      });
+    return fetch(new URL('data/products.json', layoutRoot())).then((response) => {
+      if (!response.ok) throw new Error('Не удалось загрузить товары');
+      return response.json();
+    });
+  }
+
+  function relocateHeaderOverlays() {
+    ['searchModal', 'toast'].forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) document.body.appendChild(el);
+    });
+  }
+
+  function loadPartial(selector, url) {
+    const host = document.querySelector(selector);
+    if (!host) return Promise.resolve();
+
+    function afterInsert() {
+      if (selector === '#site-header') relocateHeaderOverlays();
     }
+
+    if (host.childElementCount) {
+      afterInsert();
+      return Promise.resolve();
+    }
+
+    return loadText(url).then((html) => {
+      host.innerHTML = html;
+      afterInsert();
+    }).catch((err) => {
+      if (!host.innerHTML.trim()) console.warn(err);
+      afterInsert();
+    });
   }
 
   function showToast(message) {
@@ -191,7 +223,7 @@
       searchResults.innerHTML = '<div class="search-group-label" id="searchResultsLabel">' + heading + '</div>' +
         currentMatches.map((item, i) => (
           '<button type="button" class="search-item' + (i === 0 ? ' is-active' : '') + '" role="option" tabindex="-1" id="search-opt-' + i + '" data-index="' + i + '" aria-selected="' + (i === 0) + '">' +
-            '<span class="search-item-thumb' + (item.icon ? ' is-icon' : '') + '"><img src="' + item.thumb + '" alt=""></span>' +
+            '<span class="search-item-thumb' + (item.icon ? ' is-icon' : '') + '"><img src="' + item.thumb + '" alt="" width="48" height="48" loading="lazy"></span>' +
             '<span class="search-item-text"><strong>' + escapeHtml(item.name) + '</strong><span class="search-item-hint' + (item.category === 'Товар' ? ' is-clamped' : '') + '">' + escapeHtml(item.hint) + '</span></span>' +
             '<span class="search-item-type">' + escapeHtml(item.category) + '</span>' +
           '</button>'
@@ -350,11 +382,11 @@
       }
     });
 
-    fetch(new URL('data/products.json', layoutRoot()))
-      .then((response) => {
-        if (!response.ok) throw new Error('Не удалось загрузить товары');
-        return response.json();
-      })
+    function rebuildFuse() {
+      if (typeof Fuse === 'function') fuse = new Fuse(searchIndex, fuseOptions);
+    }
+
+    loadProducts()
       .then((catalogProducts) => {
         if (!Array.isArray(catalogProducts)) return;
         const catalogItems = catalogProducts.map((product) => {
@@ -372,12 +404,16 @@
           };
         });
         searchIndex = pages.concat(catalogItems);
-        fuse = typeof Fuse === 'function' ? new Fuse(searchIndex, fuseOptions) : null;
+        rebuildFuse();
         if (searchModal.classList.contains('is-open')) renderResults(searchInput.value);
       })
       .catch((err) => {
         console.warn(err);
       });
+
+    if (typeof Fuse !== 'function' && window.Heisskraft && typeof window.Heisskraft.loadFuse === 'function') {
+      window.Heisskraft.loadFuse().then(rebuildFuse).catch(() => {});
+    }
   }
 
   function initActions() {
@@ -422,16 +458,34 @@
     });
   }
 
-  async function loadLayout() {
-    await Promise.all([
-      loadPartial('#site-header', 'header.html'),
-      loadPartial('#site-footer', 'footer.html')
-    ]);
+  function initChrome() {
     initMenu();
     initSearch();
     initActions();
-    document.dispatchEvent(new CustomEvent('layout:ready'));
     markCurrentNav();
+    if (window.Heisskraft && typeof window.Heisskraft.markLayoutReady === 'function') {
+      window.Heisskraft.markLayoutReady();
+    } else {
+      document.dispatchEvent(new CustomEvent('layout:ready'));
+    }
+  }
+
+  function loadLayout() {
+    const headerHost = document.querySelector('#site-header');
+    const footerHost = document.querySelector('#site-footer');
+    const hasHeader = !headerHost || headerHost.childElementCount > 0;
+    const hasFooter = !footerHost || footerHost.childElementCount > 0;
+
+    if (hasHeader && hasFooter) {
+      if (headerHost) relocateHeaderOverlays();
+      initChrome();
+      return;
+    }
+
+    Promise.all([
+      loadPartial('#site-header', 'header.html'),
+      loadPartial('#site-footer', 'footer.html')
+    ]).then(initChrome);
   }
 
   if (document.readyState === 'loading') {

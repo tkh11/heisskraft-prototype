@@ -4,10 +4,24 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Подбор насосов — HEISSKRAFT</title>
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="icon" href="assets/logo-mark.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" /></noscript>
+  <link rel="preload" href="header.html" as="fetch" crossorigin />
+  <link rel="preload" href="footer.html" as="fetch" crossorigin />
+  <link rel="preload" href="data/catalog.json" as="fetch" crossorigin />
+  <link rel="preload" href="data/products.json" as="fetch" crossorigin />
   <link rel="stylesheet" href="css/styles.css" />
+  <script defer src="js/data.js"></script>
+  <script defer src="js/layout.js"></script>
+  <script defer src="js/request-form.js"></script>
+  <script defer src="js/pump-data.js"></script>
+  <script defer src="js/pump-select.js"></script>
+  <script defer src="js/pumps.js"></script>
 </head>
 <body class="is-pumps-page">
   <a class="visually-hidden" href="#pump-select">Перейти к подбору насосов</a>
@@ -107,11 +121,5 @@
       <div class="product-modal-body" id="compareModalBody"></div>
     </div>
   </div>
-
-  <script src="js/layout.js"></script>
-  <script src="js/request-form.js"></script>
-  <script src="js/pump-data.js"></script>
-  <script src="js/pump-select.js"></script>
-  <script src="js/pumps.js"></script>
 </body>
 </html>
