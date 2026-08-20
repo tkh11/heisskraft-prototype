@@ -102,9 +102,16 @@
     }
 
     /* ========== HEADER ========== */
+    #site-header {
+      height: var(--header-h);
+    }
+
     .header {
-      position: sticky;
+      position: fixed;
       top: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
       z-index: 100;
       height: var(--header-h);
       background: var(--white);
@@ -1073,20 +1080,62 @@
 
       .header {
         height: var(--header-h);
+        border-bottom: none;
+        padding: 0 var(--container-pad);
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        gap: 0;
+      }
+
+      .header-nav {
+        display: none;
+      }
+
+      .menu-btn,
+      .menu-btn:hover,
+      .menu-btn.is-open {
+        display: flex;
+        background: transparent;
+        width: 40px;
+        height: 40px;
+        gap: 5px;
       }
 
       .logo {
-        height: 32px;
-        max-width: 220px;
+        height: 28px;
+        max-width: none;
       }
 
-      .phone {
-        font-size: 16px;
+      .logo-full {
+        display: none;
+      }
+
+      .logo-mark {
+        display: block;
+        height: 28px;
+        width: auto;
+      }
+
+      .header-right {
+        justify-self: end;
+        gap: 4px;
+        margin-left: 0;
+      }
+
+      .header-right .phone {
+        display: none;
+      }
+
+      .search-btn {
+        order: 1;
+      }
+
+      .phone-icon {
+        order: 2;
       }
 
       .phone-icon,
-      .search-btn,
-      .menu-btn {
+      .search-btn {
         width: 40px;
         height: 40px;
       }
@@ -1467,50 +1516,87 @@
 <body>
   <a class="visually-hidden" href="#profiles">Перейти к содержимому</a>
   <div id="page">
-  <!-- HEADER -->
-  <header class="header">
-    <button class="menu-btn" id="menuBtn" aria-label="Открыть меню" aria-expanded="false">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-
-    <a href="/" class="logo" aria-label="HEISSKRAFT — на главную">
-      <img class="logo-full" src="assets/logo.svg" alt="HEISSKRAFT Quality in Detail" width="541" height="54" />
-      <img class="logo-mark" src="assets/logo-mark.svg" alt="HK" width="124" height="54" />
-    </a>
-
-    <nav class="header-nav" aria-label="Разделы сайта">
-      <a href="#" data-action="docs">Документация</a>
-      <a href="#" data-action="pumps">Подбор насосов</a>
-      <a href="#" data-action="request" class="is-accent">Оставить заявку</a>
-    </nav>
-
-    <div class="header-right">
-      <a href="tel:+74952584542" class="phone">+7 (495) 258-45-42</a>
-      <button class="search-btn" id="searchBtn" aria-label="Поиск" aria-expanded="false" aria-controls="searchModal" aria-haspopup="dialog">
-        <img src="assets/search-icon.svg" alt="" width="36" height="36" />
+  <div id="site-header">
+    <header class="header">
+      <button class="menu-btn" id="menuBtn" aria-label="Открыть меню" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
       </button>
-      <a href="tel:+74952584542" class="phone-icon" aria-label="Позвонить">
-        <img src="assets/phone-icon.svg" alt="" width="36" height="36" />
-      </a>
-    </div>
-  </header>
 
-  <!-- Mobile menu -->
-  <div class="mobile-menu" id="mobileMenu">
-    <div class="mobile-menu-panel">
-      <nav class="mobile-menu-nav" aria-label="Мобильное меню">
-        <a href="#catalog">Каталог продукции</a>
+      <a href="index.html" class="logo" aria-label="HEISSKRAFT — на главную">
+        <img class="logo-full" src="assets/logo.svg" alt="HEISSKRAFT Quality in Detail" width="541" height="54" />
+        <img class="logo-mark" src="assets/logo-mark.svg" alt="HK" width="124" height="54" />
+      </a>
+
+      <nav class="header-nav" aria-label="Разделы сайта">
         <a href="#" data-action="docs">Документация</a>
         <a href="#" data-action="pumps">Подбор насосов</a>
-        <a href="#" data-action="request">Оставить заявку</a>
+        <a href="#" data-action="request" class="is-accent">Оставить заявку</a>
       </nav>
-      <div class="mobile-menu-contacts">
-        <a href="tel:+74952584542">+7 (495) 258-45-42</a>
-        <a href="mailto:info@heisskraft.ru">info@heisskraft.ru</a>
+
+      <div class="header-right">
+        <a href="tel:+74952584542" class="phone">+7 (495) 258-45-42</a>
+        <button class="search-btn" id="searchBtn" aria-label="Поиск" aria-expanded="false" aria-controls="searchModal" aria-haspopup="dialog">
+          <img src="assets/search-icon.svg" alt="" width="36" height="36" />
+        </button>
+        <a href="tel:+74952584542" class="phone-icon" aria-label="Позвонить">
+          <img src="assets/phone-icon.svg" alt="" width="36" height="36" />
+        </a>
+      </div>
+    </header>
+
+    <div class="mobile-menu" id="mobileMenu">
+      <div class="mobile-menu-panel">
+        <nav class="mobile-menu-nav" aria-label="Мобильное меню">
+          <a href="index.html#catalog">Каталог продукции</a>
+          <a href="#" data-action="docs">Документация</a>
+          <a href="#" data-action="pumps">Подбор насосов</a>
+          <a href="#" data-action="request">Оставить заявку</a>
+        </nav>
+        <div class="mobile-menu-contacts">
+          <a href="tel:+74952584542">+7 (495) 258-45-42</a>
+          <a href="mailto:info@heisskraft.ru">info@heisskraft.ru</a>
+        </div>
       </div>
     </div>
+
+    <div class="search-modal" id="searchModal" role="dialog" aria-modal="true" aria-labelledby="searchTitle" aria-hidden="true">
+      <div class="search-box" role="document">
+        <div class="search-box-header">
+          <h2 id="searchTitle">Поиск по сайту</h2>
+          <button type="button" class="search-close" id="searchClose" aria-label="Закрыть поиск">
+            <svg viewBox="0 0 18 18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <path d="M4 4l10 10M14 4L4 14"/>
+            </svg>
+          </button>
+        </div>
+        <form id="searchForm" role="search">
+          <label class="visually-hidden" for="searchInput">Найти оборудование, раздел или контакт</label>
+          <div class="search-field">
+            <svg class="search-field-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="7"/>
+              <path d="M20 20l-3.5-3.5" stroke-linecap="round"/>
+            </svg>
+            <input type="search" id="searchInput" placeholder="Насос, отопление, контакты…" autocomplete="off" enterkeyhint="search" role="combobox" aria-autocomplete="list" aria-expanded="true" aria-controls="searchResults" />
+            <button type="button" class="search-clear" id="searchClear" aria-label="Очистить запрос">
+              <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <path d="M3 3l8 8M11 3L3 11"/>
+              </svg>
+            </button>
+          </div>
+        </form>
+        <div class="search-hints" id="searchHints"></div>
+        <div id="searchLive" class="visually-hidden" aria-live="polite"></div>
+        <div class="search-results" id="searchResults" role="listbox" aria-label="Результаты поиска"></div>
+        <div class="search-footer">
+          <span><kbd>↑</kbd> <kbd>↓</kbd> выбрать · <kbd>Enter</kbd> открыть</span>
+          <span><kbd>Esc</kbd> закрыть</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
   </div>
 
   <!-- HERO -->
@@ -1653,361 +1739,45 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer class="footer" id="footer">
-    <div class="footer-top">
-      <div class="footer-col">
-        <h4>Heisskraft</h4>
-        <a href="#" data-action="about">Информация о компании</a>
-        <a href="#" data-action="requisites">Реквизиты организации</a>
-        <a href="#" data-action="request">Оставить заявку</a>
-      </div>
-      <div class="footer-col legal">
-        <h4>Правовая информация</h4>
-        <a href="#" data-action="privacy">Политика конфиденциальности</a>
-        <a href="#" data-action="personal">Обработка персональных данных</a>
-      </div>
-      <div class="footer-col">
-        <h4>Контактная информация</h4>
-        <a href="tel:+74952584542">+7 (495) 258-45-42</a>
-        <a href="mailto:info@heisskraft.ru">info@heisskraft.ru</a>
-        <p>141214, Россия, Московская область, г. Пушкино, пос. Зверосовхоза, ул. Соболиная, дом 11, стр. 1, оф. 1-19</p>
-      </div>
-    </div>
-    <div class="footer-divider"></div>
-    <div class="footer-bottom">
-      <div class="footer-copy">
-        <p>© 2021 HEISSKRAFT — все права защищены</p>
-        <p>Использование материалов сайта без согласования запрещено.</p>
-      </div>
-      <div class="footer-logo">
-        <img src="assets/footer-logo.svg" alt="HEISSKRAFT" width="311" height="31" />
-      </div>
-    </div>
-  </footer>
-
-  </div>
-
-  <!-- Search modal -->
-  <div class="search-modal" id="searchModal" role="dialog" aria-modal="true" aria-labelledby="searchTitle" aria-hidden="true">
-    <div class="search-box" role="document">
-      <div class="search-box-header">
-        <h2 id="searchTitle">Поиск по сайту</h2>
-        <button type="button" class="search-close" id="searchClose" aria-label="Закрыть поиск">
-          <svg viewBox="0 0 18 18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-            <path d="M4 4l10 10M14 4L4 14"/>
-          </svg>
-        </button>
-      </div>
-      <form id="searchForm" role="search">
-        <label class="visually-hidden" for="searchInput">Найти оборудование, раздел или контакт</label>
-        <div class="search-field">
-          <svg class="search-field-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="11" cy="11" r="7"/>
-            <path d="M20 20l-3.5-3.5" stroke-linecap="round"/>
-          </svg>
-          <input type="search" id="searchInput" placeholder="Насос, отопление, контакты…" autocomplete="off" enterkeyhint="search" role="combobox" aria-autocomplete="list" aria-expanded="true" aria-controls="searchResults" />
-          <button type="button" class="search-clear" id="searchClear" aria-label="Очистить запрос">
-            <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-              <path d="M3 3l8 8M11 3L3 11"/>
-            </svg>
-          </button>
+  <div id="site-footer">
+    <footer class="footer" id="footer">
+      <div class="footer-top">
+        <div class="footer-col">
+          <h4>Heisskraft</h4>
+          <a href="#" data-action="about">Информация о компании</a>
+          <a href="#" data-action="requisites">Реквизиты организации</a>
+          <a href="#" data-action="request">Оставить заявку</a>
         </div>
-      </form>
-      <div class="search-hints" id="searchHints"></div>
-      <div id="searchLive" class="visually-hidden" aria-live="polite"></div>
-      <div class="search-results" id="searchResults" role="listbox" aria-label="Результаты поиска"></div>
-      <div class="search-footer">
-        <span><kbd>↑</kbd> <kbd>↓</kbd> выбрать · <kbd>Enter</kbd> открыть</span>
-        <span><kbd>Esc</kbd> закрыть</span>
+        <div class="footer-col legal">
+          <h4>Правовая информация</h4>
+          <a href="#" data-action="privacy">Политика конфиденциальности</a>
+          <a href="#" data-action="personal">Обработка персональных данных</a>
+        </div>
+        <div class="footer-col">
+          <h4>Контактная информация</h4>
+          <a href="tel:+74952584542">+7 (495) 258-45-42</a>
+          <a href="mailto:info@heisskraft.ru">info@heisskraft.ru</a>
+          <p>141214, Россия, Московская область, г. Пушкино, пос. Зверосовхоза, ул. Соболиная, дом 11, стр. 1, оф. 1-19</p>
+        </div>
       </div>
-    </div>
+      <div class="footer-divider"></div>
+      <div class="footer-bottom">
+        <div class="footer-copy">
+          <p>© 2021 HEISSKRAFT — все права защищены</p>
+          <p>Использование материалов сайта без согласования запрещено.</p>
+        </div>
+        <div class="footer-logo">
+          <img src="assets/footer-logo.svg" alt="HEISSKRAFT" width="311" height="31" />
+        </div>
+      </div>
+    </footer>
   </div>
 
-  <!-- Toast -->
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
+  <script src="js/layout.js"></script>
   <script>
-    // Menu toggle
-    const menuBtn = document.getElementById('menuBtn');
-    const mobileMenu = document.getElementById('mobileMenu');
-
-    menuBtn.addEventListener('click', () => {
-      const isOpen = menuBtn.classList.toggle('is-open');
-      mobileMenu.classList.toggle('is-open', isOpen);
-      menuBtn.setAttribute('aria-expanded', isOpen);
-      menuBtn.setAttribute('aria-label', isOpen ? 'Закрыть меню' : 'Открыть меню');
-      document.body.style.overflow = isOpen ? 'hidden' : '';
-    });
-
-    mobileMenu.addEventListener('click', (e) => {
-      if (e.target === mobileMenu) {
-        menuBtn.classList.remove('is-open');
-        mobileMenu.classList.remove('is-open');
-        menuBtn.setAttribute('aria-expanded', 'false');
-        menuBtn.setAttribute('aria-label', 'Открыть меню');
-        document.body.style.overflow = '';
-      }
-    });
-
-    // Close menu on link click
-    mobileMenu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        menuBtn.classList.remove('is-open');
-        mobileMenu.classList.remove('is-open');
-        menuBtn.setAttribute('aria-expanded', 'false');
-        menuBtn.setAttribute('aria-label', 'Открыть меню');
-        document.body.style.overflow = '';
-      });
-    });
-
-    // Search modal
-    const searchBtn = document.getElementById('searchBtn');
-    const searchModal = document.getElementById('searchModal');
-    const searchInput = document.getElementById('searchInput');
-    const searchClose = document.getElementById('searchClose');
-    const searchClear = document.getElementById('searchClear');
-    const searchForm = document.getElementById('searchForm');
-    const searchResults = document.getElementById('searchResults');
-    const searchHints = document.getElementById('searchHints');
-    const searchLive = document.getElementById('searchLive');
-    const pageRoot = document.getElementById('page');
-    let lastFocus = null;
-    let activeIndex = -1;
-
-    const searchIndex = [
-      { id: 'water', title: 'Водоснабжение', type: 'Каталог', hint: 'Насосы и станции для воды', keywords: 'вода насос водоснабжение станция', target: '[data-category="water"]', thumb: 'assets/catalog2.jpg' },
-      { id: 'heating', title: 'Отопление', type: 'Каталог', hint: 'Циркуляционные насосы', keywords: 'отопление тепло циркуляция', target: '[data-category="heating"]', thumb: 'assets/catalog3.jpg' },
-      { id: 'drainage', title: 'Канализация / Дренаж', type: 'Каталог', hint: 'Дренажные и фекальные насосы', keywords: 'канализация дренаж стоки', target: '[data-category="drainage"]', thumb: 'assets/catalog4.jpg' },
-      { id: 'fire', title: 'Пожаротушение', type: 'Каталог', hint: 'Насосные станции ПТ', keywords: 'пожар пожаротушение пт', target: '[data-category="fire"]', thumb: 'assets/catalog5.jpg' },
-      { id: 'treatment', title: 'Водоподготовка', type: 'Каталог', hint: 'Фильтрация и подготовка воды', keywords: 'водоподготовка фильтр очистка', target: '[data-category="treatment"]', thumb: 'assets/catalog6.jpg' },
-      { id: 'full', title: 'Полный каталог', type: 'Каталог', hint: 'Вся линейка HEISSKRAFT', keywords: 'каталог все продукция', target: '[data-category="full"]', thumb: 'assets/catalog1.jpg' },
-      { id: 'contractor', title: 'Подрядчик', type: 'Профиль', hint: 'Комплектация и поддержка объектов', keywords: 'подрядчик монтаж объект', target: '[data-profile="contractor"]', thumb: 'assets/icon-contractor.svg', icon: true },
-      { id: 'designer', title: 'Проектировщик', type: 'Профиль', hint: 'BIM, спецификации, гидравлика', keywords: 'проектировщик bim расчет', target: '[data-profile="designer"]', thumb: 'assets/icon-designer.svg', icon: true },
-      { id: 'private', title: 'Частное лицо', type: 'Профиль', hint: 'Системы для частного дома', keywords: 'дом частное консультация', target: '[data-profile="private"]', thumb: 'assets/icon-private.svg', icon: true },
-      { id: 'partner', title: 'Партнер', type: 'Профиль', hint: 'Дилерские условия', keywords: 'партнер дилер', target: '[data-profile="partner"]', thumb: 'assets/icon-partner.svg', icon: true },
-      { id: 'contacts', title: 'Контакты', type: 'Страница', hint: '+7 (495) 258-45-42 · Пушкино', keywords: 'контакты телефон адрес почта', target: '#footer', thumb: 'assets/phone-icon.svg', icon: true },
-      { id: 'request', title: 'Оставить заявку', type: 'Действие', hint: 'Подбор оборудования под объект', keywords: 'заявка форма заказ', action: 'request', thumb: 'assets/logo.svg', icon: true }
-    ];
-
-    const popularQueries = ['Отопление', 'Водоснабжение', 'Контакты', 'Подрядчик'];
-    let currentMatches = searchIndex.slice();
-
-    function openSearch() {
-      lastFocus = document.activeElement;
-      searchModal.classList.add('is-open');
-      searchModal.setAttribute('aria-hidden', 'false');
-      searchBtn.setAttribute('aria-expanded', 'true');
-      pageRoot.setAttribute('inert', '');
-      pageRoot.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = 'hidden';
-      renderHints();
-      renderResults(searchInput.value);
-      window.setTimeout(() => searchInput.focus(), 40);
-    }
-
-    function closeSearch() {
-      if (!searchModal.classList.contains('is-open')) return;
-      searchModal.classList.remove('is-open');
-      searchModal.setAttribute('aria-hidden', 'true');
-      searchBtn.setAttribute('aria-expanded', 'false');
-      pageRoot.removeAttribute('inert');
-      pageRoot.removeAttribute('aria-hidden');
-      activeIndex = -1;
-      if (!mobileMenu.classList.contains('is-open')) document.body.style.overflow = '';
-      if (lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
-    }
-
-    function normalize(s) {
-      return (s || '').toLowerCase().replace(/ё/g, 'е').trim();
-    }
-
-    const popularIds = ['water', 'heating', 'contacts', 'request'];
-
-    function filterIndex(query) {
-      const q = normalize(query);
-      if (!q) return searchIndex.filter((item) => popularIds.includes(item.id));
-      return searchIndex.filter((item) => {
-        const hay = normalize(item.title + ' ' + item.hint + ' ' + item.keywords + ' ' + item.type);
-        return hay.includes(q);
-      });
-    }
-
-    function renderHints() {
-      searchHints.innerHTML = popularQueries.map((q) => (
-        '<button type="button" class="search-chip" data-query="' + q + '">' + q + '</button>'
-      )).join('');
-    }
-
-    function renderResults(query) {
-      const q = query.trim();
-      currentMatches = filterIndex(q);
-      searchClear.classList.toggle('is-visible', q.length > 0);
-      activeIndex = currentMatches.length ? 0 : -1;
-
-      Array.from(searchHints.children).forEach((chip, i) => {
-        chip.setAttribute('aria-pressed', String(normalize(q) === normalize(popularQueries[i])));
-      });
-
-      if (!currentMatches.length) {
-        searchResults.innerHTML =
-          '<div class="search-empty">' +
-            '<h3>Ничего не найдено</h3>' +
-            '<p>По запросу «' + escapeHtml(q) + '» нет разделов. Оставьте заявку — подберём оборудование.</p>' +
-            '<button type="button" class="btn-primary" id="searchEmptyCta">Оставить заявку</button>' +
-          '</div>';
-        searchInput.removeAttribute('aria-activedescendant');
-        searchLive.textContent = 'Нет результатов';
-        return;
-      }
-
-      const heading = q ? 'Результаты' : 'Популярные разделы';
-      searchResults.innerHTML = '<div class="search-group-label" id="searchResultsLabel">' + heading + '</div>' +
-        currentMatches.map((item, i) => (
-          '<button type="button" class="search-item' + (i === 0 ? ' is-active' : '') + '" role="option" tabindex="-1" id="search-opt-' + i + '" data-index="' + i + '" aria-selected="' + (i === 0) + '">' +
-            '<span class="search-item-thumb' + (item.icon ? ' is-icon' : '') + '"><img src="' + item.thumb + '" alt=""></span>' +
-            '<span class="search-item-text"><strong>' + item.title + '</strong><span>' + item.hint + '</span></span>' +
-            '<span class="search-item-type">' + item.type + '</span>' +
-          '</button>'
-        )).join('');
-
-      searchInput.setAttribute('aria-activedescendant', 'search-opt-0');
-      searchLive.textContent = q
-        ? currentMatches.length + ' ' + plural(currentMatches.length, 'результат', 'результата', 'результатов')
-        : 'Показаны популярные разделы';
-    }
-
-    function plural(n, one, few, many) {
-      const m10 = n % 10;
-      const m100 = n % 100;
-      if (m10 === 1 && m100 !== 11) return one;
-      if (m10 >= 2 && m10 <= 4 && (m100 < 10 || m100 >= 20)) return few;
-      return many;
-    }
-
-    function escapeHtml(s) {
-      return s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-    }
-
-    function setActive(index) {
-      const items = searchResults.querySelectorAll('.search-item');
-      items.forEach((el) => {
-        el.classList.remove('is-active');
-        el.setAttribute('aria-selected', 'false');
-      });
-      if (index < 0 || !items[index]) {
-        activeIndex = -1;
-        searchInput.removeAttribute('aria-activedescendant');
-        return;
-      }
-      activeIndex = index;
-      items[index].classList.add('is-active');
-      items[index].setAttribute('aria-selected', 'true');
-      searchInput.setAttribute('aria-activedescendant', items[index].id);
-      items[index].scrollIntoView({ block: 'nearest' });
-    }
-
-    function highlightTarget(selector) {
-      document.querySelectorAll('.is-highlighted').forEach((el) => el.classList.remove('is-highlighted'));
-      const el = document.querySelector(selector);
-      if (!el) return;
-      el.classList.add('is-highlighted');
-      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      window.setTimeout(() => el.classList.remove('is-highlighted'), 2400);
-    }
-
-    function openResult(item) {
-      closeSearch();
-      if (item.action === 'request') {
-        const requestLink = document.querySelector('[data-action="request"]');
-        if (requestLink) requestLink.click();
-        return;
-      }
-      if (item.target) highlightTarget(item.target);
-    }
-
-    searchBtn.addEventListener('click', openSearch);
-    searchClose.addEventListener('click', closeSearch);
-    searchModal.addEventListener('click', (e) => {
-      if (e.target === searchModal) closeSearch();
-    });
-    searchClear.addEventListener('click', () => {
-      searchInput.value = '';
-      renderResults('');
-      searchInput.focus();
-    });
-    searchInput.addEventListener('input', () => renderResults(searchInput.value));
-    searchForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      if (activeIndex >= 0 && currentMatches[activeIndex]) openResult(currentMatches[activeIndex]);
-    });
-    searchHints.addEventListener('click', (e) => {
-      const chip = e.target.closest('.search-chip');
-      if (!chip) return;
-      searchInput.value = chip.dataset.query;
-      renderResults(searchInput.value);
-      searchInput.focus();
-    });
-    searchResults.addEventListener('click', (e) => {
-      const emptyCta = e.target.closest('#searchEmptyCta');
-      if (emptyCta) {
-        closeSearch();
-        const requestLink = document.querySelector('[data-action="request"]');
-        if (requestLink) requestLink.click();
-        return;
-      }
-      const itemEl = e.target.closest('.search-item');
-      if (!itemEl) return;
-      openResult(currentMatches[Number(itemEl.dataset.index)]);
-    });
-    searchResults.addEventListener('mousemove', (e) => {
-      const itemEl = e.target.closest('.search-item');
-      if (!itemEl) return;
-      setActive(Number(itemEl.dataset.index));
-    });
-
-    function trapFocus(e) {
-      if (!searchModal.classList.contains('is-open') || e.key !== 'Tab') return;
-      const focusable = searchModal.querySelectorAll('button:not([tabindex="-1"]), [href], input');
-      const list = Array.from(focusable).filter((el) => !el.hasAttribute('disabled') && el.offsetParent !== null);
-      if (!list.length) return;
-      const first = list[0];
-      const last = list[list.length - 1];
-      if (e.shiftKey && document.activeElement === first) {
-        e.preventDefault();
-        last.focus();
-      } else if (!e.shiftKey && document.activeElement === last) {
-        e.preventDefault();
-        first.focus();
-      }
-    }
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        if (searchModal.classList.contains('is-open')) {
-          e.preventDefault();
-          closeSearch();
-          return;
-        }
-        if (mobileMenu.classList.contains('is-open')) {
-          menuBtn.click();
-        }
-      }
-      if (!searchModal.classList.contains('is-open')) return;
-      trapFocus(e);
-      if (e.key === 'ArrowDown') {
-        e.preventDefault();
-        if (!currentMatches.length) return;
-        setActive((activeIndex + 1) % currentMatches.length);
-      }
-      if (e.key === 'ArrowUp') {
-        e.preventDefault();
-        if (!currentMatches.length) return;
-        setActive((activeIndex - 1 + currentMatches.length) % currentMatches.length);
-      }
-    });
-
-    // Hero gallery
     (function initHeroSlider() {
       const hero = document.getElementById('hero');
       if (!hero) return;
@@ -2121,24 +1891,10 @@
       applySet();
     })();
 
-    // Toast helper
-    const toast = document.getElementById('toast');
-    let toastTimer;
-
-    function showToast(message) {
-      toast.textContent = message;
-      toast.classList.add('is-visible');
-      clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => {
-        toast.classList.remove('is-visible');
-      }, 2800);
-    }
-
-    // Profile cards
     document.querySelectorAll('.profile-card').forEach(card => {
       card.addEventListener('click', () => {
         const name = card.querySelector('h3').textContent;
-        showToast('Раздел «' + name + '» — скоро будет доступен');
+        if (window.showToast) window.showToast('Раздел «' + name + '» — скоро будет доступен');
       });
       card.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
@@ -2148,11 +1904,10 @@
       });
     });
 
-    // Catalog cards
     document.querySelectorAll('.catalog-card').forEach(card => {
       card.addEventListener('click', () => {
         const name = card.querySelector('h3').textContent;
-        showToast('Каталог «' + name + '» — в разработке');
+        if (window.showToast) window.showToast('Каталог «' + name + '» — в разработке');
       });
       card.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
@@ -2161,26 +1916,6 @@
         }
       });
     });
-
-    // Footer / other actions
-    document.querySelectorAll('[data-action]').forEach(el => {
-      el.addEventListener('click', (e) => {
-        e.preventDefault();
-        const action = el.dataset.action;
-        const messages = {
-          about: 'Страница «О компании» — в разработке',
-          requisites: 'Реквизиты организации — в разработке',
-          docs: 'Раздел «Документация» — в разработке',
-          pumps: 'Подбор насосов — в разработке',
-          request: 'Форма заявки — скоро появится',
-          privacy: 'Политика конфиденциальности — в разработке',
-          personal: 'Обработка персональных данных — в разработке'
-        };
-        showToast(messages[action] || 'Раздел в разработке');
-      });
-    });
-
-    // Smooth scroll for anchor links already handled by CSS
   </script>
 </body>
 </html>
