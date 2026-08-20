@@ -207,6 +207,54 @@
       color: #fff;
     }
 
+    @property --pump-nav-angle {
+      syntax: "<angle>";
+      inherits: false;
+      initial-value: 0deg;
+    }
+
+    @media (min-width: 1025px) {
+      .header-nav a[href="pumps.html"][aria-current="page"] {
+        position: relative;
+        color: var(--red);
+        border-color: #f3c4c6;
+      }
+
+      .header-nav a[href="pumps.html"][aria-current="page"]::before {
+        content: "";
+        position: absolute;
+        inset: -1px;
+        border-radius: 11px;
+        padding: 1.5px;
+        background: conic-gradient(
+          from var(--pump-nav-angle),
+          transparent 0deg 292deg,
+          rgba(237, 28, 36, 0.18) 318deg,
+          var(--red) 344deg 360deg
+        );
+        -webkit-mask:
+          linear-gradient(#000 0 0) content-box,
+          linear-gradient(#000 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        animation: pump-nav-orbit 1.8s linear infinite;
+        pointer-events: none;
+      }
+    }
+
+    @media (min-width: 1025px) and (prefers-reduced-motion: reduce) {
+      .header-nav a[href="pumps.html"][aria-current="page"]::before {
+        animation: none;
+        background: var(--red);
+      }
+    }
+
+    @keyframes pump-nav-orbit {
+      to {
+        --pump-nav-angle: 360deg;
+      }
+    }
+
     .header-right {
       display: flex;
       align-items: center;
@@ -2926,10 +2974,6 @@
 
     .pump-compare-actions {
       margin-top: 20px;
-    }
-
-    .header-nav a[aria-current="page"] {
-      color: var(--red);
     }
 
     @media (max-width: 640px) {
