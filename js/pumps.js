@@ -326,11 +326,73 @@
     win.print();
   }
 
+  function bindProductDocTabs(root) {
+    if (!root) return;
+    const tabs = root.querySelectorAll('[data-doc-tab]');
+    const panels = root.querySelectorAll('[data-doc-panel]');
+    if (!tabs.length) return;
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const id = tab.getAttribute('data-doc-tab');
+        tabs.forEach((item) => {
+          const on = item === tab;
+          item.classList.toggle('is-active', on);
+          item.setAttribute('aria-selected', on ? 'true' : 'false');
+        });
+        panels.forEach((panel) => {
+          panel.hidden = panel.getAttribute('data-doc-panel') !== id;
+        });
+      });
+    });
+  }
+
   function openDetail(pump) {
     if (!modalEl || !modalBodyEl || !pump) return;
     lastModalFocus = document.activeElement;
     openPump = pump;
     const apps = (pump.applications || []).map((item) => item.name).join(', ');
+    const src = pump.source || {};
+    const specs = src.specs || {};
+    const hasGraph = !!(pump.graph || dutyChart(pump));
+    const hasDrawing = !!pump.drawing;
+    const specBlock =
+      (pump.description ? '<p class="product-modal-desc">' + escapeHtml(pump.description) + '</p>' : '') +
+      '<dl class="product-modal-specs">' +
+        specRow('Расход Q', pump.flowText) +
+        specRow('Напор H', pump.headText) +
+        specRow('Фактическая рабочая точка', dutyText(pump)) +
+        specRow('Мощность P2', pump.powerText) +
+        specRow('КПД', pump.efficiencyText || 'нет данных в карточке') +
+        specRow('NPSH', pump.npshText || 'нет данных в карточке') +
+        specRow('Количество насосов', pump.pumpCount != null ? String(pump.pumpCount) : 'нет данных в карточке') +
+        specRow('Частотное регулирование', vfdText(pump)) +
+        specRow('Применение', apps) +
+        specRow('Диаметр', pump.connection) +
+        specRow('Давление', pump.pressure) +
+        specRow('Напряжение', specs.voltage) +
+        specRow('Частота вращения', specs.speed) +
+        specRow('Ток номинальный', specs.current) +
+        specRow('Температура жидкости', specs.temperature) +
+        specRow('Масса', specs.weight) +
+        specRow('Артикул 220 В', specs.article220) +
+        specRow('Артикул 380 В', specs.article380) +
+      '</dl>';
+    const graphBlock =
+      (pump.graph ? '<div class="product-doc-figure"><img src="' + escapeHtml(pump.graph) + '" alt="График характеристик ' + escapeHtml(pump.name) + '" /></div>' : '') +
+      dutyChart(pump);
+    const docs = (hasGraph || hasDrawing)
+      ? '<div class="product-docs">' +
+          '<div class="product-doc-tabs" role="tablist">' +
+            '<button type="button" class="product-doc-tab is-active" role="tab" aria-selected="true" data-doc-tab="info">Характеристики</button>' +
+            (hasGraph ? '<button type="button" class="product-doc-tab" role="tab" aria-selected="false" data-doc-tab="graph">График</button>' : '') +
+            (hasDrawing ? '<button type="button" class="product-doc-tab" role="tab" aria-selected="false" data-doc-tab="drawing">Чертёж</button>' : '') +
+          '</div>' +
+          '<div class="product-doc-panel" data-doc-panel="info">' + specBlock + '</div>' +
+          (hasGraph ? '<div class="product-doc-panel" data-doc-panel="graph" hidden>' + graphBlock + '</div>' : '') +
+          (hasDrawing ? '<div class="product-doc-panel" data-doc-panel="drawing" hidden><div class="product-doc-figure"><img src="' + escapeHtml(pump.drawing) + '" alt="Чертёж ' + escapeHtml(pump.name) + '" /></div></div>' : '') +
+        '</div>'
+      : specBlock + dutyChart(pump);
+
     modalTitleEl.textContent = pump.name;
     modalBodyEl.innerHTML =
       '<div class="product-modal-layout">' +
@@ -344,21 +406,7 @@
             (pump.pumpType ? '<span>Тип: ' + escapeHtml(pump.pumpType) + '</span>' : '') +
             (pump.construction ? '<span>Конструкция: ' + escapeHtml(pump.construction) + '</span>' : '') +
           '</div>' +
-          (pump.description ? '<p class="product-modal-desc">' + escapeHtml(pump.description) + '</p>' : '') +
-          '<dl class="product-modal-specs">' +
-            specRow('Расход Q', pump.flowText) +
-            specRow('Напор H', pump.headText) +
-            specRow('Фактическая рабочая точка', dutyText(pump)) +
-            specRow('Мощность P2', pump.powerText) +
-            specRow('КПД', pump.efficiencyText || 'нет данных в карточке') +
-            specRow('NPSH', pump.npshText || 'нет данных в карточке') +
-            specRow('Количество насосов', pump.pumpCount != null ? String(pump.pumpCount) : 'нет данных в карточке') +
-            specRow('Частотное регулирование', vfdText(pump)) +
-            specRow('Применение', apps) +
-            specRow('Диаметр', pump.connection) +
-            specRow('Давление', pump.pressure) +
-          '</dl>' +
-          dutyChart(pump) +
+          docs +
           '<div class="product-modal-actions">' +
             '<div class="product-modal-buttons">' +
               '<button type="button" class="btn-secondary" data-pump-pdf>Скачать PDF</button>' +
@@ -367,6 +415,7 @@
           '</div>' +
         '</div>' +
       '</div>';
+    bindProductDocTabs(modalBodyEl);
     lockPage(true);
     window.requestAnimationFrame(function () {
       modalEl.classList.add('is-open');

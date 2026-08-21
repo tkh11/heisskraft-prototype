@@ -4,7 +4,21 @@
     head: 'Напор H',
     power: 'Мощность',
     connection: 'Диаметр',
-    pressure: 'Давление'
+    pressure: 'Давление',
+    voltage: 'Напряжение',
+    frequency: 'Частота',
+    speed: 'Частота вращения',
+    current: 'Ток номинальный',
+    temperature: 'Температура жидкости',
+    protection: 'Степень защиты',
+    insulation: 'Класс изоляции',
+    material: 'Материал',
+    stages: 'Число рабочих колёс',
+    weight: 'Масса',
+    npsh: 'NPSH',
+    standard: 'Стандарт характеристик',
+    article220: 'Артикул 220 В',
+    article380: 'Артикул 380 В'
   };
   const PUMP_FILTERS = [
     { key: 'pumpType', label: 'Тип насоса', from: 'pumpType' },
@@ -12,7 +26,8 @@
     { key: 'head', label: 'Напор', from: 'specs.head' },
     { key: 'power', label: 'Мощность', from: 'specs.power' },
     { key: 'connection', label: 'Диаметр подключения', from: 'specs.connection' },
-    { key: 'pressure', label: 'Рабочее давление', from: 'specs.pressure' }
+    { key: 'pressure', label: 'Рабочее давление', from: 'specs.pressure' },
+    { key: 'voltage', label: 'Напряжение', from: 'specs.voltage' }
   ];
 
   const titleEl = document.getElementById('catalogTitle');
@@ -325,6 +340,26 @@
     if (lastModalFocus && typeof lastModalFocus.focus === 'function') lastModalFocus.focus();
   }
 
+  function bindProductDocTabs(root) {
+    if (!root) return;
+    const tabs = root.querySelectorAll('[data-doc-tab]');
+    const panels = root.querySelectorAll('[data-doc-panel]');
+    if (!tabs.length) return;
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const id = tab.getAttribute('data-doc-tab');
+        tabs.forEach((item) => {
+          const on = item === tab;
+          item.classList.toggle('is-active', on);
+          item.setAttribute('aria-selected', on ? 'true' : 'false');
+        });
+        panels.forEach((panel) => {
+          panel.hidden = panel.getAttribute('data-doc-panel') !== id;
+        });
+      });
+    });
+  }
+
   function openProductModal(product) {
     if (!modalEl || !modalBodyEl || !product) return;
     lastModalFocus = document.activeElement;
@@ -350,6 +385,25 @@
       });
     }
 
+    const hasGraph = !!product.graph;
+    const hasDrawing = !!product.drawing;
+    const specBlock =
+      (product.description ? '<p class="product-modal-desc">' + escapeHtml(product.description) + '</p>' : '') +
+      (specRows.length ? '<dl class="product-modal-specs">' + specRows.join('') + '</dl>' : '') +
+      (apps.length ? '<div class="product-modal-apps">' + apps.map((item) => '<span>' + escapeHtml(item.name) + '</span>').join('') + '</div>' : '');
+    const docs = (hasGraph || hasDrawing)
+      ? '<div class="product-docs">' +
+          '<div class="product-doc-tabs" role="tablist">' +
+            '<button type="button" class="product-doc-tab is-active" role="tab" aria-selected="true" data-doc-tab="info">Характеристики</button>' +
+            (hasGraph ? '<button type="button" class="product-doc-tab" role="tab" aria-selected="false" data-doc-tab="graph">График</button>' : '') +
+            (hasDrawing ? '<button type="button" class="product-doc-tab" role="tab" aria-selected="false" data-doc-tab="drawing">Чертёж</button>' : '') +
+          '</div>' +
+          '<div class="product-doc-panel" data-doc-panel="info">' + specBlock + '</div>' +
+          (hasGraph ? '<div class="product-doc-panel" data-doc-panel="graph" hidden><div class="product-doc-figure"><img src="' + escapeHtml(product.graph) + '" alt="График характеристик ' + escapeHtml(product.name) + '" /></div></div>' : '') +
+          (hasDrawing ? '<div class="product-doc-panel" data-doc-panel="drawing" hidden><div class="product-doc-figure"><img src="' + escapeHtml(product.drawing) + '" alt="Чертёж ' + escapeHtml(product.name) + '" /></div></div>' : '') +
+        '</div>'
+      : specBlock;
+
     modalTitleEl.textContent = product.name;
     modalBodyEl.innerHTML =
       '<div class="product-modal-layout">' +
@@ -363,9 +417,7 @@
             (category ? '<span>Раздел: ' + escapeHtml(category.name) + '</span>' : '') +
             (subcategory ? '<span>Подкатегория: ' + escapeHtml(subcategory.name) + '</span>' : '') +
           '</div>' +
-          (product.description ? '<p class="product-modal-desc">' + escapeHtml(product.description) + '</p>' : '') +
-          (specRows.length ? '<dl class="product-modal-specs">' + specRows.join('') + '</dl>' : '') +
-          (apps.length ? '<div class="product-modal-apps">' + apps.map((item) => '<span>' + escapeHtml(item.name) + '</span>').join('') + '</div>' : '') +
+          docs +
           '<div class="product-modal-actions">' +
             '<p class="product-card-price">Цена по запросу</p>' +
             '<div class="product-modal-buttons">' +
@@ -377,6 +429,7 @@
           '</div>' +
         '</div>' +
       '</div>';
+    bindProductDocTabs(modalBodyEl);
 
     if (pageRoot) {
       pageRoot.setAttribute('inert', '');

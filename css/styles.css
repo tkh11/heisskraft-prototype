@@ -2087,7 +2087,7 @@
       position: relative;
       z-index: 1;
       background: white;
-      width: min(920px, 100%);
+      width: min(1040px, 100%);
       max-height: min(860px, calc(100dvh - 32px));
       border-radius: 16px;
       padding: 20px 20px 16px;
@@ -2193,6 +2193,47 @@
       border-radius: 999px;
       font-size: 12px;
       font-weight: 700;
+    }
+
+    .product-docs {
+      margin-top: 4px;
+    }
+
+    .product-doc-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 0 0 14px;
+    }
+
+    .product-doc-tab {
+      height: 36px;
+      padding: 0 14px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: #fff;
+      color: var(--dark);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .product-doc-tab.is-active {
+      border-color: var(--dark);
+      background: var(--dark);
+      color: #fff;
+    }
+
+    .product-doc-figure {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .product-doc-figure img {
+      display: block;
+      width: 100%;
+      height: auto;
     }
 
     .product-modal-actions {

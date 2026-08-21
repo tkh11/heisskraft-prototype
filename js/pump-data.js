@@ -70,6 +70,9 @@
       npshText: specs.npsh || '',
       connection: specs.connection || '',
       pressure: specs.pressure || '',
+      graph: product.graph || '',
+      drawing: product.drawing || '',
+      curve: Array.isArray(product.curve) ? product.curve : [],
       source: product
     };
   }
