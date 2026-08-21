@@ -131,8 +131,9 @@
       { name: 'Водоподготовка', category: 'Каталог', hint: 'Фильтрация и обратный осмос', href: 'catalog.html?category=treatment', thumb: 'assets/catalog6.jpg' },
       { name: 'Полный каталог', category: 'Каталог', hint: 'Вся линейка HEISSKRAFT', href: 'catalog.html', thumb: 'assets/catalog1.jpg' },
       { name: 'Подбор насосов', category: 'Страница', hint: 'Подбор по расходу и напору', href: 'pumps.html', thumb: 'assets/catalog2.jpg' },
+      { name: 'Решения для проектировщиков', category: 'Страница', hint: 'Узлы, насосные станции, PPR-CT, пожаротушение, сервис', href: 'designer.html', thumb: 'assets/icon-designer.svg', icon: true },
       { name: 'Подрядчик', category: 'Профиль', hint: 'Комплектация и поддержка объектов', target: '[data-profile="contractor"]', thumb: 'assets/icon-contractor.svg', icon: true },
-      { name: 'Проектировщик', category: 'Профиль', hint: 'BIM, спецификации, гидравлика', target: '[data-profile="designer"]', thumb: 'assets/icon-designer.svg', icon: true },
+      { name: 'Проектировщик', category: 'Профиль', hint: 'Узлы, станции, PPR-CT и сопровождение проекта', href: 'designer.html', thumb: 'assets/icon-designer.svg', icon: true },
       { name: 'Частное лицо', category: 'Профиль', hint: 'Системы для частного дома', target: '[data-profile="private"]', thumb: 'assets/icon-private.svg', icon: true },
       { name: 'Партнер', category: 'Профиль', hint: 'Дилерские условия', target: '[data-profile="partner"]', thumb: 'assets/icon-partner.svg', icon: true },
       { name: 'Контакты', category: 'Страница', hint: '+7 (495) 258-45-42 · Пушкино', target: '#footer', thumb: 'assets/phone-icon.svg', icon: true },
@@ -141,6 +142,7 @@
 
     const categoryLabels = {
       pumps: 'Насосы и насосные станции',
+      nodes: 'Узлы и сборные решения',
       pipes: 'Трубы и трубопроводные системы',
       fittings: 'Фитинги',
       valves: 'Трубопроводная арматура',

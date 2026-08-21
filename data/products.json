@@ -254,7 +254,7 @@
   },
   {
     "id": "hpp-20",
-    "name": "HPP 20",
+    "name": "HPP 20 PPR-CT",
     "series": "HPP",
     "sku": "HK-HPP-20",
     "category": "pipes",
@@ -264,7 +264,7 @@
       "heating"
     ],
     "image": "assets/catalog1.jpg",
-    "description": "Полипропиленовая труба для систем водоснабжения и отопления.",
+    "description": "Труба PPR-CT DN20 для систем водоснабжения и отопления. Часть линейки диаметров от малых до магистральных.",
     "specs": {
       "connection": "DN20",
       "pressure": "20 бар"
@@ -374,5 +374,85 @@
     "image": "assets/products/hmh-2-20.jpg",
     "description": "Торцевое уплотнение для многоступенчатых насосов серии HMH.",
     "specs": {}
+  },
+  {
+    "id": "hitp-80",
+    "name": "HITP 80",
+    "series": "HITP",
+    "sku": "HK-HITP-80",
+    "category": "nodes",
+    "subcategory": "assembly",
+    "applications": [
+      "heating",
+      "water"
+    ],
+    "image": "assets/catalog3.jpg",
+    "description": "Сборный тепловой узел для ИТП: насосная группа, арматура и обвязка в одном решении.",
+    "specs": {
+      "connection": "DN80",
+      "pressure": "16 бар"
+    }
+  },
+  {
+    "id": "hmv-32-11",
+    "name": "HMV 32-11",
+    "series": "HMV",
+    "sku": "HK-HMV-32-11",
+    "category": "pumps",
+    "subcategory": "high-power",
+    "applications": [
+      "water",
+      "process"
+    ],
+    "pumpType": "Вертикальный многоступенчатый",
+    "image": "assets/products/hnf-50-250.jpg",
+    "description": "Мощный вертикальный насос для высотных зданий, ИТП и технологических контуров.",
+    "specs": {
+      "flow": "32 м³/ч",
+      "head": "110 м",
+      "power": "18,5 кВт",
+      "connection": "DN65",
+      "pressure": "16 бар"
+    }
+  },
+  {
+    "id": "hpp-160",
+    "name": "HPP 160 PPR-CT",
+    "series": "HPP",
+    "sku": "HK-HPP-160",
+    "category": "pipes",
+    "subcategory": "large-dn",
+    "applications": [
+      "water",
+      "heating",
+      "process"
+    ],
+    "image": "assets/catalog1.jpg",
+    "description": "Труба PPR-CT большого диаметра DN160 для магистральных участков сетей.",
+    "specs": {
+      "connection": "DN160",
+      "pressure": "16 бар"
+    }
+  },
+  {
+    "id": "hul-50",
+    "name": "HUL 50",
+    "series": "HUL",
+    "sku": "HK-HUL-50",
+    "category": "drainage",
+    "subcategory": "uplift",
+    "applications": [
+      "sewer"
+    ],
+    "pumpType": "Насосная станция",
+    "image": "assets/catalog4.jpg",
+    "description": "Готовая канализационная станция Uplift для подъёма стоков при отсутствии самотёка.",
+    "specs": {
+      "flow": "50 м³/ч",
+      "head": "18 м",
+      "power": "7,5 кВт",
+      "connection": "DN100",
+      "pressure": "6 бар"
+    }
   }
 ]

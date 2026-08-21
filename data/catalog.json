@@ -10,16 +10,27 @@
         { "id": "booster", "name": "Повысительные насосы", "image": "assets/catalog2.jpg" },
         { "id": "multistage-h", "name": "Горизонтальные многоступенчатые", "image": "assets/catalog2.jpg" },
         { "id": "circulation", "name": "Циркуляционные насосы", "image": "assets/catalog3.jpg" },
-        { "id": "stations", "name": "Насосные станции", "image": "assets/catalog1.jpg" }
+        { "id": "stations", "name": "Насосные станции", "image": "assets/catalog1.jpg" },
+        { "id": "high-power", "name": "Мощные насосы", "image": "assets/catalog2.jpg" }
+      ]
+    },
+    {
+      "id": "nodes",
+      "name": "Узлы и сборные решения",
+      "lead": "Готовые тепловые, насосные и распределительные узлы для ИТП, ЦТП и инженерных сетей.",
+      "image": "assets/catalog3.jpg",
+      "subcategories": [
+        { "id": "assembly", "name": "Сборные узлы", "image": "assets/catalog3.jpg" }
       ]
     },
     {
       "id": "pipes",
       "name": "Трубы и трубопроводные системы",
-      "lead": "Трубы и системы для сетей водоснабжения, отопления и технологических контуров.",
+      "lead": "PPR-CT и стальные системы с широким рядом диаметров, включая крупные DN для магистралей.",
       "image": "assets/catalog1.jpg",
       "subcategories": [
-        { "id": "ppr", "name": "ПП-Р трубы", "image": "assets/catalog1.jpg" },
+        { "id": "ppr", "name": "PPR-CT", "image": "assets/catalog1.jpg" },
+        { "id": "large-dn", "name": "Большие диаметры", "image": "assets/catalog1.jpg" },
         { "id": "steel", "name": "Стальные трубы", "image": "assets/catalog1.jpg" }
       ]
     },
@@ -60,7 +71,8 @@
       "image": "assets/catalog4.jpg",
       "subcategories": [
         { "id": "drain-pumps", "name": "Дренажные насосы", "image": "assets/catalog4.jpg" },
-        { "id": "sewage-pumps", "name": "Фекальные насосы", "image": "assets/catalog4.jpg" }
+        { "id": "sewage-pumps", "name": "Фекальные насосы", "image": "assets/catalog4.jpg" },
+        { "id": "uplift", "name": "Uplift / КНС", "image": "assets/catalog4.jpg" }
       ]
     },
     {
