@@ -1,48 +1,5 @@
 [
   {
-    "id": "hmh-2-20",
-    "name": "HMH 2-20",
-    "series": "HMH",
-    "sku": "HK-HMH-2-20",
-    "category": "pumps",
-    "subcategory": "multistage-h",
-    "applications": [
-      "water",
-      "process"
-    ],
-    "pumpType": "Горизонтальный многоступенчатый",
-    "image": "assets/products/hmh-2-20.jpg",
-    "description": "Горизонтальный многоступенчатый насос для водоснабжения частных домов и небольших объектов.",
-    "specs": {
-      "flow": "2 м³/ч",
-      "head": "20 м",
-      "power": "0,37 кВт",
-      "connection": "1\"",
-      "pressure": "10 бар"
-    }
-  },
-  {
-    "id": "hmh-4-50",
-    "name": "HMH 4-50",
-    "series": "HMH",
-    "sku": "HK-HMH-4-50",
-    "category": "pumps",
-    "subcategory": "booster",
-    "applications": [
-      "water"
-    ],
-    "pumpType": "Горизонтальный многоступенчатый",
-    "image": "assets/products/hmh-4-50.jpg",
-    "description": "Насос для повышения давления в распределительных сетях. Удобен для работы с частотным преобразователем.",
-    "specs": {
-      "flow": "4 м³/ч",
-      "head": "50 м",
-      "power": "1,1 кВт",
-      "connection": "1¼\"",
-      "pressure": "16 бар"
-    }
-  },
-  {
     "id": "hmh-1-2",
     "name": "HMH 1-2",
     "series": "HMH",
