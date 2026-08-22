@@ -1919,8 +1919,29 @@
     }
 
     .catalog-find {
+      display: flex;
+      align-items: stretch;
+      gap: 10px;
       max-width: 720px;
       margin-bottom: 28px;
+    }
+
+    .catalog-find .search-field {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .catalog-find-submit {
+      flex-shrink: 0;
+      height: 52px;
+      padding: 0 22px;
+      font-size: 14px;
+      border-radius: 12px;
+      text-transform: none;
+    }
+
+    .catalog-find-submit[hidden] {
+      display: none;
     }
 
     .catalog-nav-grid {

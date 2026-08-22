@@ -39,6 +39,7 @@
   const contentEl = document.getElementById('catalogContent');
   const findForm = document.getElementById('catalogFind');
   const queryInput = document.getElementById('catalogQuery');
+  const findSubmit = document.getElementById('catalogFindSubmit');
 
   let taxonomy = { categories: [], applications: [] };
   let allProducts = [];
@@ -246,9 +247,15 @@
     window.setTimeout(() => target.classList.remove('is-highlighted'), 2400);
   }
 
+  function syncFindSubmit() {
+    if (!findSubmit || !queryInput) return;
+    findSubmit.hidden = !queryInput.value.trim();
+  }
+
   function render() {
     const state = readState();
     if (queryInput) queryInput.value = state.q;
+    syncFindSubmit();
     setMode(state.view);
     if (statusEl) statusEl.hidden = true;
     if (contentEl) contentEl.hidden = false;
@@ -424,7 +431,7 @@
               (window.requestQtyWrapHtml ? window.requestQtyWrapHtml(product) : (
                 '<button type="button" class="btn-secondary" data-add-to-request="' + escapeHtml(product.id) + '">Добавить в заявку</button>'
               )) +
-              '<button type="button" class="btn-primary" data-action="request">Оставить заявку</button>' +
+              '<button type="button" class="btn-primary" data-action="request" data-request-product="' + escapeHtml(product.id) + '">Оставить заявку</button>' +
             '</div>' +
           '</div>' +
         '</div>' +
@@ -464,8 +471,9 @@
       if (!requestBtn) return;
       event.preventDefault();
       event.stopPropagation();
+      const product = findById(allProducts, requestBtn.getAttribute('data-request-product'));
       closeProductModal();
-      if (window.openRequestForm) window.openRequestForm();
+      if (window.openRequestForm) window.openRequestForm(product ? { product: product } : {});
       else if (window.showToast) window.showToast('Форма заявки — скоро появится');
     });
   }
@@ -493,6 +501,10 @@
   }
 
   if (filtersEl) filtersEl.addEventListener('change', updateFilters);
+
+  if (queryInput) {
+    queryInput.addEventListener('input', syncFindSubmit);
+  }
 
   if (findForm) {
     findForm.addEventListener('submit', (event) => {
