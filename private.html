@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Решения для частных лиц — HEISSKRAFT</title>
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="icon" href="assets/logo-mark.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" /></noscript>
+  <link rel="preload" href="header.html" as="fetch" crossorigin />
+  <link rel="preload" href="footer.html" as="fetch" crossorigin />
+  <link rel="stylesheet" href="css/styles.css" />
+  <script defer src="js/data.js"></script>
+  <script defer src="js/layout.js"></script>
+  <script defer src="js/request-form.js"></script>
+  <script defer src="js/private.js"></script>
+</head>
+<body>
+  <a class="visually-hidden" href="#private">Перейти к решениям для частных лиц</a>
+  <div id="page">
+    <div id="site-header"></div>
+
+    <main class="page-private" id="private">
+      <section class="private-hero" aria-labelledby="privateTitle">
+        <video muted loop playsinline autoplay preload="metadata" poster="assets/catalog2.jpg">
+          <source src="assets/private-hero.mp4" type="video/mp4" />
+        </video>
+        <div class="private-hero-overlay"></div>
+        <div class="private-hero-content">
+          <h1 id="privateTitle">Решения HEISSKRAFT<br>для частных лиц</h1>
+        </div>
+      </section>
+
+      <div class="page-catalog page-private-body">
+        <section class="private-intro" aria-label="Продукт и ассортимент">
+          <article class="private-intro-card" id="product">
+            <p class="designer-kicker">Комплексные решения</p>
+            <h2>Инженерные системы для дома и участка</h2>
+            <p>Насосы, трубы и комплектующие HEISSKRAFT для скважины, водоснабжения, отопления и канализации. Один производитель — от подбора до сервиса. Оставьте заявку и мы подберем комплексное решение под ваши задачи!</p>
+            <a class="btn-primary" href="#" data-action="request">Оставить заявку</a>
+          </article>
+          <article class="private-intro-card" id="assortment">
+            <p class="designer-kicker">Ассортимент</p>
+            <h2>Всё необходимое в одном каталоге</h2>
+            <p>Скважинные насосы, Uplift, гидробаки, фитинги, трубы PERT и полипропилен, сварочное оборудование — линейка для частного строительства.</p>
+            <div class="private-intro-actions">
+              <a class="btn-primary" href="catalog.html">Каталог</a>
+              <a class="btn-retail" href="#privateMarkets">Розница</a>
+            </div>
+          </article>
+        </section>
+
+        <h2 class="designer-heading">Оборудование для частного дома</h2>
+        <div class="catalog-grid private-topics">
+          <a class="catalog-card" href="catalog.html?category=pumps&amp;sub=borehole">
+            <div class="catalog-img">
+              <img src="assets/catalog2.jpg" alt="" width="600" height="400" loading="lazy" decoding="async" />
+            </div>
+            <h3>Скважинные насосы</h3>
+            <p>Подъём воды из скважины для дома, полива и хозяйственных нужд.</p>
+          </a>
+          <a class="catalog-card" href="catalog.html?category=drainage&amp;sub=uplift">
+            <div class="catalog-img">
+              <img src="assets/catalog4.jpg" alt="" width="600" height="400" loading="lazy" decoding="async" />
+            </div>
+            <h3>Uplift</h3>
+            <p>Станции подъёма стоков, когда самотёк невозможен — для цоколя и участка.</p>
+          </a>
+          <a class="catalog-card" href="catalog.html?category=pumps&amp;sub=stations">
+            <div class="catalog-img">
+              <img src="assets/catalog1.jpg" alt="" width="600" height="400" loading="lazy" decoding="async" />
+            </div>
+            <h3>Гидробаки</h3>
+            <p>Гидроаккумуляторы для стабильного давления и защиты насоса от частых пусков.</p>
+          </a>
+          <a class="catalog-card" href="catalog.html?category=fittings">
+            <div class="catalog-img">
+              <img src="assets/catalog1.jpg" alt="" width="600" height="400" loading="lazy" decoding="async" />
+            </div>
+            <h3>Фитинги</h3>
+            <p>Соединения для сборки трубопровода: резьба, пресс и полипропилен.</p>
+          </a>
+          <a class="catalog-card" href="catalog.html?category=pipes">
+            <div class="catalog-img">
+              <img src="assets/catalog3.jpg" alt="" width="600" height="400" loading="lazy" decoding="async" />
+            </div>
+            <h3>PERT</h3>
+            <p>Гибкие трубы для отопления и тёплого пола — удобный монтаж в частном доме.</p>
+          </a>
+          <a class="catalog-card" href="catalog.html?category=pipes&amp;sub=ppr">
+            <div class="catalog-img">
+              <img src="assets/catalog1.jpg" alt="" width="600" height="400" loading="lazy" decoding="async" />
+            </div>
+            <h3>Трубы полипропилен</h3>
+            <p>PPR-CT для холодной, горячей воды и отопления — долговечная разводка по дому.</p>
+          </a>
+          <a class="catalog-card" href="#" data-action="request">
+            <div class="catalog-img">
+              <img src="assets/catalog3.jpg" alt="" width="600" height="400" loading="lazy" decoding="async" />
+            </div>
+            <h3>Сварочники</h3>
+            <p>Оборудование для сварки полипропиленовых труб. Подберём комплект под ваш объект.</p>
+          </a>
+        </div>
+
+        <section class="private-markets" id="privateMarkets" aria-labelledby="privateMarketsTitle">
+          <h2 class="designer-heading" id="privateMarketsTitle">Продукция HEISSKRAFT в розницу на маркет-площадках:</h2>
+          <div class="private-markets-row">
+            <a class="private-market is-cover" href="https://www.wildberries.ru/catalog/0/search.aspx?search=HEISSKRAFT" target="_blank" rel="noopener noreferrer">
+              <img src="assets/market-wildberries.png" alt="Wildberries" width="640" height="200" loading="lazy" decoding="async" />
+            </a>
+            <a class="private-market is-cover" href="https://www.ozon.ru/search/?text=HEISSKRAFT" target="_blank" rel="noopener noreferrer">
+              <img src="assets/market-ozon.png" alt="Ozon" width="640" height="200" loading="lazy" decoding="async" />
+            </a>
+            <a class="private-market is-cover" href="https://market.yandex.ru/search?text=HEISSKRAFT" target="_blank" rel="noopener noreferrer">
+              <img src="assets/market-yandex.png" alt="Яндекс Маркет" width="640" height="200" loading="lazy" decoding="async" />
+            </a>
+          </div>
+        </section>
+
+        <h2 class="designer-heading" id="warranty">Сервис и гарантия</h2>
+        <div class="catalog-grid designer-grid private-service">
+          <article class="catalog-card designer-card">
+            <div class="designer-card-icon" aria-hidden="true">
+              <img src="assets/icon-warranty.svg" alt="" width="48" height="48" />
+            </div>
+            <h3>Гарантийное обслуживание</h3>
+            <a href="#" class="btn-secondary" data-action="request">Запросить условия</a>
+          </article>
+          <article class="catalog-card designer-card">
+            <div class="designer-card-icon" aria-hidden="true">
+              <img src="assets/icon-service.svg" alt="" width="48" height="48" />
+            </div>
+            <h3>Сервисный центр</h3>
+            <a href="#" class="btn-secondary" data-action="request">Связаться с сервисом</a>
+          </article>
+        </div>
+      </div>
+    </main>
+
+    <div id="site-footer"></div>
+  </div>
+</body>
+</html>
