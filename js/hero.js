@@ -9,8 +9,8 @@
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const mobileMq = window.matchMedia('(max-width: 640px)');
   const queues = {
-    desktop: ['lakhta', 'market', 'production'],
-    mobile: ['lakhta', 'production', 'warranty']
+    desktop: ['market', 'lakhta', 'production'],
+    mobile: ['market', 'lakhta', 'production', 'warranty']
   };
   let queue = [];
   let index = 0;

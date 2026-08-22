@@ -113,17 +113,20 @@
   <!-- HERO -->
   <section class="hero" id="hero" aria-roledescription="карусель" aria-label="Галерея Heisskraft">
     <div class="hero-slides">
-      <div class="hero-slide is-active" data-slide="lakhta">
+      <div class="hero-slide is-active" data-slide="market">
+        <video class="hero-media-mobile" muted loop playsinline preload="metadata">
+          <source src="assets/hero-market-mobile.mp4" type="video/mp4" />
+        </video>
+        <video class="hero-media-desktop" muted loop playsinline preload="metadata">
+          <source src="assets/hero-market.mp4" type="video/mp4" />
+        </video>
+      </div>
+      <div class="hero-slide" data-slide="lakhta">
         <img src="assets/hero.jpg" alt="Лахта-центр" width="1920" height="1280" fetchpriority="high" decoding="async" />
       </div>
       <div class="hero-slide" data-slide="warranty">
         <video muted loop playsinline preload="metadata">
           <source src="assets/hero-warranty.mp4" type="video/mp4" />
-        </video>
-      </div>
-      <div class="hero-slide" data-slide="market">
-        <video muted loop playsinline preload="metadata">
-          <source src="assets/hero-market.mp4" type="video/mp4" />
         </video>
       </div>
       <div class="hero-slide" data-slide="production">
@@ -140,12 +143,12 @@
     <div class="hero-content">
       <div class="hero-top">
         <div class="hero-titles">
-          <h1 class="hero-title is-active" data-slide="lakhta">
+          <p class="hero-title is-active" data-slide="market">БОЛЕЕ 25 ЛЕТ<br />НА РЫНКЕ</p>
+          <h1 class="hero-title" data-slide="lakhta">
             НАСОСНОЕ ОБОРУДОВАНИЕ HEISSKRAFT<br />
             В ЛАХТА-ЦЕНТРЕ
           </h1>
           <p class="hero-title" data-slide="warranty">ГАРАНТИЯ<br />от 10 ЛЕТ</p>
-          <p class="hero-title" data-slide="market">БОЛЕЕ 25 ЛЕТ<br />НА РЫНКЕ</p>
           <p class="hero-title" data-slide="production">СОБСТВЕННОЕ ПРОИЗВОДСТВО<br />В РОССИИ</p>
         </div>
         <div class="hero-dots" role="tablist" aria-label="Слайды галереи"></div>
