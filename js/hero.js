@@ -16,6 +16,10 @@
   let index = 0;
   let timer = null;
   let inView = false;
+  const swipeMin = 40;
+  let swipeStartX = 0;
+  let swipeStartY = 0;
+  let swipeAxis = null;
 
   function currentQueue() {
     return mobileMq.matches ? queues.mobile : queues.desktop;
@@ -35,16 +39,20 @@
   }
 
   function syncMedia() {
+    const activeId = queue[index];
     videos.forEach((video) => {
-      const active = video.closest('.hero-slide').classList.contains('is-active') && videoAllowed(video);
-      if (active && inView) {
+      const slide = video.closest('.hero-slide');
+      const on = slide && slide.dataset.slide === activeId && videoAllowed(video);
+      if (on && inView) {
         video.muted = true;
         video.loop = true;
         const play = video.play();
         if (play) play.catch(() => {});
       } else {
         video.pause();
-        if (!active) video.currentTime = 0;
+        if (!on) {
+          try { video.currentTime = 0; } catch (err) {}
+        }
       }
     });
   }
@@ -118,6 +126,68 @@
   } else if (typeof mobileMq.addListener === 'function') {
     mobileMq.addListener(applySet);
   }
+
+  const mediaRoot = hero.querySelector('.hero-slides');
+  let swipeOn = false;
+
+  function swipeTargetBlocked(target) {
+    return Boolean(target.closest('a, button, input, textarea, select, label'));
+  }
+
+  function resetSwipe() {
+    swipeOn = false;
+    swipeAxis = null;
+  }
+
+  function beginSwipe(x, y, target) {
+    if (!mobileMq.matches || swipeTargetBlocked(target)) return;
+    swipeOn = true;
+    swipeStartX = x;
+    swipeStartY = y;
+    swipeAxis = null;
+  }
+
+  function trackSwipe(x, y) {
+    if (!swipeOn) return;
+    const dx = x - swipeStartX;
+    const dy = y - swipeStartY;
+    if (!swipeAxis) {
+      if (Math.abs(dx) < 8 && Math.abs(dy) < 8) return;
+      swipeAxis = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y';
+    }
+  }
+
+  function finishSwipe(x, y) {
+    if (!swipeOn) return;
+    const dx = x - swipeStartX;
+    const dy = y - swipeStartY;
+    const axis = swipeAxis || (Math.abs(dx) > Math.abs(dy) ? 'x' : 'y');
+    if (axis === 'x' && Math.abs(dx) >= swipeMin && queue.length > 1) {
+      go(index + (dx < 0 ? 1 : -1));
+      start();
+    }
+    resetSwipe();
+  }
+
+  mediaRoot.addEventListener('touchstart', function (event) {
+    const touch = event.changedTouches[0];
+    if (!touch) return;
+    beginSwipe(touch.clientX, touch.clientY, event.target);
+  }, { passive: true });
+
+  mediaRoot.addEventListener('touchmove', function (event) {
+    const touch = event.touches[0];
+    if (!touch) return;
+    trackSwipe(touch.clientX, touch.clientY);
+  }, { passive: true });
+
+  mediaRoot.addEventListener('touchend', function (event) {
+    const touch = event.changedTouches[0];
+    if (touch) finishSwipe(touch.clientX, touch.clientY);
+    else resetSwipe();
+  }, { passive: true });
+
+  mediaRoot.addEventListener('touchcancel', resetSwipe);
 
   setInView(measureInView());
   applySet();
