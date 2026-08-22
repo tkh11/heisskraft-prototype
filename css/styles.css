@@ -715,17 +715,32 @@
     .warranty-banner {
       position: relative;
       margin: 8px var(--container-pad) 24px;
+      min-height: 420px;
+      height: min(52vh, 560px);
       border-radius: 20px;
       overflow: hidden;
       color: #fff;
+      background: #fff;
+    }
+
+    .warranty-banner-media {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      justify-content: center;
+      grid-template-columns: max-content;
+      grid-template-rows: 100%;
     }
 
     .warranty-banner-media video {
-      width: 100%;
-      height: auto;
-      display: block;
+      grid-area: 1 / 1;
+    }
+
+    .warranty-banner-media video {
+      height: 100%;
+      width: auto;
+      max-width: 100%;
       object-fit: contain;
-      vertical-align: top;
     }
 
     .warranty-banner-overlay {
@@ -1619,6 +1634,12 @@
       .warranty-banner-overlay {
         position: absolute;
         inset: 0;
+      }
+
+      .warranty-banner-media {
+        display: block;
+        grid-template-columns: none;
+        grid-template-rows: none;
       }
 
       .warranty-banner-media video {
