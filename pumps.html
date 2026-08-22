@@ -29,19 +29,13 @@
     <div id="site-header"></div>
 
     <main class="page-catalog page-pumps" id="pump-select">
-      <nav class="catalog-breadcrumb" aria-label="Навигация">
-        <a href="index.html">Главная</a>
-        <span aria-hidden="true">/</span>
-        <span>Подбор насосов</span>
-      </nav>
       <section class="pumps-intro" aria-labelledby="pumpsTitle">
         <div class="pumps-intro-copy">
           <h1 class="section-title" id="pumpsTitle">Подбор насосов HEISSKRAFT</h1>
           <p>Подберите оборудование по расходу и напору: повысительные станции, вертикальные и горизонтальные агрегаты, погружные насосы для водоснабжения и канализации.</p>
         </div>
         <div class="pumps-intro-media">
-          <img class="pumps-intro-wide" src="assets/pumps-intro-stations.png" alt="Повысительные насосные станции HEISSKRAFT вертикального и горизонтального исполнения" width="1024" height="682" />
-          <img class="pumps-intro-tall" src="assets/pumps-intro-submersible.png" alt="Погружной промышленный насос HEISSKRAFT" width="682" height="1024" />
+          <img src="assets/pumps-intro.png" alt="Насосные станции HEISSKRAFT вертикального и горизонтального исполнения" width="1024" height="682" />
         </div>
       </section>
 
@@ -66,8 +60,14 @@
           <button type="submit" class="btn-primary">Подобрать насос</button>
         </div>
 
-        <details class="pump-select-extra">
-          <summary>Дополнительные параметры</summary>
+        <div class="pump-select-extra">
+          <button type="button" class="pump-select-extra-toggle" aria-expanded="false" aria-controls="pumpExtraPanel">
+            Дополнительные параметры
+            <svg class="pump-select-chevron" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 7.5L10 12.5 15 7.5"/>
+            </svg>
+          </button>
+          <div class="pump-select-extra-panel" id="pumpExtraPanel">
           <div class="catalog-filters">
             <label>
               Применение
@@ -88,7 +88,8 @@
               </select>
             </label>
           </div>
-        </details>
+          </div>
+        </div>
       </form>
 
       <div id="pumpResults" hidden></div>
