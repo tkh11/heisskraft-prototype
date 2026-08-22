@@ -147,12 +147,15 @@
 
   function cards(items, makeHref) {
     if (!items || !items.length) return '';
-    return '<div class="catalog-grid catalog-nav-grid">' + items.map((item) => (
-      '<a class="catalog-card" href="' + makeHref(item) + '">' +
-        '<div class="catalog-img"><img src="' + escapeHtml(item.image) + '" alt="" width="600" height="400" loading="lazy" decoding="async" /></div>' +
-        '<h3>' + escapeHtml(item.name) + '</h3>' +
-      '</a>'
-    )).join('') + '</div>';
+    return '<div class="catalog-grid catalog-nav-grid">' + items.map((item) => {
+      const lineart = item.image && (item.image.indexOf('assets/cat-') === 0 || /\.svg$/i.test(item.image));
+      return (
+        '<a class="catalog-card' + (lineart ? ' catalog-card-lineart' : '') + '" href="' + makeHref(item) + '">' +
+          '<div class="catalog-img"><img src="' + escapeHtml(item.image) + '" alt="" width="600" height="400" loading="lazy" decoding="async" /></div>' +
+          '<h3>' + escapeHtml(item.name) + '</h3>' +
+        '</a>'
+      );
+    }).join('') + '</div>';
   }
 
   function productCard(product) {
