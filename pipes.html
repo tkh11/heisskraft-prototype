@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Подбор труб — HEISSKRAFT</title>
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="icon" href="assets/logo-mark.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" /></noscript>
+  <link rel="preload" href="header.html" as="fetch" crossorigin />
+  <link rel="preload" href="footer.html" as="fetch" crossorigin />
+  <link rel="stylesheet" href="css/styles.css" />
+  <script defer src="js/data.js"></script>
+  <script defer src="js/layout.js"></script>
+  <script defer src="js/request-form.js"></script>
+</head>
+<body class="is-pipes-page">
+  <a class="visually-hidden" href="#pipe-select">Перейти к подбору труб</a>
+  <div id="page">
+    <div id="site-header"></div>
+
+    <main class="page-catalog page-pumps" id="pipe-select">
+      <section class="pumps-intro pipes-intro" aria-labelledby="pipesTitle">
+        <div class="pumps-intro-copy">
+          <h1 class="section-title" id="pipesTitle">Подбор труб HEISSKRAFT</h1>
+          <p>Подберите трубопроводную систему под задачу объекта: PPR-CT, стальные трубы и крупные DN для магистралей. Оставьте параметры — поможем с диаметром, материалом и комплектацией.</p>
+        </div>
+        <div class="pumps-intro-media">
+          <img src="assets/cat-pipes.png" alt="Трубы HEISSKRAFT" width="1024" height="682" />
+        </div>
+      </section>
+
+      <div class="pipe-select-actions">
+        <a class="btn-primary" href="catalog.html?category=pipes">Открыть каталог труб</a>
+        <a class="btn-retail" href="#" data-action="request">Оставить заявку на подбор</a>
+      </div>
+    </main>
+
+    <div id="site-footer"></div>
+  </div>
+</body>
+</html>

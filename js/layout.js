@@ -106,6 +106,22 @@
     });
   }
 
+  function initMobileSelect() {
+    document.querySelectorAll('.mobile-select-group').forEach((group) => {
+      const btn = group.querySelector('.mobile-select-toggle');
+      if (!btn) return;
+      const hasCurrent = Boolean(group.querySelector('[aria-current="page"]'));
+      if (hasCurrent) {
+        group.classList.add('is-open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+      btn.addEventListener('click', () => {
+        const open = group.classList.toggle('is-open');
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+    });
+  }
+
   function initSearch() {
     const searchBtn = document.getElementById('searchBtn');
     const searchModal = document.getElementById('searchModal');
@@ -131,6 +147,7 @@
       { name: 'Водоподготовка', category: 'Каталог', hint: 'Фильтрация и обратный осмос', href: 'catalog.html?category=treatment', thumb: 'assets/catalog6.jpg' },
       { name: 'Полный каталог', category: 'Каталог', hint: 'Вся линейка HEISSKRAFT', href: 'catalog.html', thumb: 'assets/catalog1.jpg' },
       { name: 'Подбор насосов', category: 'Страница', hint: 'Подбор по расходу и напору', href: 'pumps.html', thumb: 'assets/catalog2.jpg' },
+      { name: 'Подбор труб', category: 'Страница', hint: 'Подбор трубопроводных систем PPR-CT и стальных труб', href: 'pipes.html', thumb: 'assets/cat-pipes.png' },
       { name: 'О компании', category: 'Страница', hint: 'Качество в деталях, производство, достижения HEISSKRAFT', href: 'about.html', thumb: 'assets/logo-mark.svg', icon: true },
       { name: 'Решения для проектировщиков', category: 'Страница', hint: 'Узлы, насосные станции, PPR-CT, пожаротушение, сервис', href: 'designer.html', thumb: 'assets/icon-designer.svg', icon: true },
       { name: 'Решения для подрядчиков', category: 'Страница', hint: 'Сварка, фитинги, крепления, обучение монтажников, сервис', href: 'contractor.html', thumb: 'assets/icon-contractor.svg', icon: true },
@@ -457,6 +474,7 @@
   function markCurrentNav() {
     const pageFile = pageFileName(window.location.pathname);
     if (pageFile === 'pumps.html') document.body.classList.add('is-pumps-page');
+    if (pageFile === 'pipes.html') document.body.classList.add('is-pipes-page');
     document.querySelectorAll('.header-nav a[href], .mobile-menu-nav a[href]').forEach((link) => {
       const href = pageFileName(link.getAttribute('href') || '');
       if (href && href === pageFile) link.setAttribute('aria-current', 'page');
@@ -468,6 +486,7 @@
     initSearch();
     initActions();
     markCurrentNav();
+    initMobileSelect();
     if (window.Heisskraft && typeof window.Heisskraft.markLayoutReady === 'function') {
       window.Heisskraft.markLayoutReady();
     } else {
