@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Решения для подрядчиков — HEISSKRAFT</title>
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="icon" href="assets/logo-mark.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" /></noscript>
+  <link rel="preload" href="header.html" as="fetch" crossorigin />
+  <link rel="preload" href="footer.html" as="fetch" crossorigin />
+  <link rel="stylesheet" href="css/styles.css" />
+  <script defer src="js/data.js"></script>
+  <script defer src="js/layout.js"></script>
+  <script defer src="js/request-form.js"></script>
+  <script defer src="js/contractor.js"></script>
+</head>
+<body>
+  <a class="visually-hidden" href="#contractor">Перейти к решениям для подрядчиков</a>
+  <div id="page">
+    <div id="site-header"></div>
+
+    <main class="page-private page-contractor" id="contractor">
+      <section class="private-hero contractor-hero" aria-labelledby="contractorTitle">
+        <video muted loop playsinline autoplay preload="metadata">
+          <source src="assets/contractor-hero.mp4" type="video/mp4" />
+        </video>
+        <div class="private-hero-overlay"></div>
+        <div class="private-hero-content">
+          <h1 id="contractorTitle">Решения HEISSKRAFT<br>для подрядчиков</h1>
+        </div>
+      </section>
+
+      <div class="page-catalog page-private-body">
+        <section class="private-intro" aria-label="Комплектация и монтаж">
+          <article class="private-intro-card">
+            <p class="designer-kicker">Комплектация объекта</p>
+            <h2>Монтажные комплекты и выездная поддержка</h2>
+            <p>Сварочное оборудование, фитинги, крепёж и расходники с одного склада — чтобы бригада не ждала поставки на площадке. Оставьте заявку, соберём комплект под ваш объект и график работ.</p>
+            <a class="btn-primary" href="#" data-action="request">Оставить заявку</a>
+          </article>
+          <article class="private-intro-card">
+            <p class="designer-kicker">Для монтажа</p>
+            <h2>Всё для сварки и сборки сетей</h2>
+            <p>Аппараты, сварочные машины, фитинги, крепления и вспомогательное оборудование HEISSKRAFT. Плюс обучение монтажников и сервис после сдачи объекта.</p>
+            <div class="private-intro-actions">
+              <a class="btn-primary" href="catalog.html">Каталог</a>
+              <a class="btn-retail" href="#contractorLearn">Обучение</a>
+            </div>
+          </article>
+        </section>
+
+        <h2 class="designer-heading">Оборудование для подрядчика</h2>
+        <div class="catalog-grid private-topics">
+          <a class="catalog-card" href="#" data-action="request">
+            <div class="catalog-img catalog-img-icon">
+              <img src="assets/icon-contractor.svg" alt="" width="72" height="72" />
+            </div>
+            <h3>Сварочные аппараты</h3>
+            <p>Ручные аппараты для сварки полипропилена на объекте. Подберём мощность под диаметры вашей сметы.</p>
+          </a>
+          <a class="catalog-card catalog-card-lineart" href="#" data-action="request">
+            <div class="catalog-img">
+              <img src="assets/cat-nodes.png" alt="" width="600" height="400" loading="lazy" decoding="async" />
+            </div>
+            <h3>Сварочная машина</h3>
+            <p>Стационарные и мобильные машины для серийной сварки труб и узлов — меньше брака, ровнее стык.</p>
+          </a>
+          <a class="catalog-card catalog-card-lineart" href="catalog.html?category=fittings">
+            <div class="catalog-img">
+              <img src="assets/cat-fittings.png" alt="" width="600" height="400" loading="lazy" decoding="async" />
+            </div>
+            <h3>Фитинги</h3>
+            <p>Резьба, пресс и полипропилен — соединения в одной системе с трубами HEISSKRAFT.</p>
+          </a>
+          <a class="catalog-card catalog-card-lineart" href="catalog.html?category=mounting">
+            <div class="catalog-img">
+              <img src="assets/cat-mounting.png" alt="" width="600" height="400" loading="lazy" decoding="async" />
+            </div>
+            <h3>Крепления</h3>
+            <p>Кронштейны, рамы и крепёж для насосов и трубопроводов. Чтобы узел стоял как в проекте.</p>
+          </a>
+          <a class="catalog-card catalog-card-lineart" href="catalog.html?category=mounting">
+            <div class="catalog-img">
+              <img src="assets/cat-spares.png" alt="" width="600" height="400" loading="lazy" decoding="async" />
+            </div>
+            <h3>Вспомогательное оборудование</h3>
+            <p>Инструмент и комплектующие для монтажа: резка, сверление, подготовка стыка.</p>
+          </a>
+        </div>
+
+        <section class="contractor-learn" id="contractorLearn" aria-labelledby="contractorLearnTitle">
+          <h2 class="designer-heading" id="contractorLearnTitle">Обучение монтажников</h2>
+          <div class="contractor-learn-grid">
+            <article class="contractor-learn-card">
+              <p class="designer-kicker">Онлайн</p>
+              <h3>Вебинары</h3>
+              <p>Короткие сессии по сварке PPR-CT, типовым ошибкам монтажа и приёмке узлов. Можно подключить бригаду с объекта.</p>
+              <a class="btn-secondary" href="#" data-action="request">Записаться на вебинар</a>
+            </article>
+            <article class="contractor-learn-card">
+              <p class="designer-kicker">Очно</p>
+              <h3>Семинары для монтажников</h3>
+              <p>Практика на оборудовании HEISSKRAFT: режимы сварки, крепление, сборка узлов. Для прорабов и монтажных бригад.</p>
+              <a class="btn-secondary" href="#" data-action="request">Запросить расписание</a>
+            </article>
+          </div>
+        </section>
+
+        <h2 class="designer-heading" id="warranty">Сервис и гарантия</h2>
+        <div class="catalog-grid designer-grid private-service">
+          <article class="catalog-card designer-card">
+            <div class="designer-card-icon" aria-hidden="true">
+              <img src="assets/icon-warranty.svg" alt="" width="48" height="48" />
+            </div>
+            <h3>Гарантийное обслуживание</h3>
+            <a href="#" class="btn-secondary" data-action="request">Запросить условия</a>
+          </article>
+          <article class="catalog-card designer-card">
+            <div class="designer-card-icon" aria-hidden="true">
+              <img src="assets/icon-service.svg" alt="" width="48" height="48" />
+            </div>
+            <h3>Сервисный центр</h3>
+            <a href="#" class="btn-secondary" data-action="request">Связаться с сервисом</a>
+          </article>
+        </div>
+      </div>
+    </main>
+
+    <div id="site-footer"></div>
+  </div>
+</body>
+</html>

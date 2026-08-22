@@ -133,11 +133,13 @@
       { name: 'Подбор насосов', category: 'Страница', hint: 'Подбор по расходу и напору', href: 'pumps.html', thumb: 'assets/catalog2.jpg' },
       { name: 'О компании', category: 'Страница', hint: 'Качество в деталях, производство, достижения HEISSKRAFT', href: 'about.html', thumb: 'assets/logo-mark.svg', icon: true },
       { name: 'Решения для проектировщиков', category: 'Страница', hint: 'Узлы, насосные станции, PPR-CT, пожаротушение, сервис', href: 'designer.html', thumb: 'assets/icon-designer.svg', icon: true },
+      { name: 'Решения для подрядчиков', category: 'Страница', hint: 'Сварка, фитинги, крепления, обучение монтажников, сервис', href: 'contractor.html', thumb: 'assets/icon-contractor.svg', icon: true },
       { name: 'Решения для частных лиц', category: 'Страница', hint: 'Скважинные насосы, Uplift, гидробаки, фитинги, PERT, трубы, сервис', href: 'private.html', thumb: 'assets/icon-private.svg', icon: true },
-      { name: 'Подрядчик', category: 'Профиль', hint: 'Комплектация и поддержка объектов', target: '[data-profile="contractor"]', thumb: 'assets/icon-contractor.svg', icon: true },
+      { name: 'Партнёрам', category: 'Страница', hint: 'Дилерская программа, опт, поддержка продаж, сервис', href: 'partner.html', thumb: 'assets/icon-partner.svg', icon: true },
+      { name: 'Подрядчик', category: 'Профиль', hint: 'Комплектация и поддержка объектов', href: 'contractor.html', thumb: 'assets/icon-contractor.svg', icon: true },
       { name: 'Проектировщик', category: 'Профиль', hint: 'Узлы, станции, PPR-CT и сопровождение проекта', href: 'designer.html', thumb: 'assets/icon-designer.svg', icon: true },
       { name: 'Частное лицо', category: 'Профиль', hint: 'Системы для частного дома', href: 'private.html', thumb: 'assets/icon-private.svg', icon: true },
-      { name: 'Партнер', category: 'Профиль', hint: 'Дилерские условия', target: '[data-profile="partner"]', thumb: 'assets/icon-partner.svg', icon: true },
+      { name: 'Партнер', category: 'Профиль', hint: 'Дилерские условия', href: 'partner.html', thumb: 'assets/icon-partner.svg', icon: true },
       { name: 'Контакты', category: 'Страница', hint: '+7 (495) 258-45-42 · Пушкино', target: '#footer', thumb: 'assets/phone-icon.svg', icon: true },
       { name: 'Оставить заявку', category: 'Действие', hint: 'Подбор оборудования под объект', action: 'request', thumb: 'assets/logo.svg', icon: true }
     ];

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Партнёрам — HEISSKRAFT</title>
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="icon" href="assets/logo-mark.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" /></noscript>
+  <link rel="preload" href="header.html" as="fetch" crossorigin />
+  <link rel="preload" href="footer.html" as="fetch" crossorigin />
+  <link rel="stylesheet" href="css/styles.css" />
+  <script defer src="js/data.js"></script>
+  <script defer src="js/layout.js"></script>
+  <script defer src="js/request-form.js"></script>
+  <script defer src="js/partner.js"></script>
+</head>
+<body>
+  <a class="visually-hidden" href="#partner">Перейти к партнёрской программе</a>
+  <div id="page">
+    <div id="site-header"></div>
+
+    <main class="page-private page-partner" id="partner">
+      <section class="private-hero partner-hero" aria-labelledby="partnerTitle">
+        <video muted loop playsinline autoplay preload="metadata">
+          <source src="assets/partner-hero.mp4" type="video/mp4" />
+        </video>
+        <div class="private-hero-overlay"></div>
+        <div class="private-hero-content">
+          <h1 id="partnerTitle">HEISSKRAFT<br>партнёрам</h1>
+        </div>
+      </section>
+
+      <div class="page-catalog page-private-body">
+        <section class="partner-dealers" aria-labelledby="partnerDealersTitle">
+          <div class="partner-dealers-copy">
+            <p class="designer-kicker">Дилерам</p>
+            <h2 id="partnerDealersTitle">Оптовые решения под реализацию</h2>
+            <p>Дилерская программа HEISSKRAFT — это понятные объёмы, стабильная отгрузка и линейка, которую можно держать на складе и закрывать объекты целиком: насосы, трубы, узлы и комплектующие от одного производителя.</p>
+            <ul class="partner-list">
+              <li>Оптовые партии под склад и объект</li>
+              <li>Приоритет по наличию и срокам поставки</li>
+              <li>Документы, спецификации и поддержка сделки</li>
+            </ul>
+            <a class="btn-primary" href="#" data-action="request">Стать дилером</a>
+          </div>
+          <aside class="partner-dealers-panel" aria-label="Формат работы">
+            <p class="partner-dealers-stat">01</p>
+            <h3>Складской опт</h3>
+            <p>Формируем партии под ваш оборот: ходовые позиции плюс позиции под проект.</p>
+            <p class="partner-dealers-stat">02</p>
+            <h3>Поставка на объект</h3>
+            <p>Комплектуем заказ по спецификации подрядчика или проектировщика — без россыпи брендов.</p>
+          </aside>
+        </section>
+
+        <section class="partner-support" aria-labelledby="partnerSupportTitle">
+          <h2 class="designer-heading" id="partnerSupportTitle">Поддержка в реализации</h2>
+          <p class="partner-section-lead">Мы не оставляем партнёра один на один с клиентом: помогаем закрыть технический вопрос, собрать КП и довести поставку до акта.</p>
+          <div class="partner-support-grid">
+            <article class="partner-support-card">
+              <span>01</span>
+              <h3>Техническое сопровождение</h3>
+              <p>Подбор по параметрам, проверка спецификации, ответы проектировщику и подрядчику в ходе сделки.</p>
+            </article>
+            <article class="partner-support-card">
+              <span>02</span>
+              <h3>Материалы для продаж</h3>
+              <p>Каталоги, паспорта, аргументы для тендера и совместные визиты на объект при крупных поставках.</p>
+            </article>
+            <article class="partner-support-card">
+              <span>03</span>
+              <h3>Логистика и сроки</h3>
+              <p>Прозрачный график отгрузки и приоритет дилерских заказов при пиковой загрузке производства.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="partner-offers" aria-labelledby="partnerOffersTitle">
+          <div class="partner-offers-head">
+            <p class="designer-kicker">Условия</p>
+            <h2 id="partnerOffersTitle">Выгодные предложения</h2>
+            <p>Дилерский прайс, бонусы за объём и совместные акции — фиксируем в договоре, без скрытых оговорок.</p>
+          </div>
+          <ul class="partner-offers-list">
+            <li>
+              <strong>Дилерская цена</strong>
+              <span>Отдельная сетка для оптовой реализации и повторных отгрузок.</span>
+            </li>
+            <li>
+              <strong>Бонус за оборот</strong>
+              <span>Улучшение условий при выполнении согласованного объёма.</span>
+            </li>
+            <li>
+              <strong>Совместный маркетинг</strong>
+              <span>Участие в тендерах, выставках и продвижении объектов с оборудованием HEISSKRAFT.</span>
+            </li>
+          </ul>
+          <a class="btn-warranty" href="#" data-action="request">Запросить условия</a>
+        </section>
+
+        <h2 class="designer-heading" id="warranty">Сервис для партнёров</h2>
+        <div class="catalog-grid designer-grid private-service">
+          <article class="catalog-card designer-card">
+            <div class="designer-card-icon" aria-hidden="true">
+              <img src="assets/icon-warranty.svg" alt="" width="48" height="48" />
+            </div>
+            <h3>Гарантийное обслуживание</h3>
+            <a href="#" class="btn-secondary" data-action="request">Запросить условия</a>
+          </article>
+          <article class="catalog-card designer-card">
+            <div class="designer-card-icon" aria-hidden="true">
+              <img src="assets/icon-service.svg" alt="" width="48" height="48" />
+            </div>
+            <h3>Сервисный центр</h3>
+            <a href="#" class="btn-secondary" data-action="request">Связаться с сервисом</a>
+          </article>
+        </div>
+      </div>
+    </main>
+
+    <div id="site-footer"></div>
+  </div>
+</body>
+</html>
