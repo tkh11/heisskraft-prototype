@@ -131,6 +131,7 @@
       { name: 'Водоподготовка', category: 'Каталог', hint: 'Фильтрация и обратный осмос', href: 'catalog.html?category=treatment', thumb: 'assets/catalog6.jpg' },
       { name: 'Полный каталог', category: 'Каталог', hint: 'Вся линейка HEISSKRAFT', href: 'catalog.html', thumb: 'assets/catalog1.jpg' },
       { name: 'Подбор насосов', category: 'Страница', hint: 'Подбор по расходу и напору', href: 'pumps.html', thumb: 'assets/catalog2.jpg' },
+      { name: 'О компании', category: 'Страница', hint: 'Качество в деталях, производство, достижения HEISSKRAFT', href: 'about.html', thumb: 'assets/logo-mark.svg', icon: true },
       { name: 'Решения для проектировщиков', category: 'Страница', hint: 'Узлы, насосные станции, PPR-CT, пожаротушение, сервис', href: 'designer.html', thumb: 'assets/icon-designer.svg', icon: true },
       { name: 'Решения для частных лиц', category: 'Страница', hint: 'Скважинные насосы, Uplift, гидробаки, фитинги, PERT, трубы, сервис', href: 'private.html', thumb: 'assets/icon-private.svg', icon: true },
       { name: 'Подрядчик', category: 'Профиль', hint: 'Комплектация и поддержка объектов', target: '[data-profile="contractor"]', thumb: 'assets/icon-contractor.svg', icon: true },
@@ -431,7 +432,6 @@
         return;
       }
       const messages = {
-        about: 'Страница «О компании» — в разработке',
         requisites: 'Реквизиты организации — в разработке',
         docs: 'Раздел «Документация» — в разработке',
         privacy: 'Политика конфиденциальности — в разработке',

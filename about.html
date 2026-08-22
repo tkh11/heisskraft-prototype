@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>О компании — HEISSKRAFT</title>
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="icon" href="assets/logo-mark.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" /></noscript>
+  <link rel="preload" href="header.html" as="fetch" crossorigin />
+  <link rel="preload" href="footer.html" as="fetch" crossorigin />
+  <link rel="stylesheet" href="css/styles.css" />
+  <script defer src="js/data.js"></script>
+  <script defer src="js/layout.js"></script>
+  <script defer src="js/request-form.js"></script>
+  <script defer src="js/about.js"></script>
+</head>
+<body>
+  <a class="visually-hidden" href="#about">Перейти к информации о компании</a>
+  <div id="page">
+    <div id="site-header"></div>
+
+    <main class="page-about" id="about">
+      <nav class="catalog-breadcrumb" aria-label="Навигация">
+        <a href="index.html">Главная</a>
+        <span aria-hidden="true">/</span>
+        <span>О компании</span>
+      </nav>
+
+      <section class="about-hero" aria-labelledby="aboutTitle">
+        <div class="about-hero-grid">
+          <button type="button" class="about-card" id="aboutCard" aria-pressed="false" aria-label="Перевернуть визитку HEISSKRAFT">
+            <div class="about-card-inner">
+              <div class="about-card-face about-card-front">
+                <img class="about-card-logo" src="assets/footer-logo.svg" alt="HEISSKRAFT" width="311" height="31" />
+                <p class="about-card-kicker">Визитная карточка</p>
+                <h1 id="aboutTitle">Качество в деталях</h1>
+                <p class="about-card-lead">Производитель полимерных трубопроводов и насосного оборудования</p>
+                <ul class="about-card-meta">
+                  <li>Россия · Московская область, Пушкино</li>
+                  <li>+7 (495) 258-45-42</li>
+                  <li>info@heisskraft.ru</li>
+                </ul>
+                <span class="about-card-hint">Нажмите, чтобы увидеть достижения</span>
+              </div>
+              <div class="about-card-face about-card-back">
+                <p class="about-card-kicker">Достижения</p>
+                <ul class="about-card-achievements">
+                  <li><strong>25+ лет</strong> на рынке инженерных систем</li>
+                  <li><strong>Собственное производство</strong> в России</li>
+                  <li><strong>Лахта-центр</strong> — объекты федерального масштаба</li>
+                  <li><strong>Гарантия от 10 лет</strong> и сопровождение от производителя</li>
+                </ul>
+                <span class="about-card-hint">Нажмите, чтобы вернуться</span>
+              </div>
+            </div>
+          </button>
+
+          <div class="about-hero-media">
+            <video muted loop playsinline autoplay preload="metadata">
+              <source src="assets/hero-production-desktop.mp4" type="video/mp4" />
+            </video>
+            <p>Собственное производство в России</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="about-story" aria-label="О компании">
+        <p class="about-story-lead">Компания Heisskraft является одним из ведущих производителей инновационной продукции в области инженерных систем, реализуемых в различных отраслях промышленности.</p>
+        <p>Каждый день наша команда работает над увеличением сроков службы и эффективности производимой продукции во вновь возводимых или реконструируемых инженерных коммуникациях.</p>
+        <p>Наш девиз — «Качество в деталях» — полностью отражает дух нашей работы и комплекс процессов, который направлен на разработку новых идей и продуктов в области полимерных трубопроводов и насосного оборудования.</p>
+        <p>Реализованный системный подход к контролю качества позволяет проследить весь путь изделия — от момента его разработки до практического применения в инженерных системах.</p>
+        <p>В сотрудничестве с нашими партнерами мы постоянно развиваемся и внедряем инновации в жизнь!</p>
+      </section>
+
+      <section class="about-stats" aria-label="Цифры компании">
+        <article class="about-stat">
+          <span class="about-stat-value" data-count="25" data-suffix="+">0</span>
+          <span class="about-stat-label">лет на рынке</span>
+        </article>
+        <article class="about-stat">
+          <span class="about-stat-value" data-count="10" data-suffix="+">0</span>
+          <span class="about-stat-label">лет гарантии</span>
+        </article>
+        <article class="about-stat">
+          <span class="about-stat-value is-text">РФ</span>
+          <span class="about-stat-label">производство в России</span>
+        </article>
+        <article class="about-stat">
+          <span class="about-stat-value is-text">HK</span>
+          <span class="about-stat-label">качество в деталях</span>
+        </article>
+      </section>
+
+      <section class="about-path" id="aboutPath" aria-label="Путь изделия">
+        <h2 class="designer-heading">От идеи до инженерной системы</h2>
+        <p class="about-path-lead">Системный контроль качества сопровождает каждое изделие на всех этапах.</p>
+        <div class="about-path-tabs" role="tablist" aria-label="Этапы">
+          <button type="button" role="tab" id="pathTab1" aria-selected="true" aria-controls="pathPanel1" data-path="0">01 Разработка</button>
+          <button type="button" role="tab" id="pathTab2" aria-selected="false" aria-controls="pathPanel2" data-path="1">02 Контроль</button>
+          <button type="button" role="tab" id="pathTab3" aria-selected="false" aria-controls="pathPanel3" data-path="2">03 Производство</button>
+          <button type="button" role="tab" id="pathTab4" aria-selected="false" aria-controls="pathPanel4" data-path="3">04 Применение</button>
+        </div>
+        <div class="about-path-stage">
+          <div class="about-path-copy">
+            <div class="about-path-panel is-active" id="pathPanel1" role="tabpanel" aria-labelledby="pathTab1">
+              <h3>Новые идеи и продукты</h3>
+              <p>Разрабатываем решения в области полимерных трубопроводов и насосного оборудования — так, чтобы они служили дольше и работали эффективнее.</p>
+            </div>
+            <div class="about-path-panel" id="pathPanel2" role="tabpanel" aria-labelledby="pathTab2" hidden>
+              <h3>Системный контроль качества</h3>
+              <p>Прослеживаем весь путь изделия: от чертежа и испытаний до серийного выпуска. Ни один этап не остаётся без внимания.</p>
+            </div>
+            <div class="about-path-panel" id="pathPanel3" role="tabpanel" aria-labelledby="pathTab3" hidden>
+              <h3>Собственное производство</h3>
+              <p>Выпускаем продукцию в России и держим процессы рядом с объектом — это короче цикл, понятнее сервис и стабильнее поставка.</p>
+            </div>
+            <div class="about-path-panel" id="pathPanel4" role="tabpanel" aria-labelledby="pathTab4" hidden>
+              <h3>Практическое применение</h3>
+              <p>Оборудование HEISSKRAFT работает во вновь возводимых и реконструируемых инженерных коммуникациях — от частного дома до Лахта-центра.</p>
+            </div>
+          </div>
+          <div class="about-path-media">
+            <figure class="about-path-shot is-active" data-path-shot="0">
+              <img src="assets/catalog1.jpg" alt="Разработка продукции HEISSKRAFT" width="1200" height="800" />
+            </figure>
+            <figure class="about-path-shot" data-path-shot="1">
+              <img src="assets/icon-cert.svg" alt="" width="120" height="120" />
+              <figcaption>Контроль на каждом этапе</figcaption>
+            </figure>
+            <figure class="about-path-shot" data-path-shot="2">
+              <video muted loop playsinline preload="metadata">
+                <source src="assets/hero-production.mp4" type="video/mp4" />
+              </video>
+            </figure>
+            <figure class="about-path-shot" data-path-shot="3">
+              <img src="assets/hero.jpg" alt="Насосное оборудование HEISSKRAFT в Лахта-центре" width="1920" height="1280" />
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="about-gallery" aria-label="Фото и видео">
+        <h2 class="designer-heading">Компания в кадре</h2>
+        <div class="about-gallery-grid">
+          <button type="button" class="about-shot is-large" data-lightbox="assets/hero.jpg" data-caption="Лахта-центр">
+            <img src="assets/hero.jpg" alt="Лахта-центр: объекты с оборудованием HEISSKRAFT" width="1920" height="1280" loading="lazy" decoding="async" />
+            <span>Лахта-центр</span>
+          </button>
+          <div class="about-shot is-video">
+            <video muted loop playsinline autoplay preload="metadata">
+              <source src="assets/hero-market.mp4" type="video/mp4" />
+            </video>
+            <span>Более 25 лет на рынке</span>
+          </div>
+          <button type="button" class="about-shot" data-lightbox="assets/catalog2.jpg" data-caption="Водоснабжение">
+            <img src="assets/catalog2.jpg" alt="Насосное оборудование для водоснабжения" width="600" height="400" loading="lazy" decoding="async" />
+            <span>Водоснабжение</span>
+          </button>
+          <button type="button" class="about-shot" data-lightbox="assets/catalog3.jpg" data-caption="Отопление">
+            <img src="assets/catalog3.jpg" alt="Оборудование для отопления" width="600" height="400" loading="lazy" decoding="async" />
+            <span>Отопление</span>
+          </button>
+          <button type="button" class="about-shot" data-lightbox="assets/catalog5.jpg" data-caption="Пожаротушение">
+            <img src="assets/catalog5.jpg" alt="Оборудование пожаротушения HEISSKRAFT" width="600" height="400" loading="lazy" decoding="async" />
+            <span>Пожаротушение</span>
+          </button>
+          <div class="about-shot is-video">
+            <video muted loop playsinline preload="metadata">
+              <source src="assets/warranty-banner.mp4" type="video/mp4" />
+            </video>
+            <span>Гарантия от производителя</span>
+          </button>
+        </div>
+      </section>
+
+      <section class="about-cta" aria-label="Следующий шаг">
+        <h2>Внедряем инновации вместе с партнёрами</h2>
+        <p>Посмотрите каталог или оставьте заявку — подберём решение под ваш объект.</p>
+        <div class="about-cta-actions">
+          <a class="btn-primary" href="catalog.html">Каталог продукции</a>
+          <a class="btn-secondary" href="#" data-action="request">Оставить заявку</a>
+        </div>
+      </section>
+    </main>
+
+    <div class="about-lightbox" id="aboutLightbox" hidden role="dialog" aria-modal="true" aria-labelledby="aboutLightboxCaption">
+      <button type="button" class="about-lightbox-close" id="aboutLightboxClose" aria-label="Закрыть">
+        <svg viewBox="0 0 18 18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <path d="M4 4l10 10M14 4L4 14"/>
+        </svg>
+      </button>
+      <img id="aboutLightboxImage" alt="" />
+      <p id="aboutLightboxCaption"></p>
+    </div>
+
+    <div id="site-footer"></div>
+  </div>
+</body>
+</html>
