@@ -935,6 +935,11 @@
       padding: 36px;
     }
 
+    .catalog-card-lineart .catalog-img-icon img,
+    .catalog-card-lineart .catalog-img-icon img[src$=".svg"] {
+      padding: 0;
+    }
+
     .catalog-card-lineart:hover .catalog-img img {
       transform: scale(1.03);
     }
@@ -955,6 +960,7 @@
       width: 72px;
       height: 72px;
       object-fit: contain;
+      padding: 0;
     }
 
     .catalog-card-full:hover .catalog-img-icon img {
@@ -1799,7 +1805,7 @@
 
       .catalog .catalog-card {
         padding: 0;
-        border: none;
+        border: 1px solid var(--border);
         box-shadow: none;
         border-radius: 16px;
         gap: 0;
@@ -1850,6 +1856,14 @@
       }
 
       .catalog .catalog-card-full h3 {
+        color: var(--dark);
+      }
+
+      .catalog .catalog-card-lineart .catalog-img::after {
+        display: none;
+      }
+
+      .catalog .catalog-card-lineart h3 {
         color: var(--dark);
       }
 

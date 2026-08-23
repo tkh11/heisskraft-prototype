@@ -140,12 +140,12 @@
 
     const pages = [
       { name: 'Насосы и насосные станции', category: 'Каталог', hint: 'Скважинные, циркуляционные и повысительные насосы', href: 'catalog.html?category=pumps', thumb: 'assets/catalog2.jpg' },
-      { name: 'Водоснабжение', category: 'Применение', hint: 'Фильтр по сфере применения', href: 'catalog.html?use=water', thumb: 'assets/catalog2.jpg' },
-      { name: 'Отопление', category: 'Применение', hint: 'Фильтр по сфере применения', href: 'catalog.html?use=heating', thumb: 'assets/catalog3.jpg' },
-      { name: 'Канализация и дренаж', category: 'Каталог', hint: 'Дренажные и фекальные насосы', href: 'catalog.html?category=drainage', thumb: 'assets/catalog4.jpg' },
-      { name: 'Пожаротушение', category: 'Каталог', hint: 'Насосы и станции ПТ', href: 'catalog.html?category=fire', thumb: 'assets/catalog5.jpg' },
-      { name: 'Водоподготовка', category: 'Каталог', hint: 'Фильтрация и обратный осмос', href: 'catalog.html?category=treatment', thumb: 'assets/catalog6.jpg' },
-      { name: 'Полный каталог', category: 'Каталог', hint: 'Вся линейка HEISSKRAFT', href: 'catalog.html', thumb: 'assets/catalog1.jpg' },
+      { name: 'Водоснабжение', category: 'Применение', hint: 'Фильтр по сфере применения', href: 'catalog.html?use=water', thumb: 'assets/home-cat-water.png', icon: true },
+      { name: 'Отопление', category: 'Применение', hint: 'Фильтр по сфере применения', href: 'catalog.html?use=heating', thumb: 'assets/home-cat-heating.png', icon: true },
+      { name: 'Канализация и дренаж', category: 'Каталог', hint: 'Дренажные и фекальные насосы', href: 'catalog.html?category=drainage', thumb: 'assets/home-cat-sewer.png', icon: true },
+      { name: 'Пожаротушение', category: 'Каталог', hint: 'Насосы и станции ПТ', href: 'catalog.html?category=fire', thumb: 'assets/home-cat-fire.png', icon: true },
+      { name: 'Водоподготовка', category: 'Каталог', hint: 'Фильтрация и обратный осмос', href: 'catalog.html?category=treatment', thumb: 'assets/home-cat-treatment.png', icon: true },
+      { name: 'Полный каталог', category: 'Каталог', hint: 'Вся линейка HEISSKRAFT', href: 'catalog.html', thumb: 'assets/icon-catalog.svg', icon: true },
       { name: 'Подбор насосов', category: 'Страница', hint: 'Подбор по расходу и напору', href: 'pumps.html', thumb: 'assets/catalog2.jpg' },
       { name: 'Подбор труб', category: 'Страница', hint: 'Подбор трубопроводных систем PPR-CT и стальных труб', href: 'pipes.html', thumb: 'assets/cat-pipes.png' },
       { name: 'О компании', category: 'Страница', hint: 'Качество в деталях, производство, достижения HEISSKRAFT', href: 'about.html', thumb: 'assets/logo-mark.svg', icon: true },
