@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Документация — HEISSKRAFT</title>
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="icon" href="assets/logo-mark.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" /></noscript>
+  <link rel="preload" href="header.html" as="fetch" crossorigin />
+  <link rel="preload" href="footer.html" as="fetch" crossorigin />
+  <link rel="preload" href="data/docs.json" as="fetch" crossorigin />
+  <link rel="stylesheet" href="css/styles.css" />
+  <script defer src="js/data.js"></script>
+  <script defer src="js/layout.js"></script>
+  <script defer src="js/request-form.js"></script>
+  <script defer src="js/docs.js"></script>
+</head>
+<body>
+  <a class="visually-hidden" href="#docs">Перейти к документации</a>
+  <div id="page">
+    <div id="site-header"></div>
+
+    <main class="page-docs page-catalog" id="docs">
+      <section class="docs-library" id="docsLibrary">
+        <h1 class="section-title">Документация</h1>
+        <p class="catalog-lead">Каталоги продукции и технические спецификации в формате PDF.</p>
+        <div class="docs-grid" id="docsGrid"></div>
+      </section>
+
+      <section class="docs-reader" id="docsReader" hidden>
+        <div class="docs-bar">
+          <nav class="catalog-breadcrumb" aria-label="Навигация">
+            <a href="docs.html" id="docsBack">Документация</a>
+            <span aria-hidden="true">/</span>
+            <span id="docsReaderTitle">Каталог</span>
+          </nav>
+          <a class="docs-download" id="docsDownload" download>Скачать PDF</a>
+        </div>
+
+        <div class="docs-stage">
+          <button type="button" class="docs-nav" id="docsPrev" aria-label="Предыдущая страница">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 5l-7 7 7 7"/>
+            </svg>
+          </button>
+
+          <div class="docs-book-frame">
+            <div class="docs-book is-closed" id="docsBook" aria-label="Предпросмотр каталога">
+              <div class="docs-page" data-side="left">
+                <canvas></canvas>
+              </div>
+              <div class="docs-page" data-side="right">
+                <canvas></canvas>
+              </div>
+              <div class="docs-sheet" id="docsSheet">
+                <div class="docs-sheet-face is-front"><canvas></canvas></div>
+                <div class="docs-sheet-face is-back"><canvas></canvas></div>
+              </div>
+            </div>
+            <div class="docs-loading" id="docsLoading" hidden>
+              <span class="docs-spinner" aria-hidden="true"></span>
+              <p id="docsLoadingText">Загрузка каталога…</p>
+            </div>
+          </div>
+
+          <button type="button" class="docs-nav" id="docsNext" aria-label="Следующая страница">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 5l7 7-7 7"/>
+            </svg>
+          </button>
+        </div>
+
+        <p class="docs-counter" id="docsCounter" aria-live="polite"></p>
+      </section>
+    </main>
+
+    <div id="site-footer"></div>
+  </div>
+</body>
+</html>

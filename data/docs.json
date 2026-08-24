@@ -1,0 +1,16 @@
+[
+  {
+    "id": "catalog-image",
+    "title": "Имиджевый каталог",
+    "file": "assets/docs/catalog-image.pdf",
+    "cover": "assets/docs/catalog-image-cover.jpg",
+    "hint": "Презентация компании и продуктовых линеек"
+  },
+  {
+    "id": "mini-2025",
+    "title": "Миникаталог 2025",
+    "file": "assets/docs/minicatalog-2025.pdf",
+    "cover": "assets/docs/minicatalog-2025-cover.jpg",
+    "hint": "Полипропиленовые и полиэтиленовые трубопроводные системы"
+  }
+]
