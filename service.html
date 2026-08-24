@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Сервисный центр HEISSKRAFT</title>
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="icon" href="assets/logo-mark.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" /></noscript>
+  <link rel="preload" href="header.html" as="fetch" crossorigin />
+  <link rel="preload" href="footer.html" as="fetch" crossorigin />
+  <link rel="stylesheet" href="css/styles.css" />
+  <script defer src="js/data.js"></script>
+  <script defer src="js/layout.js"></script>
+  <script defer src="js/request-form.js"></script>
+  <script defer src="js/service.js"></script>
+</head>
+<body>
+  <a class="visually-hidden" href="#service">Перейти к сервисному центру</a>
+  <div id="page">
+    <div id="site-header"></div>
+
+    <main class="page-private page-service" id="service">
+      <section class="private-hero service-hero" aria-labelledby="serviceTitle">
+        <video muted loop playsinline autoplay preload="metadata">
+          <source src="assets/service-hero.mp4" type="video/mp4" />
+        </video>
+        <div class="private-hero-overlay"></div>
+        <div class="private-hero-content">
+          <h1 id="serviceTitle">Сервисный центр<br>HEISSKRAFT</h1>
+        </div>
+      </section>
+
+      <div class="page-catalog page-private-body">
+        <section class="private-intro" aria-label="Сервисное обслуживание">
+          <article class="private-intro-card" id="maintenance">
+            <p class="designer-kicker">Обслуживание</p>
+            <h2>Сервис от производителя</h2>
+            <p>Собственный сервисный центр сопровождает оборудование HEISSKRAFT на объекте: диагностика, ремонт, пусконаладка, регламентное обслуживание и поставка оригинальных запчастей. Один контур ответственности — от заявки до акта.</p>
+            <ul class="partner-list">
+              <li>Диагностика насосов, станций и автоматики</li>
+              <li>Гарантийный и постгарантийный ремонт</li>
+              <li>Пусконаладка и шеф-монтаж</li>
+              <li>Регламент и оригинальные запасные части</li>
+            </ul>
+            <a class="btn-primary" href="#" data-action="request">Оставить заявку в сервис</a>
+          </article>
+          <article class="private-intro-card" id="contacts">
+            <p class="designer-kicker">Контакты</p>
+            <h2>Как связаться с сервисным центром</h2>
+            <p>Приём заявок — в рабочие дни. Укажите модель, серийный номер и описание неисправности: подскажем, нужен выезд, ремонт в центре или замена узла.</p>
+            <ul class="service-contacts">
+              <li><span>Телефон</span><a href="tel:+74952584542">+7 (495) 258-45-42</a></li>
+              <li><span>Почта</span><a href="mailto:info@heisskraft.ru">info@heisskraft.ru</a></li>
+              <li><span>Режим</span><p>Пн–Пт, 9:00–18:00</p></li>
+              <li><span>Адрес</span><p>141214, Московская область, г. Пушкино, пос. Зверосовхоза, ул. Соболиная, д. 11, стр. 1</p></li>
+            </ul>
+            <a class="btn-retail" href="tel:+74952584542">Позвонить</a>
+          </article>
+        </section>
+
+        <h2 class="designer-heading" id="cert">Сертификация продукции</h2>
+        <div class="catalog-grid designer-grid service-cert">
+          <article class="catalog-card designer-card">
+            <div class="designer-card-icon" aria-hidden="true">
+              <img src="assets/icon-cert.svg" alt="" width="48" height="48" />
+            </div>
+            <h3>ТР ТС / EAC</h3>
+            <p>Оборудование поставляется с декларациями и сертификатами соответствия техническим регламентам Таможенного союза.</p>
+          </article>
+          <article class="catalog-card designer-card">
+            <div class="designer-card-icon" aria-hidden="true">
+              <img src="assets/icon-cert.svg" alt="" width="48" height="48" />
+            </div>
+            <h3>Пожарная безопасность</h3>
+            <p>Насосы и станции для систем водяного пожаротушения — с комплектом документов для проекта и экспертизы.</p>
+          </article>
+          <article class="catalog-card designer-card">
+            <div class="designer-card-icon" aria-hidden="true">
+              <img src="assets/icon-pdf.svg" alt="" width="48" height="48" />
+            </div>
+            <h3>Паспорта и протоколы</h3>
+            <p>По запросу выдаём паспорта изделий, протоколы испытаний и копии сертификатов на партию.</p>
+            <a class="btn-secondary" href="#" data-action="docs">Запросить документы</a>
+          </article>
+        </div>
+
+        <h2 class="designer-heading" id="warranty">Условия гарантии</h2>
+        <p class="service-lead">Гарантия действует при монтаже по инструкции, наличии паспорта и обращении в авторизованный сервис HEISSKRAFT. Срок считается с даты продажи, указанной в документах.</p>
+        <div class="service-warranty">
+          <article class="service-warranty-card">
+            <h3>Насосы</h3>
+            <p class="service-warranty-term">10 лет</p>
+            <p>Вертикальные, горизонтальные, скважинные и циркуляционные агрегаты HEISSKRAFT. Не распространяется на износ уплотнений и повреждения от некачественной среды.</p>
+          </article>
+          <article class="service-warranty-card">
+            <h3>Насосные станции</h3>
+            <p class="service-warranty-term">10 лет / 24 мес.</p>
+            <p>10 лет на насосную часть, 24 месяца на шкаф автоматики и КИП. Пусконаладка сервисом производителя сохраняет полный срок.</p>
+          </article>
+          <article class="service-warranty-card">
+            <h3>Трубы PPR-CT</h3>
+            <p class="service-warranty-term">10 лет</p>
+            <p>Полипропиленовые системы повышенной термостойкости при сварке штатным оборудованием и соблюдении температурного режима.</p>
+          </article>
+          <article class="service-warranty-card">
+            <h3>Пожаротушение</h3>
+            <p class="service-warranty-term">10 лет</p>
+            <p>Насосы и станции ПТ. Гарантия действует при регламентном обслуживании и работе в проектных параметрах системы.</p>
+          </article>
+          <article class="service-warranty-card">
+            <h3>Водоподготовка</h3>
+            <p class="service-warranty-term">3 года</p>
+            <p>Фильтрация и обратный осмос. Сменные картриджи, мембраны и расходники — по ресурсу, не входят в срок гарантии изделия.</p>
+          </article>
+          <article class="service-warranty-card">
+            <h3>Дренаж и Uplift</h3>
+            <p class="service-warranty-term">5 лет</p>
+            <p>Дренажные, фекальные насосы и станции подъёма стоков — при защите от камней, тряпок и работе без «сухого хода».</p>
+          </article>
+          <article class="service-warranty-card">
+            <h3>Фитинги и арматура</h3>
+            <p class="service-warranty-term">10 лет</p>
+            <p>Соединения и трубопроводная арматура HEISSKRAFT в составе системы того же бренда. Уплотнения — расходный материал.</p>
+          </article>
+        </div>
+
+        <div class="service-note">
+          <p>Точные условия по серии уточняйте в паспорте изделия или у сервиса. Для гарантийного случая приложите фото шильда, описание режима работы и копию документов на поставку.</p>
+          <a class="btn-primary" href="#" data-action="request">Заявить гарантийный случай</a>
+        </div>
+      </div>
+    </main>
+
+    <div id="site-footer"></div>
+  </div>
+</body>
+</html>

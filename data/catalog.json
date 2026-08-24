@@ -26,12 +26,11 @@
     {
       "id": "pipes",
       "name": "Трубы и трубопроводные системы",
-      "lead": "PPR-CT и стальные системы с широким рядом диаметров, включая крупные DN для магистралей.",
+      "lead": "Полипропиленовые системы PPR-CT с широким рядом диаметров, включая крупные DN для магистралей.",
       "image": "assets/cat-pipes.png",
       "subcategories": [
         { "id": "ppr", "name": "PPR-CT", "image": "assets/catalog1.jpg" },
-        { "id": "large-dn", "name": "Большие диаметры", "image": "assets/catalog1.jpg" },
-        { "id": "steel", "name": "Стальные трубы", "image": "assets/catalog1.jpg" }
+        { "id": "large-dn", "name": "Большие диаметры", "image": "assets/catalog1.jpg" }
       ]
     },
     {
