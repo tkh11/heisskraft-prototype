@@ -13,6 +13,55 @@
     });
   });
 
+  const industries = document.getElementById('industries');
+  if (industries) {
+    const moreBtn = document.getElementById('industriesMore');
+    const closeBtn = document.getElementById('industriesClose');
+    const extra = industries.querySelector('.industries-extra');
+    const extraCards = extra ? extra.querySelectorAll('.catalog-card').length : 0;
+    const mobileMq = window.matchMedia('(max-width: 640px)');
+    let expanded = false;
+
+    function isMobile() {
+      return mobileMq.matches;
+    }
+
+    function renderMore() {
+      const mobile = isMobile();
+      industries.classList.toggle('is-expanded', mobile && expanded);
+      if (moreBtn) moreBtn.hidden = !mobile || extraCards === 0 || expanded;
+      if (closeBtn) closeBtn.hidden = !mobile || extraCards === 0 || !expanded;
+    }
+
+    if (moreBtn) {
+      moreBtn.addEventListener('click', () => {
+        expanded = true;
+        renderMore();
+      });
+    }
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', () => {
+        expanded = false;
+        renderMore();
+        if (typeof industries.scrollIntoView === 'function') {
+          industries.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    }
+
+    if (typeof mobileMq.addEventListener === 'function') {
+      mobileMq.addEventListener('change', () => {
+        if (!isMobile()) expanded = false;
+        renderMore();
+      });
+    } else if (typeof mobileMq.addListener === 'function') {
+      mobileMq.addListener(renderMore);
+    }
+
+    renderMore();
+  }
+
   const banner = document.querySelector('.warranty-banner video');
   if (!banner) return;
 

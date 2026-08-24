@@ -872,6 +872,25 @@
       margin: 0 auto;
     }
 
+    .industries-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    #industries {
+      scroll-margin-top: calc(var(--header-h) + 12px);
+    }
+
+    .industries-extra,
+    .industries-extra-inner,
+    .industries-extra-grid {
+      display: contents;
+    }
+
+    .industries-actions,
+    .industries-more {
+      display: none;
+    }
+
     .catalog-card {
       background: white;
       border: 1px solid var(--border);
@@ -1390,6 +1409,10 @@
       .catalog-grid {
         grid-template-columns: repeat(2, 1fr);
       }
+
+      .industries-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
     }
 
     @media (max-width: 1024px) {
@@ -1801,6 +1824,63 @@
       .catalog-grid {
         grid-template-columns: 1fr 1fr;
         gap: 10px;
+      }
+
+      .industries-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+
+      .industries-extra {
+        display: grid;
+        grid-column: 1 / -1;
+        grid-template-rows: 0fr;
+        transition: grid-template-rows 0.45s ease;
+      }
+
+      #industries.is-expanded .industries-extra {
+        grid-template-rows: 1fr;
+      }
+
+      .industries-extra-inner {
+        display: block;
+        overflow: hidden;
+        min-height: 0;
+      }
+
+      .industries-extra-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+
+      .industries-actions {
+        display: block;
+        margin-top: 14px;
+      }
+
+      .industries-more {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 44px;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        background: #fff;
+        color: var(--dark);
+        font-size: 14px;
+        font-weight: 700;
+      }
+
+      .industries-more[hidden] {
+        display: none;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .industries-extra {
+          transition: none;
+        }
       }
 
       .catalog .catalog-card {
