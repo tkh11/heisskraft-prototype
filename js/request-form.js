@@ -371,7 +371,7 @@
             '<div class="request-field request-consent">' +
               '<label class="request-check">' +
                 '<input type="checkbox" id="requestConsent" name="consent" required />' +
-                '<span>Согласен на обработку персональных данных и принимаю <a href="#" data-action="privacy">политику конфиденциальности</a>*</span>' +
+                '<span>Согласен на обработку персональных данных и принимаю <a href="privacy.html" target="_blank" rel="noopener noreferrer">политику конфиденциальности</a>*</span>' +
               '</label>' +
               '<span class="request-error" id="requestConsentError" role="alert"></span>' +
             '</div>' +
@@ -405,6 +405,14 @@
     fields.details = document.getElementById('requestDetails');
     fields.file = document.getElementById('requestFile');
     fields.consent = document.getElementById('requestConsent');
+    const privacyLink = form.querySelector('.request-consent a[href*="privacy"]');
+    if (privacyLink) {
+      privacyLink.addEventListener('click', (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        window.open(privacyLink.href, '_blank', 'noopener,noreferrer');
+      });
+    }
 
     document.getElementById('requestClose').addEventListener('click', closeRequestForm);
     modal.addEventListener('click', (event) => {

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Реквизиты организации — HEISSKRAFT</title>
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="icon" href="assets/logo-mark.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" /></noscript>
+  <link rel="preload" href="header.html" as="fetch" crossorigin />
+  <link rel="preload" href="footer.html" as="fetch" crossorigin />
+  <link rel="stylesheet" href="css/styles.css" />
+  <script defer src="js/data.js"></script>
+  <script defer src="js/layout.js"></script>
+  <script defer src="js/request-form.js"></script>
+  <script defer src="js/requisites.js"></script>
+</head>
+<body>
+  <a class="visually-hidden" href="#requisites">Перейти к реквизитам</a>
+  <div id="page">
+    <div id="site-header"></div>
+
+    <main class="page-requisites" id="requisites">
+      <nav class="catalog-breadcrumb" aria-label="Навигация">
+        <a href="index.html">Главная</a>
+        <span aria-hidden="true">/</span>
+        <a href="about.html">О компании</a>
+        <span aria-hidden="true">/</span>
+        <span>Реквизиты</span>
+      </nav>
+
+      <header class="req-hero">
+        <div class="req-hero-copy">
+          <p class="designer-kicker">Юридическая информация</p>
+          <h1>Реквизиты организации</h1>
+          <p class="catalog-lead">ООО «Хайсскрафт Импекс». Данные для договоров, счетов и платёжных поручений — нажмите строку, чтобы скопировать значение.</p>
+        </div>
+        <div class="req-hero-actions">
+          <button type="button" class="btn-primary" id="reqCopyAll">Скопировать все реквизиты</button>
+          <a class="btn-secondary" href="assets/docs/requisites.pdf" target="_blank" rel="noopener noreferrer" download="Реквизиты ООО Хайсскрафт Импекс.pdf">Печать / PDF</a>
+        </div>
+      </header>
+
+      <ul class="req-highlights" aria-label="Основные идентификаторы">
+        <li>
+          <button type="button" class="req-chip" data-copy="7728291164" data-label="ИНН">
+            <span>ИНН</span>
+            <strong>7728291164</strong>
+          </button>
+        </li>
+        <li>
+          <button type="button" class="req-chip" data-copy="1037728027369" data-label="ОГРН">
+            <span>ОГРН</span>
+            <strong>1037728027369</strong>
+          </button>
+        </li>
+        <li>
+          <button type="button" class="req-chip" data-copy="503801001" data-label="КПП">
+            <span>КПП</span>
+            <strong>503801001</strong>
+          </button>
+        </li>
+        <li>
+          <button type="button" class="req-chip" data-copy="044525411" data-label="БИК">
+            <span>БИК</span>
+            <strong>044525411</strong>
+          </button>
+        </li>
+      </ul>
+
+      <nav class="req-tabs" aria-label="Разделы реквизитов">
+        <a href="#org" class="is-active">Организация</a>
+        <a href="#bank">Банк</a>
+        <a href="#codes">Классификаторы</a>
+        <a href="#okved">ОКВЭД</a>
+        <a href="#people">Руководство</a>
+      </nav>
+
+      <div class="req-grid">
+        <section class="req-card" id="org">
+          <p class="designer-kicker">Организация</p>
+          <h2>Сведения о юридическом лице</h2>
+          <div class="req-list">
+            <button type="button" class="req-row" data-copy="Общество с ограниченной ответственностью «Хайсскрафт Импекс»" data-label="Полное наименование">
+              <span class="req-row-label">Полное наименование</span>
+              <span class="req-row-value">Общество с ограниченной ответственностью «Хайсскрафт Импекс»</span>
+            </button>
+            <button type="button" class="req-row" data-copy="ООО «Хайсскрафт Импекс»" data-label="Краткое наименование">
+              <span class="req-row-label">Краткое наименование</span>
+              <span class="req-row-value">ООО «Хайсскрафт Импекс»</span>
+            </button>
+            <button type="button" class="req-row" data-copy="141214, Московская область, г. Пушкино, пос. Зверосовхоза, ул. Соболиная, д. 11, стр. 1, офис 1-19" data-label="Юридический адрес">
+              <span class="req-row-label">Юридический адрес</span>
+              <span class="req-row-value">141214, Московская область, г. Пушкино, пос. Зверосовхоза, ул. Соболиная, д. 11, стр. 1, офис 1-19</span>
+            </button>
+            <button type="button" class="req-row" data-copy="141214, Московская область, г. Пушкино, пос. Зверосовхоза, ул. Соболиная, д. 11, стр. 1, офис 1-19" data-label="Фактический адрес">
+              <span class="req-row-label">Фактический адрес</span>
+              <span class="req-row-value">141214, Московская область, г. Пушкино, пос. Зверосовхоза, ул. Соболиная, д. 11, стр. 1, офис 1-19</span>
+            </button>
+            <a class="req-row req-row-link" href="tel:+74952584542">
+              <span class="req-row-label">Телефон</span>
+              <span class="req-row-value">+7 (495) 258-45-42</span>
+            </a>
+          </div>
+        </section>
+
+        <section class="req-card" id="bank">
+          <p class="designer-kicker">Расчётный счёт</p>
+          <h2>Банковские реквизиты</h2>
+          <div class="req-list">
+            <button type="button" class="req-row" data-copy='Филиал "Центральный" Банка ВТБ (ПАО)' data-label="Банк">
+              <span class="req-row-label">Банк</span>
+              <span class="req-row-value">Филиал «Центральный» Банка ВТБ (ПАО)</span>
+            </button>
+            <button type="button" class="req-row" data-copy="40702810903960001239" data-label="Расчётный счёт">
+              <span class="req-row-label">Расчётный счёт</span>
+              <span class="req-row-value req-mono">40702810903960001239</span>
+            </button>
+            <button type="button" class="req-row" data-copy="30101810145250000411" data-label="Корреспондентский счёт">
+              <span class="req-row-label">Корреспондентский счёт</span>
+              <span class="req-row-value req-mono">30101810145250000411</span>
+            </button>
+            <button type="button" class="req-row" data-copy="044525411" data-label="БИК">
+              <span class="req-row-label">БИК</span>
+              <span class="req-row-value req-mono">044525411</span>
+            </button>
+          </div>
+        </section>
+
+        <section class="req-card" id="codes">
+          <p class="designer-kicker">Коды статистики</p>
+          <h2>Классификаторы</h2>
+          <div class="req-list req-list-compact">
+            <button type="button" class="req-row" data-copy="14665714" data-label="ОКПО"><span class="req-row-label">ОКПО</span><span class="req-row-value req-mono">14665714</span></button>
+            <button type="button" class="req-row" data-copy="4210014" data-label="ОКОГУ"><span class="req-row-label">ОКОГУ</span><span class="req-row-value req-mono">4210014</span></button>
+            <button type="button" class="req-row" data-copy="46458000126" data-label="ОКАТО"><span class="req-row-label">ОКАТО</span><span class="req-row-value req-mono">46458000126</span></button>
+            <button type="button" class="req-row" data-copy="46758000" data-label="ОКТМО"><span class="req-row-label">ОКТМО</span><span class="req-row-value req-mono">46758000</span></button>
+            <button type="button" class="req-row" data-copy="16" data-label="ОКФС"><span class="req-row-label">ОКФС</span><span class="req-row-value req-mono">16</span></button>
+            <button type="button" class="req-row" data-copy="12300" data-label="ОКОПФ"><span class="req-row-label">ОКОПФ</span><span class="req-row-value req-mono">12300</span></button>
+          </div>
+        </section>
+
+        <section class="req-card" id="okved">
+          <p class="designer-kicker">ОКВЭД ОК 029-2014</p>
+          <h2>Виды деятельности</h2>
+          <p class="req-note">Основной и дополнительные виды деятельности по ОКВЭД ред. 2.</p>
+          <div class="req-list">
+            <button type="button" class="req-row" data-copy="22.23 Производство пластмассовых изделий, используемых в строительстве" data-label="Основной ОКВЭД">
+              <span class="req-row-label">Основной</span>
+              <span class="req-row-value"><em>22.23</em> Производство пластмассовых изделий, используемых в строительстве</span>
+            </button>
+            <button type="button" class="req-row" data-copy="22.21 Производство пластмассовых плит, полос, труб и профилей" data-label="ОКВЭД 22.21">
+              <span class="req-row-label">Дополнительный</span>
+              <span class="req-row-value"><em>22.21</em> Производство пластмассовых плит, полос, труб и профилей</span>
+            </button>
+            <button type="button" class="req-row" data-copy="46.74 Торговля оптовая скобяными изделиями, водопроводным и отопительным оборудованием и принадлежностями" data-label="ОКВЭД 46.74">
+              <span class="req-row-label">Дополнительный</span>
+              <span class="req-row-value"><em>46.74</em> Торговля оптовая скобяными изделиями, водопроводным и отопительным оборудованием и принадлежностями</span>
+            </button>
+          </div>
+        </section>
+
+        <section class="req-card req-card-wide" id="people">
+          <p class="designer-kicker">Подписи</p>
+          <h2>Руководство</h2>
+          <div class="req-people">
+            <button type="button" class="req-person" data-copy="Сафонов Александр Валентинович" data-label="Генеральный директор">
+              <span class="req-row-label">Генеральный директор</span>
+              <strong>Сафонов Александр Валентинович</strong>
+            </button>
+            <button type="button" class="req-person" data-copy="Ковалева Ирина Сергеевна" data-label="Главный бухгалтер">
+              <span class="req-row-label">Главный бухгалтер</span>
+              <strong>Ковалева Ирина Сергеевна</strong>
+            </button>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <div id="site-footer"></div>
+  </div>
+</body>
+</html>

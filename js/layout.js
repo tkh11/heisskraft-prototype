@@ -159,6 +159,9 @@
       { name: 'Подбор насосов', category: 'Страница', hint: 'Подбор по расходу и напору', href: 'pumps.html', thumb: 'assets/catalog2.jpg' },
       { name: 'Подбор труб', category: 'Страница', hint: 'Подбор трубопроводных систем PPR-CT', href: 'pipes.html', thumb: 'assets/cat-pipes.png' },
       { name: 'О компании', category: 'Страница', hint: 'Качество в деталях, производство, достижения HEISSKRAFT', href: 'about.html', thumb: 'assets/logo-mark.svg', icon: true },
+      { name: 'Реквизиты организации', category: 'Страница', hint: 'ИНН, ОГРН, КПП, банк ВТБ, юридический адрес ООО «Хайсскрафт Импекс»', href: 'requisites.html', thumb: 'assets/logo-mark.svg', icon: true },
+      { name: 'Политика конфиденциальности', category: 'Страница', hint: 'Политика конфиденциальности ООО «Хайсскрафт Импекс»', href: 'privacy.html', thumb: 'assets/logo-mark.svg', icon: true },
+      { name: 'Обработка персональных данных', category: 'Страница', hint: 'Политика обработки ПДн, 152-ФЗ, cookie, права субъекта', href: 'personal.html', thumb: 'assets/logo-mark.svg', icon: true },
       { name: 'Решения для проектировщиков', category: 'Страница', hint: 'Узлы, насосные станции, PPR-CT, пожаротушение, сервис', href: 'designer.html', thumb: 'assets/icon-designer.svg', icon: true },
       { name: 'Решения для подрядчиков', category: 'Страница', hint: 'Сварка, фитинги, крепления, обучение монтажников, сервис', href: 'contractor.html', thumb: 'assets/icon-contractor.svg', icon: true },
       { name: 'Решения для частных лиц', category: 'Страница', hint: 'Скважинные насосы, Uplift, гидробаки, фитинги, PERT, трубы, сервис', href: 'private.html', thumb: 'assets/icon-private.svg', icon: true },
@@ -466,10 +469,7 @@
         return;
       }
       const messages = {
-        requisites: 'Реквизиты организации — в разработке',
-        docs: 'Раздел «Документация» — в разработке',
-        privacy: 'Политика конфиденциальности — в разработке',
-        personal: 'Обработка персональных данных — в разработке'
+        docs: 'Раздел «Документация» — в разработке'
       };
       const message = messages[action];
       if (!message) return;
