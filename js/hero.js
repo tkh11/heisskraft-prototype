@@ -26,9 +26,50 @@
   }
 
   function videoAllowed(video) {
+    const slide = video.closest('.hero-slide');
+    if (slide && queue.length && !queue.includes(slide.dataset.slide)) return false;
     if (video.classList.contains('hero-media-desktop')) return !mobileMq.matches;
     if (video.classList.contains('hero-media-mobile')) return mobileMq.matches;
     return true;
+  }
+
+  function attachVideo(video, preload) {
+    let changed = false;
+    video.querySelectorAll('source[data-src]').forEach((source) => {
+      const url = source.getAttribute('data-src');
+      if (source.getAttribute('src') !== url) {
+        source.setAttribute('src', url);
+        changed = true;
+      }
+    });
+    video.preload = preload;
+    if (changed) video.load();
+  }
+
+  function detachVideo(video) {
+    let changed = false;
+    video.pause();
+    video.querySelectorAll('source[data-src]').forEach((source) => {
+      if (source.hasAttribute('src')) {
+        source.removeAttribute('src');
+        changed = true;
+      }
+    });
+    if (changed) {
+      video.removeAttribute('src');
+      video.load();
+    }
+  }
+
+  function nextQueuedVideoSlideId() {
+    for (let step = 1; step < queue.length; step++) {
+      const id = queue[(index + step) % queue.length];
+      const slide = allSlides.find((item) => item.dataset.slide === id);
+      if (!slide) continue;
+      const hasVideo = Array.from(slide.querySelectorAll('video')).some(videoAllowed);
+      if (hasVideo) return id;
+    }
+    return null;
   }
 
   function measureInView() {
@@ -40,20 +81,46 @@
 
   function syncMedia() {
     const activeId = queue[index];
+    const nextId = inView ? nextQueuedVideoSlideId() : null;
+
     videos.forEach((video) => {
       const slide = video.closest('.hero-slide');
-      const on = slide && slide.dataset.slide === activeId && videoAllowed(video);
-      if (on && inView) {
-        video.muted = true;
-        video.loop = true;
-        const play = video.play();
-        if (play) play.catch(() => {});
-      } else {
-        video.pause();
-        if (!on) {
-          try { video.currentTime = 0; } catch (err) {}
-        }
+      const slideId = slide && slide.dataset.slide;
+      const allowed = videoAllowed(video);
+      const isActive = allowed && slideId === activeId;
+      const isNext = allowed && nextId && slideId === nextId && slideId !== activeId;
+
+      if (!allowed) {
+        detachVideo(video);
+        return;
       }
+
+      if (isActive) {
+        attachVideo(video, inView ? 'auto' : 'metadata');
+        if (inView) {
+          video.muted = true;
+          video.loop = true;
+          const replay = function () {
+            const play = video.play();
+            if (play) play.catch(() => {});
+          };
+          if (video.readyState >= 2) replay();
+          else video.addEventListener('canplay', replay, { once: true });
+        } else {
+          video.pause();
+        }
+        return;
+      }
+
+      video.pause();
+      if (isNext) {
+        attachVideo(video, 'metadata');
+        return;
+      }
+
+      video.preload = 'none';
+      if (!video.querySelector('source[src]')) return;
+      try { video.currentTime = 0; } catch (err) {}
     });
   }
 
@@ -189,8 +256,8 @@
 
   mediaRoot.addEventListener('touchcancel', resetSwipe);
 
-  setInView(measureInView());
   applySet();
+  setInView(measureInView());
 
   if ('IntersectionObserver' in window) {
     const observer = new IntersectionObserver(function () {
