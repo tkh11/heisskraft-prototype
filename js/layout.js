@@ -147,7 +147,6 @@
       { name: 'Водоподготовка', category: 'Каталог', hint: 'Фильтрация и обратный осмос', href: 'catalog.html?category=treatment', thumb: 'assets/home-cat-treatment.png', icon: true },
       { name: 'Полный каталог', category: 'Каталог', hint: 'Вся линейка HEISSKRAFT', href: 'catalog.html', thumb: 'assets/icon-catalog.svg', icon: true },
       { name: 'Отраслевые решения', category: 'Раздел', hint: 'Решения HEISSKRAFT для отраслей', href: 'index.html#industries', thumb: 'assets/icon-catalog.svg', icon: true },
-      { name: 'Материально-техническое снабжение', category: 'Отрасль', hint: 'Отраслевое решение HEISSKRAFT', href: 'index.html#industries', thumb: 'assets/industry-supply.svg', icon: true },
       { name: 'Лесная промышленность', category: 'Отрасль', hint: 'Отраслевое решение HEISSKRAFT', href: 'index.html#industries', thumb: 'assets/industry-forest.svg', icon: true },
       { name: 'Пневматика', category: 'Отрасль', hint: 'Отраслевое решение HEISSKRAFT', href: 'index.html#industries', thumb: 'assets/industry-pneumatics.svg', icon: true },
       { name: 'Здравоохранение', category: 'Отрасль', hint: 'Отраслевое решение HEISSKRAFT', href: 'index.html#industries', thumb: 'assets/industry-health.svg', icon: true },
