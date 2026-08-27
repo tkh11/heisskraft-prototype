@@ -126,33 +126,44 @@
           </div>
           <div class="about-path-media">
             <figure class="about-path-shot is-active" data-path-shot="0">
-              <img src="assets/catalog1.jpg" alt="Разработка продукции HEISSKRAFT" width="1200" height="800" />
+              <img src="assets/about-path-develop.png" alt="Разработка продукции HEISSKRAFT" width="1200" height="800" />
             </figure>
             <figure class="about-path-shot" data-path-shot="1">
-              <img src="assets/icon-cert.svg" alt="" width="120" height="120" />
-              <figcaption>Контроль на каждом этапе</figcaption>
+              <img src="assets/about-path-control.png" alt="Контроль качества фитингов HEISSKRAFT" width="1200" height="800" />
             </figure>
             <figure class="about-path-shot" data-path-shot="2">
-              <video muted loop playsinline preload="metadata">
-                <source src="assets/hero-production.mp4" type="video/mp4" />
-              </video>
+              <img src="assets/about-path-production.png" alt="Серийное производство фитингов HEISSKRAFT" width="1200" height="800" />
             </figure>
             <figure class="about-path-shot" data-path-shot="3">
-              <img src="assets/hero.jpg" alt="Насосное оборудование HEISSKRAFT в Лахта-центре" width="1920" height="1280" />
+              <img src="assets/about-path-application.png" alt="Насосное оборудование HEISSKRAFT в инженерной системе" width="1600" height="1067" />
             </figure>
           </div>
         </div>
       </section>
 
-      <section class="about-gallery" aria-label="Фото и видео">
-        <h2 class="designer-heading">Компания в кадре</h2>
-        <div class="about-gallery-grid">
-          <button type="button" class="about-shot is-large" data-lightbox="assets/hero.jpg" data-caption="Лахта-центр">
+      <section class="about-gallery" id="aboutGallery" aria-roledescription="карусель" aria-label="Компания в кадре">
+        <div class="about-gallery-head">
+          <h2 class="designer-heading">Компания в кадре</h2>
+          <div class="about-gallery-arrows">
+            <button type="button" class="spec-gallery-arrow" data-gallery-prev aria-label="Предыдущий кадр">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M15 6l-6 6 6 6"/>
+              </svg>
+            </button>
+            <button type="button" class="spec-gallery-arrow" data-gallery-next aria-label="Следующий кадр">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M9 6l6 6-6 6"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div class="about-gallery-media" tabindex="0">
+          <button type="button" class="about-shot is-active" data-lightbox="assets/hero.jpg" data-caption="Лахта-центр">
             <img src="assets/hero.jpg" alt="Лахта-центр: объекты с оборудованием HEISSKRAFT" width="1920" height="1280" loading="lazy" decoding="async" />
             <span>Лахта-центр</span>
           </button>
           <div class="about-shot is-video">
-            <video muted loop playsinline autoplay preload="metadata">
+            <video muted loop playsinline preload="metadata">
               <source src="assets/hero-market.mp4" type="video/mp4" />
             </video>
             <span>Более 25 лет на рынке</span>
@@ -174,8 +185,9 @@
               <source src="assets/warranty-banner.mp4" type="video/mp4" />
             </video>
             <span>Гарантия от производителя</span>
-          </button>
+          </div>
         </div>
+        <div class="about-gallery-dots" role="tablist" aria-label="Кадры галереи"></div>
       </section>
 
       <section class="about-cta" aria-label="Следующий шаг">

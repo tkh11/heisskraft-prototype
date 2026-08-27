@@ -76,7 +76,120 @@
     });
   }
 
-  const videos = Array.from(document.querySelectorAll('.about-hero-media video, .about-shot video'));
+  const gallery = document.getElementById('aboutGallery');
+  if (gallery) {
+    const slides = Array.from(gallery.querySelectorAll('.about-shot'));
+    const media = gallery.querySelector('.about-gallery-media');
+    const prevBtn = gallery.querySelector('[data-gallery-prev]');
+    const nextBtn = gallery.querySelector('[data-gallery-next]');
+    const dotsRoot = gallery.querySelector('.about-gallery-dots');
+    const total = slides.length;
+    let index = 0;
+    let touchX = null;
+    let dragged = false;
+
+    slides.forEach((slide, i) => {
+      const label = slide.querySelector('span');
+      const dot = document.createElement('button');
+      dot.type = 'button';
+      dot.setAttribute('role', 'tab');
+      dot.setAttribute('aria-label', label ? label.textContent : 'Кадр ' + (i + 1));
+      if (i === 0) dot.classList.add('is-active');
+      dot.addEventListener('click', () => go(i));
+      if (dotsRoot) dotsRoot.appendChild(dot);
+    });
+
+    const dots = Array.from(gallery.querySelectorAll('.about-gallery-dots button'));
+
+    function syncVideos() {
+      slides.forEach((slide, i) => {
+        const video = slide.querySelector('video');
+        if (!video) return;
+        if (i === index) {
+          const play = video.play();
+          if (play) play.catch(() => {});
+        } else {
+          video.pause();
+        }
+      });
+    }
+
+    function go(next) {
+      if (!total) return;
+      index = (next + total) % total;
+      slides.forEach((slide, i) => slide.classList.toggle('is-active', i === index));
+      dots.forEach((dot, i) => dot.classList.toggle('is-active', i === index));
+      syncVideos();
+    }
+
+    if (prevBtn) prevBtn.addEventListener('click', () => go(index - 1));
+    if (nextBtn) nextBtn.addEventListener('click', () => go(index + 1));
+
+    gallery.addEventListener('keydown', function (event) {
+      if (event.key === 'ArrowLeft') {
+        event.preventDefault();
+        go(index - 1);
+      }
+      if (event.key === 'ArrowRight') {
+        event.preventDefault();
+        go(index + 1);
+      }
+    });
+
+    function onPointerStart(clientX) {
+      touchX = clientX;
+      dragged = false;
+    }
+
+    function onPointerEnd(clientX) {
+      if (touchX == null) return;
+      const dx = clientX - touchX;
+      touchX = null;
+      if (Math.abs(dx) < 40) return;
+      dragged = true;
+      go(index + (dx < 0 ? 1 : -1));
+    }
+
+    if (media) {
+      media.addEventListener('touchstart', (event) => onPointerStart(event.changedTouches[0].clientX), { passive: true });
+      media.addEventListener('touchend', (event) => onPointerEnd(event.changedTouches[0].clientX), { passive: true });
+      media.addEventListener('pointerdown', (event) => {
+        if (event.pointerType === 'touch') return;
+        onPointerStart(event.clientX);
+      });
+      media.addEventListener('pointerup', (event) => {
+        if (event.pointerType === 'touch') return;
+        onPointerEnd(event.clientX);
+      });
+    }
+
+    gallery.querySelectorAll('[data-lightbox]').forEach((btn) => {
+      btn.addEventListener('click', function (event) {
+        if (!dragged) return;
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        dragged = false;
+      });
+    });
+
+    if ('IntersectionObserver' in window && media) {
+      const galleryObserver = new IntersectionObserver(function (entries) {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            syncVideos();
+            return;
+          }
+          slides.forEach((slide) => {
+            const video = slide.querySelector('video');
+            if (video) video.pause();
+          });
+        });
+      }, { threshold: 0.35 });
+      galleryObserver.observe(media);
+    }
+  }
+
+  const videos = Array.from(document.querySelectorAll('.about-hero-media video'));
   if ('IntersectionObserver' in window) {
     const mediaObserver = new IntersectionObserver(function (entries) {
       entries.forEach((entry) => {
