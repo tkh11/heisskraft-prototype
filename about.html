@@ -162,12 +162,6 @@
             <img src="assets/hero.jpg" alt="Лахта-центр: объекты с оборудованием HEISSKRAFT" width="1920" height="1280" loading="lazy" decoding="async" />
             <span>Лахта-центр</span>
           </button>
-          <div class="about-shot is-video">
-            <video muted loop playsinline preload="metadata">
-              <source src="assets/hero-market.mp4" type="video/mp4" />
-            </video>
-            <span>Более 25 лет на рынке</span>
-          </div>
           <button type="button" class="about-shot" data-lightbox="assets/catalog2.jpg" data-caption="Водоснабжение">
             <img src="assets/catalog2.jpg" alt="Насосное оборудование для водоснабжения" width="600" height="400" loading="lazy" decoding="async" />
             <span>Водоснабжение</span>
@@ -180,12 +174,6 @@
             <img src="assets/catalog5.jpg" alt="Оборудование пожаротушения HEISSKRAFT" width="600" height="400" loading="lazy" decoding="async" />
             <span>Пожаротушение</span>
           </button>
-          <div class="about-shot is-video">
-            <video muted loop playsinline preload="metadata">
-              <source src="assets/warranty-banner.mp4" type="video/mp4" />
-            </video>
-            <span>Гарантия от производителя</span>
-          </div>
         </div>
         <div class="about-gallery-dots" role="tablist" aria-label="Кадры галереи"></div>
       </section>
@@ -206,7 +194,17 @@
           <path d="M4 4l10 10M14 4L4 14"/>
         </svg>
       </button>
+      <button type="button" class="about-lightbox-nav is-prev" id="aboutLightboxPrev" aria-label="Предыдущее фото">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M15 6l-6 6 6 6"/>
+        </svg>
+      </button>
       <img id="aboutLightboxImage" alt="" />
+      <button type="button" class="about-lightbox-nav is-next" id="aboutLightboxNext" aria-label="Следующее фото">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M9 6l6 6-6 6"/>
+        </svg>
+      </button>
       <p id="aboutLightboxCaption"></p>
     </div>
 
