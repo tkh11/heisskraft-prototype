@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Достижения HEISSKRAFT</title>
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="icon" href="assets/logo-mark.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" /></noscript>
+  <link rel="preload" href="header.html" as="fetch" crossorigin />
+  <link rel="preload" href="footer.html" as="fetch" crossorigin />
+  <link rel="stylesheet" href="css/styles.css" />
+  <script defer src="js/data.js"></script>
+  <script defer src="js/layout.js"></script>
+  <script defer src="js/request-form.js"></script>
+</head>
+<body>
+  <a class="visually-hidden" href="#achievements">Перейти к достижениям HEISSKRAFT</a>
+  <div id="page">
+    <div id="site-header"></div>
+
+    <main class="page-achievements" id="achievements">
+      <section class="achievements-banner" aria-labelledby="achievementsTitle">
+        <img src="assets/hero.jpg" alt="Лахта-центр" width="1920" height="1280" />
+        <div class="achievements-banner-overlay"></div>
+        <div class="achievements-banner-content">
+          <p class="designer-kicker">Проекты</p>
+          <h1 id="achievementsTitle">Достижения HEISSKRAFT</h1>
+        </div>
+      </section>
+
+      <div class="page-catalog achievements-body">
+        <nav class="catalog-breadcrumb" aria-label="Навигация">
+          <a href="index.html">Главная</a>
+          <span aria-hidden="true">/</span>
+          <span>Достижения</span>
+        </nav>
+
+        <article class="achievements-project" aria-labelledby="lakhtaTitle">
+          <h2 id="lakhtaTitle">Лахта-центр</h2>
+          <p>Лахта-центр — объект федерального масштаба, в инженерных системах которого работает оборудование HEISSKRAFT. Для водоснабжения, отопления и пожаротушения комплекса применены вертикальные насосы <a href="catalog.html?category=pumps&amp;sub=high-power#hmv-32-11">HMV 32-11</a>, пожарные насосы <a href="catalog.html?category=fire#hnf-50-250">HNF 50-250</a>, циркуляционные насосы <a href="catalog.html?category=pumps&amp;sub=circulation#hmc-32-80">HMC 32-80</a>, тепловой узел <a href="catalog.html?category=nodes#hitp-80">HITP 80</a> и трубы <a href="catalog.html?category=pipes&amp;sub=large-dn#hpp-160">HPP 160 PPR-CT</a>.</p>
+        </article>
+
+        <section class="about-cta achievements-cta" aria-label="Каталог оборудования">
+          <h2>Ознакомьтесь с широким выбором оборудования для ваших проектов</h2>
+          <div class="about-cta-actions">
+            <a class="btn-primary" href="catalog.html">Каталог продукции</a>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <div id="site-footer"></div>
+  </div>
+</body>
+</html>

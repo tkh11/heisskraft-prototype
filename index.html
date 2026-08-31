@@ -11,6 +11,8 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'" />
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" /></noscript>
+  <link rel="preload" href="header.html" as="fetch" crossorigin />
+  <link rel="preload" href="footer.html" as="fetch" crossorigin />
   <link rel="stylesheet" href="css/styles.css" />
   <script defer src="js/data.js"></script>
   <script defer src="js/layout.js"></script>
@@ -21,112 +23,7 @@
 <body>
   <a class="visually-hidden" href="#profiles">Перейти к содержимому</a>
   <div id="page">
-  <div id="site-header">
-    <header class="header">
-      <button class="menu-btn" id="menuBtn" aria-label="Открыть меню" aria-expanded="false">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-
-      <a href="index.html" class="logo" aria-label="HEISSKRAFT — на главную">
-        <img class="logo-full" src="assets/logo.svg" alt="HEISSKRAFT Quality in Detail" width="541" height="54" />
-        <img class="logo-mark" src="assets/logo-mark.svg" alt="HK" width="124" height="54" />
-      </a>
-
-      <nav class="header-nav" aria-label="Разделы сайта">
-        <a href="catalog.html">Каталог</a>
-        <a href="pumps.html">Подбор насосов</a>
-        <a href="pipes.html">Подбор труб</a>
-        <a href="#" data-action="request" class="is-accent">Оставить заявку</a>
-      </nav>
-
-      <div class="header-right">
-        <a href="tel:+74952584542" class="phone">+7 (495) 258-45-42</a>
-        <button class="search-btn" id="searchBtn" aria-label="Поиск" aria-expanded="false" aria-controls="searchModal" aria-haspopup="dialog">
-          <img src="assets/search-icon.svg" alt="" width="36" height="36" />
-        </button>
-        <a href="tel:+74952584542" class="phone-icon" aria-label="Позвонить">
-          <img src="assets/phone-icon.svg" alt="" width="36" height="36" />
-        </a>
-        <button type="button" class="request-cart-btn" data-action="request" aria-label="Открыть заявку" aria-haspopup="dialog">
-          <img src="assets/request-icon.svg" alt="" width="24" height="24" />
-          <span class="request-cart-count" hidden>0</span>
-        </button>
-      </div>
-    </header>
-
-    <div class="mobile-menu" id="mobileMenu">
-      <div class="mobile-menu-panel">
-        <nav class="mobile-menu-nav" aria-label="Мобильное меню">
-          <a href="catalog.html">Каталог продукции</a>
-          <a href="designer.html">Для проектировщиков</a>
-          <a href="contractor.html">Для подрядчиков</a>
-          <a href="private.html">Для частных лиц</a>
-          <a href="partner.html">Партнёрам</a>
-          <a href="service.html">Сервисный центр</a>
-          <a href="docs.html">Документация</a>
-          <a href="requisites.html">Реквизиты организации</a>
-          <div class="mobile-select-group">
-            <button type="button" class="mobile-select-toggle" aria-expanded="false" aria-controls="mobileSelectList">
-              Подбор оборудования
-              <svg class="mobile-select-chevron" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 7.5L10 12.5 15 7.5"/>
-              </svg>
-            </button>
-            <div class="mobile-select-list" id="mobileSelectList">
-              <div class="mobile-select-list-inner">
-              <a href="pumps.html">Подбор насосов</a>
-              <a href="pipes.html">Подбор труб</a>
-              </div>
-            </div>
-          </div>
-          <a href="#" data-action="request">Оставить заявку</a>
-        </nav>
-        <div class="mobile-menu-contacts">
-          <a href="tel:+74952584542">+7 (495) 258-45-42</a>
-          <a href="mailto:info@heisskraft.ru">info@heisskraft.ru</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="search-modal" id="searchModal" role="dialog" aria-modal="true" aria-labelledby="searchTitle" aria-hidden="true">
-      <div class="search-box" role="document">
-        <div class="search-box-header">
-          <h2 id="searchTitle">Поиск по сайту</h2>
-          <button type="button" class="search-close" id="searchClose" aria-label="Закрыть поиск">
-            <svg viewBox="0 0 18 18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-              <path d="M4 4l10 10M14 4L4 14"/>
-            </svg>
-          </button>
-        </div>
-        <form id="searchForm" role="search">
-          <label class="visually-hidden" for="searchInput">Найти оборудование, раздел или контакт</label>
-          <div class="search-field">
-            <svg class="search-field-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="11" cy="11" r="7"/>
-              <path d="M20 20l-3.5-3.5" stroke-linecap="round"/>
-            </svg>
-            <input type="search" id="searchInput" placeholder="Насос, отопление, контакты…" autocomplete="off" enterkeyhint="search" role="combobox" aria-autocomplete="list" aria-expanded="true" aria-controls="searchResults" />
-            <button type="button" class="search-clear" id="searchClear" aria-label="Очистить запрос">
-              <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-                <path d="M3 3l8 8M11 3L3 11"/>
-              </svg>
-            </button>
-          </div>
-        </form>
-        <div class="search-hints" id="searchHints"></div>
-        <div id="searchLive" class="visually-hidden" aria-live="polite"></div>
-        <div class="search-results" id="searchResults" role="listbox" aria-label="Результаты поиска"></div>
-        <div class="search-footer">
-          <span><kbd>↑</kbd> <kbd>↓</kbd> выбрать · <kbd>Enter</kbd> открыть</span>
-          <span><kbd>Esc</kbd> закрыть</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  </div>
+    <div id="site-header"></div>
 
   <!-- HERO -->
   <section class="hero" id="hero" aria-roledescription="карусель" aria-label="Галерея Heisskraft">
@@ -348,41 +245,7 @@
     </div>
   </section>
 
-  <div id="site-footer">
-    <footer class="footer" id="footer">
-      <div class="footer-top">
-        <div class="footer-col">
-          <h4>Heisskraft</h4>
-          <a href="about.html">Информация о компании</a>
-          <a href="docs.html">Документация</a>
-          <a href="service.html">Сервисный центр</a>
-          <a href="requisites.html">Реквизиты организации</a>
-          <a href="#" data-action="request">Оставить заявку</a>
-        </div>
-        <div class="footer-col legal">
-          <h4>Правовая информация</h4>
-          <a href="privacy.html">Политика конфиденциальности</a>
-          <a href="personal.html">Обработка персональных данных</a>
-        </div>
-        <div class="footer-col">
-          <h4>Контактная информация</h4>
-          <a href="tel:+74952584542">+7 (495) 258-45-42</a>
-          <a href="mailto:info@heisskraft.ru">info@heisskraft.ru</a>
-          <p>141214, Россия, Московская область, г. Пушкино, пос. Зверосовхоза, ул. Соболиная, дом 11, стр. 1, оф. 1-19</p>
-        </div>
-      </div>
-      <div class="footer-divider"></div>
-      <div class="footer-bottom">
-        <div class="footer-copy">
-          <p>© 2021 HEISSKRAFT — все права защищены</p>
-          <p>Использование материалов сайта без согласования запрещено.</p>
-        </div>
-        <div class="footer-logo">
-          <img src="assets/footer-logo.svg" alt="HEISSKRAFT" width="311" height="31" loading="lazy" decoding="async" />
-        </div>
-      </div>
-    </footer>
-  </div>
+  <div id="site-footer"></div>
 
   </div>
 </body>

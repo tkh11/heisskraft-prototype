@@ -29,7 +29,7 @@
   }
 
   function relocateHeaderOverlays() {
-    ['searchModal', 'toast'].forEach((id) => {
+    ['searchModal', 'toast', 'cookieNotice'].forEach((id) => {
       const el = document.getElementById(id);
       if (el) document.body.appendChild(el);
     });
@@ -106,6 +106,32 @@
     });
   }
 
+  function initHeaderSelect() {
+    const select = document.querySelector('.header-select');
+    if (!select) return;
+    const btn = select.querySelector('.header-select-toggle');
+    if (!btn) return;
+
+    function close() {
+      select.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const open = select.classList.toggle('is-open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!select.contains(e.target)) close();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && select.classList.contains('is-open')) close();
+    });
+  }
+
   function initMobileSelect() {
     document.querySelectorAll('.mobile-select-group').forEach((group) => {
       const btn = group.querySelector('.mobile-select-toggle');
@@ -155,9 +181,10 @@
       { name: 'Кораблестроение', category: 'Отрасль', hint: 'Отраслевое решение HEISSKRAFT', href: 'index.html#industries', thumb: 'assets/industry-ship.svg', icon: true },
       { name: 'Промышленность', category: 'Отрасль', hint: 'Отраслевое решение HEISSKRAFT', href: 'index.html#industries', thumb: 'assets/industry-industry.svg', icon: true },
       { name: 'Строительство', category: 'Отрасль', hint: 'Отраслевое решение HEISSKRAFT', href: 'index.html#industries', thumb: 'assets/industry-build.svg', icon: true },
-      { name: 'Подбор насосов', category: 'Страница', hint: 'Подбор по расходу и напору', href: 'pumps.html', thumb: 'assets/catalog2.jpg' },
-      { name: 'Подбор труб', category: 'Страница', hint: 'Подбор трубопроводных систем PPR-CT', href: 'pipes.html', thumb: 'assets/cat-pipes.png' },
+      { name: 'Подбор насосного оборудования', category: 'Страница', hint: 'Подбор по расходу и напору', href: 'pumps.html', thumb: 'assets/catalog2.jpg' },
+      { name: 'Расчет трубопроводных систем', category: 'Страница', hint: 'Подбор трубопроводных систем PPR-CT', href: 'pipes.html', thumb: 'assets/cat-pipes.png' },
       { name: 'О компании', category: 'Страница', hint: 'Качество в деталях, производство, достижения HEISSKRAFT', href: 'about.html', thumb: 'assets/logo-mark.svg', icon: true },
+      { name: 'Достижения HEISSKRAFT', category: 'Страница', hint: 'Лахта-центр и крупные проекты с оборудованием HEISSKRAFT', href: 'achievements.html', thumb: 'assets/hero.jpg' },
       { name: 'Реквизиты организации', category: 'Страница', hint: 'ИНН, ОГРН, КПП, банк ВТБ, юридический адрес ООО «Хайсскрафт Импекс»', href: 'requisites.html', thumb: 'assets/logo-mark.svg', icon: true },
       { name: 'Политика конфиденциальности', category: 'Страница', hint: 'Политика конфиденциальности ООО «Хайсскрафт Импекс»', href: 'privacy.html', thumb: 'assets/logo-mark.svg', icon: true },
       { name: 'Обработка персональных данных', category: 'Страница', hint: 'Политика обработки ПДн, 152-ФЗ, cookie, права субъекта', href: 'personal.html', thumb: 'assets/logo-mark.svg', icon: true },
@@ -485,14 +512,67 @@
     return name;
   }
 
+  const COOKIE_NOTICE_KEY = 'heisskraft-cookie-notice';
+  const COOKIE_NOTICE_MAX_AGE = 60 * 60 * 24 * 365;
+
+  function hasCookieNoticeAck() {
+    try {
+      if (window.localStorage.getItem(COOKIE_NOTICE_KEY) === '1') return true;
+    } catch (err) {}
+    return /(?:^|;\s*)hk_cookie_notice=1(?:;|$)/.test(document.cookie || '');
+  }
+
+  function saveCookieNoticeAck() {
+    try {
+      window.localStorage.setItem(COOKIE_NOTICE_KEY, '1');
+    } catch (err) {}
+    document.cookie = 'hk_cookie_notice=1; max-age=' + COOKIE_NOTICE_MAX_AGE + '; path=/; SameSite=Lax';
+  }
+
+  function initCookieNotice() {
+    const banner = document.getElementById('cookieNotice');
+    if (!banner) return;
+    if (hasCookieNoticeAck()) {
+      banner.remove();
+      return;
+    }
+
+    const accept = document.getElementById('cookieNoticeAccept');
+    banner.hidden = false;
+
+    function dismiss() {
+      saveCookieNoticeAck();
+      banner.classList.remove('is-visible');
+      window.setTimeout(() => {
+        if (banner.parentNode) banner.remove();
+      }, 280);
+    }
+
+    if (accept) accept.addEventListener('click', dismiss);
+
+    window.requestAnimationFrame(() => {
+      banner.classList.add('is-visible');
+    });
+  }
+
   function markCurrentNav() {
     const pageFile = pageFileName(window.location.pathname);
+    const isSelectPage = pageFile === 'pumps.html' || pageFile === 'pipes.html';
     if (pageFile === 'pumps.html') document.body.classList.add('is-pumps-page');
     if (pageFile === 'pipes.html') document.body.classList.add('is-pipes-page');
     document.querySelectorAll('.header-nav a[href], .mobile-menu-nav a[href]').forEach((link) => {
       const href = pageFileName(link.getAttribute('href') || '');
       if (href && href === pageFile) link.setAttribute('aria-current', 'page');
     });
+    const select = document.querySelector('.header-select');
+    if (select) {
+      select.classList.toggle('is-current', isSelectPage);
+      const btn = select.querySelector('.header-select-toggle');
+      if (btn) {
+        if (isSelectPage) btn.setAttribute('aria-current', 'true');
+        else btn.removeAttribute('aria-current');
+      }
+    }
   }
 
   function initChrome() {
@@ -500,7 +580,9 @@
     initSearch();
     initActions();
     markCurrentNav();
+    initHeaderSelect();
     initMobileSelect();
+    initCookieNotice();
     if (window.Heisskraft && typeof window.Heisskraft.markLayoutReady === 'function') {
       window.Heisskraft.markLayoutReady();
     } else {

@@ -12,8 +12,18 @@
 
   <nav class="header-nav" aria-label="Разделы сайта">
     <a href="catalog.html">Каталог</a>
-    <a href="pumps.html">Подбор насосов</a>
-    <a href="pipes.html">Подбор труб</a>
+    <div class="header-select">
+      <button type="button" class="header-select-toggle" aria-expanded="false" aria-haspopup="true" aria-controls="headerSelectMenu">
+        Подбор оборудования
+        <svg class="header-select-chevron" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 7.5L10 12.5 15 7.5"/>
+        </svg>
+      </button>
+      <div class="header-select-menu" id="headerSelectMenu">
+        <a href="pumps.html">Подбор насосного оборудования</a>
+        <a href="pipes.html">Расчет трубопроводных систем</a>
+      </div>
+    </div>
     <a href="#" data-action="request" class="is-accent">Оставить заявку</a>
   </nav>
 
@@ -42,6 +52,7 @@
           <a href="partner.html">Партнёрам</a>
           <a href="service.html">Сервисный центр</a>
           <a href="docs.html">Документация</a>
+          <a href="achievements.html">Достижения HEISSKRAFT</a>
           <a href="requisites.html">Реквизиты организации</a>
           <div class="mobile-select-group">
             <button type="button" class="mobile-select-toggle" aria-expanded="false" aria-controls="mobileSelectList">
@@ -52,8 +63,8 @@
             </button>
             <div class="mobile-select-list" id="mobileSelectList">
               <div class="mobile-select-list-inner">
-              <a href="pumps.html">Подбор насосов</a>
-              <a href="pipes.html">Подбор труб</a>
+              <a href="pumps.html">Подбор насосного оборудования</a>
+              <a href="pipes.html">Расчет трубопроводных систем</a>
               </div>
             </div>
           </div>
@@ -102,3 +113,9 @@
 </div>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<div class="cookie-notice" id="cookieNotice" hidden role="dialog" aria-labelledby="cookieNoticeTitle" aria-describedby="cookieNoticeText">
+  <p class="cookie-notice-title" id="cookieNoticeTitle">Файлы cookie</p>
+  <p class="cookie-notice-text" id="cookieNoticeText">Сайт использует файлы cookie, чтобы страницы работали корректно. Подробнее — в <a href="personal.html#s7">политике обработки персональных данных</a>.</p>
+  <button type="button" class="cookie-notice-btn" id="cookieNoticeAccept">Понятно</button>
+</div>
