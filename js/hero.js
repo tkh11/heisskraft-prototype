@@ -4,6 +4,7 @@
 
   const allSlides = Array.from(hero.querySelectorAll('.hero-slide'));
   const allTitles = Array.from(hero.querySelectorAll('.hero-titles .hero-title'));
+  const allCtas = Array.from(hero.querySelectorAll('.hero-cta .btn-primary'));
   const dotsRoot = hero.querySelector('.hero-dots');
   const videos = Array.from(hero.querySelectorAll('video'));
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -12,10 +13,14 @@
     desktop: ['market', 'lakhta', 'production'],
     mobile: ['market', 'lakhta', 'production', 'warranty']
   };
+  const FADE_MS = 700;
   let queue = [];
   let index = 0;
   let timer = null;
   let inView = false;
+  let playGen = 0;
+  let playingVideo = null;
+  let unloadTimer = null;
   const swipeMin = 40;
   let swipeStartX = 0;
   let swipeStartY = 0;
@@ -33,7 +38,7 @@
     return true;
   }
 
-  function attachVideo(video, preload) {
+  function attachVideo(video) {
     let changed = false;
     video.querySelectorAll('source[data-src]').forEach((source) => {
       const url = source.getAttribute('data-src');
@@ -42,7 +47,7 @@
         changed = true;
       }
     });
-    video.preload = preload;
+    video.preload = 'auto';
     if (changed) video.load();
   }
 
@@ -61,78 +66,93 @@
     }
   }
 
-  function nextQueuedVideoSlideId() {
-    for (let step = 1; step < queue.length; step++) {
-      const id = queue[(index + step) % queue.length];
-      const slide = allSlides.find((item) => item.dataset.slide === id);
-      if (!slide) continue;
-      const hasVideo = Array.from(slide.querySelectorAll('video')).some(videoAllowed);
-      if (hasVideo) return id;
-    }
-    return null;
+  function pauseVideo(video) {
+    video.pause();
   }
 
-  function measureInView() {
-    const rect = hero.getBoundingClientRect();
-    const vh = window.innerHeight || document.documentElement.clientHeight;
-    const visible = Math.min(rect.bottom, vh) - Math.max(rect.top, 0);
-    return visible > 0 && visible >= Math.min(rect.height, vh) * 0.25;
+  function resetAndDetach(video) {
+    pauseVideo(video);
+    try { video.currentTime = 0; } catch (err) {}
+    detachVideo(video);
   }
 
-  function syncMedia() {
-    const activeId = queue[index];
-    const nextId = inView ? nextQueuedVideoSlideId() : null;
-
+  function stopOthers(keep) {
     videos.forEach((video) => {
-      const slide = video.closest('.hero-slide');
-      const slideId = slide && slide.dataset.slide;
-      const allowed = videoAllowed(video);
-      const isActive = allowed && slideId === activeId;
-      const isNext = allowed && nextId && slideId === nextId && slideId !== activeId;
-
-      if (!allowed) {
-        detachVideo(video);
-        return;
-      }
-
-      if (isActive) {
-        attachVideo(video, inView ? 'auto' : 'metadata');
-        if (inView) {
-          video.muted = true;
-          video.loop = true;
-          const replay = function () {
-            const play = video.play();
-            if (play) play.catch(() => {});
-          };
-          if (video.readyState >= 2) replay();
-          else video.addEventListener('canplay', replay, { once: true });
-        } else {
-          video.pause();
-        }
-        return;
-      }
-
-      video.pause();
-      if (isNext) {
-        attachVideo(video, 'metadata');
-        return;
-      }
-
-      video.preload = 'none';
-      if (!video.querySelector('source[src]')) return;
-      try { video.currentTime = 0; } catch (err) {}
+      if (video === keep) return;
+      pauseVideo(video);
     });
+    clearTimeout(unloadTimer);
+    unloadTimer = setTimeout(function () {
+      videos.forEach((video) => {
+        if (video === playingVideo) return;
+        resetAndDetach(video);
+      });
+    }, FADE_MS);
   }
 
-  function go(next) {
+  function playSlideVideo(video, restart) {
+    const gen = ++playGen;
+    playingVideo = video;
+    stopOthers(video);
+    attachVideo(video);
+    video.muted = true;
+    video.loop = true;
+
+    function start() {
+      if (gen !== playGen || playingVideo !== video) return;
+      if (restart) {
+        try { video.currentTime = 0; } catch (err) {}
+      }
+      const play = video.play();
+      if (play) play.catch(function () {});
+    }
+
+    if (video.readyState >= 2) start();
+    else video.addEventListener('canplay', start, { once: true });
+  }
+
+  function activeVideo() {
+    const activeId = queue[index];
+    return videos.find(function (video) {
+      const slide = video.closest('.hero-slide');
+      return videoAllowed(video) && slide && slide.dataset.slide === activeId;
+    }) || null;
+  }
+
+  function syncMedia(restart) {
+    if (!inView) {
+      playGen += 1;
+      playingVideo = null;
+      videos.forEach(resetAndDetach);
+      return;
+    }
+
+    const target = activeVideo();
+    if (!target) {
+      playGen += 1;
+      playingVideo = null;
+      stopOthers(null);
+      return;
+    }
+
+    const shouldRestart = restart || playingVideo !== target;
+    playSlideVideo(target, shouldRestart);
+  }
+
+  function go(next, restartVideo) {
     if (!queue.length) return;
+    const prev = index;
     index = (next + queue.length) % queue.length;
     const activeId = queue[index];
+    const changed = prev !== index;
     allSlides.forEach((slide) => {
       slide.classList.toggle('is-active', slide.dataset.slide === activeId);
     });
     allTitles.forEach((title) => {
       title.classList.toggle('is-active', title.dataset.slide === activeId);
+    });
+    allCtas.forEach((cta) => {
+      cta.classList.toggle('is-active', cta.dataset.slide === activeId);
     });
     Array.from(dotsRoot.querySelectorAll('button')).forEach((dot, i) => {
       const on = i === index;
@@ -140,7 +160,7 @@
       if (on) dot.setAttribute('aria-current', 'true');
       else dot.removeAttribute('aria-current');
     });
-    syncMedia();
+    syncMedia(restartVideo !== false && (changed || restartVideo === true));
   }
 
   function stop() {
@@ -168,11 +188,13 @@
     )).join('');
     dotsRoot.querySelectorAll('button').forEach((dot, i) => {
       dot.addEventListener('click', () => {
-        go(i);
+        go(i, true);
         start();
       });
     });
-    go(0);
+    index = 0;
+    playingVideo = null;
+    go(0, true);
     start();
   }
 
@@ -180,11 +202,11 @@
     const was = inView;
     inView = next;
     if (inView) {
-      syncMedia();
+      syncMedia(!was);
       if (!was) start();
     } else {
       stop();
-      videos.forEach((video) => video.pause());
+      syncMedia(false);
     }
   }
 
@@ -230,7 +252,7 @@
     const dy = y - swipeStartY;
     const axis = swipeAxis || (Math.abs(dx) > Math.abs(dy) ? 'x' : 'y');
     if (axis === 'x' && Math.abs(dx) >= swipeMin && queue.length > 1) {
-      go(index + (dx < 0 ? 1 : -1));
+      go(index + (dx < 0 ? 1 : -1), true);
       start();
     }
     resetSwipe();
@@ -257,6 +279,14 @@
   mediaRoot.addEventListener('touchcancel', resetSwipe);
 
   applySet();
+
+  function measureInView() {
+    const rect = hero.getBoundingClientRect();
+    const vh = window.innerHeight || document.documentElement.clientHeight;
+    const visible = Math.min(rect.bottom, vh) - Math.max(rect.top, 0);
+    return visible > 0 && visible >= Math.min(rect.height, vh) * 0.25;
+  }
+
   setInView(measureInView());
 
   if ('IntersectionObserver' in window) {
@@ -266,9 +296,16 @@
     observer.observe(hero);
   }
 
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) {
+      stop();
+      if (playingVideo) playingVideo.pause();
+    } else {
+      setInView(measureInView());
+    }
+  });
+
   window.addEventListener('pageshow', function () {
     setInView(measureInView());
-    syncMedia();
-    start();
   });
 })();

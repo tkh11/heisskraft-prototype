@@ -638,7 +638,8 @@
       text-shadow: 0 2px 18px rgba(0, 0, 0, 0.4);
     }
 
-    .hero-titles .hero-title:not(.is-active) {
+    .hero-titles .hero-title:not(.is-active),
+    .hero-cta .btn-primary:not(.is-active) {
       display: none;
     }
 
