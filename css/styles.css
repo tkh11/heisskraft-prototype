@@ -3877,20 +3877,17 @@
 
     .designer-feature-media {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr;
       gap: 8px;
     }
 
     .designer-feature-media img {
       width: 100%;
-      height: 110px;
-      object-fit: cover;
+      height: auto;
+      aspect-ratio: 2.4 / 1;
+      object-fit: contain;
+      background: #fff;
       border-radius: 12px;
-    }
-
-    .designer-feature-media img:first-child {
-      grid-column: 1 / -1;
-      height: 140px;
     }
 
     .designer-heading {
@@ -4143,8 +4140,8 @@
     }
 
     @media (max-width: 640px) {
-      .designer-feature-media {
-        display: none;
+      .designer-feature-media img {
+        aspect-ratio: 2.2 / 1;
       }
 
       .designer-services {

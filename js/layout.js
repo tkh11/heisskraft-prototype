@@ -197,7 +197,7 @@
       { name: 'Миникаталог 2025', category: 'Документация', hint: 'Краткий каталог оборудования PDF', href: 'docs.html#mini-2025', thumb: 'assets/icon-pdf.svg', icon: true },
       { name: 'Сервисный центр HEISSKRAFT', category: 'Страница', hint: 'Обслуживание, контакты сервиса, сертификация и гарантия', href: 'service.html', thumb: 'assets/icon-service.svg', icon: true },
       { name: 'Гарантия HEISSKRAFT', category: 'Страница', hint: 'Сроки гарантии на насосы, трубы, станции и другое оборудование', href: 'service.html#warranty', thumb: 'assets/icon-warranty.svg', icon: true },
-      { name: 'Подрядчик', category: 'Профиль', hint: 'Комплектация и поддержка объектов', href: 'contractor.html', thumb: 'assets/icon-contractor.svg', icon: true },
+      { name: 'Монтажник', category: 'Профиль', hint: 'Монтажные комплекты, сервисное обслуживание, обучающий материал', href: 'contractor.html', thumb: 'assets/icon-contractor.svg', icon: true },
       { name: 'Проектировщик', category: 'Профиль', hint: 'Узлы, станции, PPR-CT и сопровождение проекта', href: 'designer.html', thumb: 'assets/icon-designer.svg', icon: true },
       { name: 'Частное лицо', category: 'Профиль', hint: 'Системы для частного дома', href: 'private.html', thumb: 'assets/icon-private.svg', icon: true },
       { name: 'Партнер', category: 'Профиль', hint: 'Дилерские условия', href: 'partner.html', thumb: 'assets/icon-partner.svg', icon: true },
