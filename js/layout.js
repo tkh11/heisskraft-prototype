@@ -89,6 +89,7 @@
       menuBtn.setAttribute('aria-expanded', isOpen);
       menuBtn.setAttribute('aria-label', isOpen ? 'Закрыть меню' : 'Открыть меню');
       document.body.style.overflow = isOpen ? 'hidden' : '';
+      if (isOpen) closeHeaderDropdowns();
     });
 
     mobileMenu.addEventListener('click', (e) => {
@@ -106,29 +107,52 @@
     });
   }
 
-  function initHeaderSelect() {
-    const select = document.querySelector('.header-select');
-    if (!select) return;
-    const btn = select.querySelector('.header-select-toggle');
-    if (!btn) return;
+  function closeHeaderDropdowns() {
+    document.querySelectorAll('.header-select, .header-contacts').forEach((el) => {
+      el.classList.remove('is-open');
+      const btn = el.querySelector('[aria-expanded]');
+      if (btn) btn.setAttribute('aria-expanded', 'false');
+    });
+  }
 
-    function close() {
-      select.classList.remove('is-open');
-      btn.setAttribute('aria-expanded', 'false');
+  function initHeaderDropdowns() {
+    const dropdowns = Array.from(document.querySelectorAll('.header-select, .header-contacts'));
+    if (!dropdowns.length) return;
+
+    function closeDropdown(el) {
+      el.classList.remove('is-open');
+      const btn = el.querySelector('[aria-expanded]');
+      if (btn) btn.setAttribute('aria-expanded', 'false');
     }
 
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const open = select.classList.toggle('is-open');
-      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    function closeAll(except) {
+      dropdowns.forEach((el) => {
+        if (el !== except) closeDropdown(el);
+      });
+    }
+
+    dropdowns.forEach((el) => {
+      const btn = el.querySelector('[aria-expanded]');
+      if (!btn) return;
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const willOpen = !el.classList.contains('is-open');
+        closeAll();
+        if (willOpen) {
+          el.classList.add('is-open');
+          btn.setAttribute('aria-expanded', 'true');
+        } else {
+          closeDropdown(el);
+        }
+      });
     });
 
     document.addEventListener('click', (e) => {
-      if (!select.contains(e.target)) close();
+      if (!dropdowns.some((el) => el.contains(e.target))) closeAll();
     });
 
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && select.classList.contains('is-open')) close();
+      if (e.key === 'Escape') closeAll();
     });
   }
 
@@ -201,7 +225,7 @@
       { name: 'Проектировщик', category: 'Профиль', hint: 'Узлы, станции, PPR-CT и сопровождение проекта', href: 'designer.html', thumb: 'assets/icon-designer.svg', icon: true },
       { name: 'Частное лицо', category: 'Профиль', hint: 'Системы для частного дома', href: 'private.html', thumb: 'assets/icon-private.svg', icon: true },
       { name: 'Партнер', category: 'Профиль', hint: 'Дилерские условия', href: 'partner.html', thumb: 'assets/icon-partner.svg', icon: true },
-      { name: 'Контакты', category: 'Страница', hint: '+7 (495) 258-45-42 · Пушкино', target: '#footer', thumb: 'assets/phone-icon.svg', icon: true },
+      { name: 'Контакты', category: 'Страница', hint: 'MAX, WeChat, +7 (495) 258-45-42, info@heisskraft.ru', target: '#footer', thumb: 'assets/icon-contacts.svg', icon: true },
       { name: 'Оставить заявку', category: 'Действие', hint: 'Подбор оборудования под объект', action: 'request', thumb: 'assets/logo.svg', icon: true }
     ];
 
@@ -334,6 +358,7 @@
     }
 
     function openSearch() {
+      closeHeaderDropdowns();
       lastFocus = document.activeElement;
       searchModal.classList.add('is-open');
       searchModal.setAttribute('aria-hidden', 'false');
@@ -580,7 +605,7 @@
     initSearch();
     initActions();
     markCurrentNav();
-    initHeaderSelect();
+    initHeaderDropdowns();
     initMobileSelect();
     initCookieNotice();
     if (window.Heisskraft && typeof window.Heisskraft.markLayoutReady === 'function') {

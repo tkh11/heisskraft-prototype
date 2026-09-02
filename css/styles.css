@@ -295,35 +295,20 @@
       margin-left: auto;
     }
 
-    .phone {
+    .header-contacts {
+      position: relative;
       order: 1;
     }
 
-    .phone-icon {
+    .request-cart-btn {
       order: 2;
     }
 
-    .request-cart-btn {
+    .search-btn {
       order: 3;
     }
 
-    .search-btn {
-      order: 4;
-    }
-
-    .phone {
-      font-weight: 700;
-      font-size: 18px;
-      color: var(--dark);
-      white-space: nowrap;
-      transition: color 0.2s;
-    }
-
-    .phone:hover {
-      color: var(--red);
-    }
-
-    .phone-icon {
+    .header-contacts-toggle {
       width: 44px;
       height: 44px;
       display: flex;
@@ -333,14 +318,98 @@
       transition: background 0.2s;
     }
 
-    .phone-icon:hover {
+    .header-contacts-toggle:hover,
+    .header-contacts.is-open .header-contacts-toggle {
       background: #f3f4f6;
     }
 
-    .phone-icon img {
+    .header-contacts-toggle img {
       width: 22px;
       height: 22px;
       object-fit: contain;
+    }
+
+    .header-contacts-menu {
+      display: none;
+      position: absolute;
+      top: calc(100% + 6px);
+      right: 0;
+      z-index: 20;
+      min-width: 268px;
+      width: max-content;
+      flex-direction: column;
+      gap: 2px;
+      padding: 8px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: 0 12px 32px rgba(17, 24, 39, 0.12);
+    }
+
+    .header-contacts.is-open .header-contacts-menu {
+      display: flex;
+    }
+
+    .header-contacts-menu a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 10px;
+      border-radius: 10px;
+      color: var(--dark);
+      transition: background 0.2s;
+    }
+
+    .header-contacts-menu a:hover {
+      background: #f3f4f6;
+    }
+
+    .header-contact-icon {
+      width: 36px;
+      height: 36px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .header-contact-icon.is-mono {
+      background: #f3f4f6;
+    }
+
+    .header-contact-icon img {
+      width: 36px;
+      height: 36px;
+      object-fit: contain;
+    }
+
+    .header-contact-icon.is-mono img {
+      width: 18px;
+      height: 18px;
+    }
+
+    .header-contact-text {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      gap: 1px;
+    }
+
+    .header-contact-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--gray);
+      line-height: 1.2;
+    }
+
+    .header-contact-value {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--dark);
+      line-height: 1.3;
+      white-space: nowrap;
     }
 
     .request-cart-btn {
@@ -1576,15 +1645,11 @@
         margin-left: 0;
       }
 
-      .header-right .phone {
-        display: none;
-      }
-
       .search-btn {
         order: 1;
       }
 
-      .phone-icon {
+      .header-contacts {
         order: 2;
       }
 
@@ -1592,14 +1657,14 @@
         order: 3;
       }
 
-      .phone-icon,
+      .header-contacts-toggle,
       .search-btn,
       .request-cart-btn {
         width: 40px;
         height: 40px;
       }
 
-      .phone-icon img,
+      .header-contacts-toggle img,
       .search-btn img,
       .request-cart-btn img {
         width: 20px;
@@ -1702,15 +1767,11 @@
         width: auto;
       }
 
-      .header-right .phone {
-        display: none;
-      }
-
       .search-btn {
         order: 1;
       }
 
-      .phone-icon {
+      .header-contacts {
         order: 2;
       }
 
@@ -1718,21 +1779,27 @@
         order: 3;
       }
 
-      .phone-icon,
+      .header-contacts-toggle,
       .search-btn,
       .request-cart-btn {
         width: 36px;
         height: 36px;
       }
 
-      .phone-icon img,
+      .header-contacts-toggle img,
       .search-btn img,
       .request-cart-btn img {
         width: 22px;
         height: 22px;
       }
 
-      .phone-icon:hover,
+      .header-contacts-menu {
+        right: 0;
+        min-width: min(268px, calc(100vw - 32px));
+      }
+
+      .header-contacts-toggle:hover,
+      .header-contacts.is-open .header-contacts-toggle,
       .search-btn:hover,
       .search-btn[aria-expanded="true"],
       .request-cart-btn:hover {

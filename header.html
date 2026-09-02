@@ -28,13 +28,52 @@
   </nav>
 
   <div class="header-right">
-    <a href="tel:+74952584542" class="phone">+7 (495) 258-45-42</a>
+    <div class="header-contacts">
+      <button type="button" class="header-contacts-toggle" aria-expanded="false" aria-haspopup="true" aria-controls="headerContactsMenu" aria-label="Контакты">
+        <img src="assets/icon-contacts.svg" alt="" width="36" height="36" />
+      </button>
+      <div class="header-contacts-menu" id="headerContactsMenu">
+        <a href="https://max.ru/" target="_blank" rel="noopener noreferrer">
+          <span class="header-contact-icon" aria-hidden="true">
+            <img src="assets/icon-max.svg" alt="" width="32" height="32" />
+          </span>
+          <span class="header-contact-text">
+            <span class="header-contact-label">MAX</span>
+            <span class="header-contact-value">Написать в мессенджер</span>
+          </span>
+        </a>
+        <a href="https://www.wechat.com/" target="_blank" rel="noopener noreferrer">
+          <span class="header-contact-icon" aria-hidden="true">
+            <img src="assets/icon-wechat.svg" alt="" width="32" height="32" />
+          </span>
+          <span class="header-contact-text">
+            <span class="header-contact-label">WeChat</span>
+            <span class="header-contact-value">Написать в мессенджер</span>
+          </span>
+        </a>
+        <a href="tel:+74952584542">
+          <span class="header-contact-icon is-mono" aria-hidden="true">
+            <img src="assets/phone-icon.svg" alt="" width="22" height="22" />
+          </span>
+          <span class="header-contact-text">
+            <span class="header-contact-label">Телефон</span>
+            <span class="header-contact-value">+7 (495) 258-45-42</span>
+          </span>
+        </a>
+        <a href="mailto:info@heisskraft.ru">
+          <span class="header-contact-icon is-mono" aria-hidden="true">
+            <img src="assets/icon-email.svg" alt="" width="22" height="22" />
+          </span>
+          <span class="header-contact-text">
+            <span class="header-contact-label">Почта</span>
+            <span class="header-contact-value">info@heisskraft.ru</span>
+          </span>
+        </a>
+      </div>
+    </div>
     <button class="search-btn" id="searchBtn" aria-label="Поиск" aria-expanded="false" aria-controls="searchModal" aria-haspopup="dialog">
       <img src="assets/search-icon.svg" alt="" width="36" height="36" />
     </button>
-    <a href="tel:+74952584542" class="phone-icon" aria-label="Позвонить">
-      <img src="assets/phone-icon.svg" alt="" width="36" height="36" />
-    </a>
     <button type="button" class="request-cart-btn" data-action="request" aria-label="Открыть заявку" aria-haspopup="dialog">
       <img src="assets/request-icon.svg" alt="" width="24" height="24" />
       <span class="request-cart-count" hidden>0</span>
@@ -71,6 +110,8 @@
       <a href="#" data-action="request">Оставить заявку</a>
     </nav>
     <div class="mobile-menu-contacts">
+      <a href="https://max.ru/" target="_blank" rel="noopener noreferrer">MAX</a>
+      <a href="https://www.wechat.com/" target="_blank" rel="noopener noreferrer">WeChat</a>
       <a href="tel:+74952584542">+7 (495) 258-45-42</a>
       <a href="mailto:info@heisskraft.ru">info@heisskraft.ru</a>
     </div>
