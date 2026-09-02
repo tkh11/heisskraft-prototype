@@ -1,47 +1,33 @@
 (function () {
-  const root = document.getElementById('specGallery');
-  if (!root) return;
+  const nav = document.querySelector('.designer-toc');
+  if (!nav) return;
 
-  const copies = Array.from(root.querySelectorAll('.spec-copy'));
-  const slides = Array.from(root.querySelectorAll('.spec-slide'));
-  const prevBtn = root.querySelector('[data-spec-prev]');
-  const nextBtn = root.querySelector('[data-spec-next]');
-  const media = root.querySelector('.spec-gallery-media');
-  const total = Math.min(copies.length, slides.length);
-  let index = 0;
-  let touchX = null;
+  const links = Array.from(nav.querySelectorAll('a[href^="#"]'));
+  const sections = links
+    .map((link) => document.querySelector(link.getAttribute('href')))
+    .filter(Boolean);
 
-  function go(next) {
-    if (!total) return;
-    index = (next + total) % total;
-    copies.forEach((el, i) => el.classList.toggle('is-active', i === index));
-    slides.forEach((el, i) => el.classList.toggle('is-active', i === index));
+  function setActive(id) {
+    links.forEach((link) => {
+      link.classList.toggle('is-active', link.getAttribute('href') === '#' + id);
+    });
   }
 
-  if (prevBtn) prevBtn.addEventListener('click', () => go(index - 1));
-  if (nextBtn) nextBtn.addEventListener('click', () => go(index + 1));
-
-  root.addEventListener('keydown', (event) => {
-    if (event.key === 'ArrowLeft') {
-      event.preventDefault();
-      go(index - 1);
-    }
-    if (event.key === 'ArrowRight') {
-      event.preventDefault();
-      go(index + 1);
-    }
-  });
-
-  if (media) {
-    media.addEventListener('touchstart', (event) => {
-      touchX = event.changedTouches[0].clientX;
-    }, { passive: true });
-    media.addEventListener('touchend', (event) => {
-      if (touchX == null) return;
-      const dx = event.changedTouches[0].clientX - touchX;
-      touchX = null;
-      if (Math.abs(dx) < 40) return;
-      go(index + (dx < 0 ? 1 : -1));
-    }, { passive: true });
+  function currentId() {
+    const offset = nav.getBoundingClientRect().bottom + 24;
+    let active = sections[0];
+    sections.forEach((section) => {
+      if (section.getBoundingClientRect().top <= offset) active = section;
+    });
+    return active ? active.id : '';
   }
+
+  function sync() {
+    const id = currentId();
+    if (id) setActive(id);
+  }
+
+  window.addEventListener('scroll', sync, { passive: true });
+  window.addEventListener('resize', sync);
+  sync();
 })();
