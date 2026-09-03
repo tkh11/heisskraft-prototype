@@ -106,6 +106,54 @@
     return serial ? 'catalog.html?' + serial : 'catalog.html';
   }
 
+  function catalogFileName(pathname) {
+    let name = String(pathname || '').split('/').pop() || '';
+    if (!name) return 'catalog.html';
+    if (name.indexOf('.') === -1) name += '.html';
+    return name;
+  }
+
+  function isCatalogPageHref(href) {
+    if (!href) return false;
+    try {
+      const next = new URL(href, window.location.href);
+      if (next.origin !== window.location.origin) return false;
+      return catalogFileName(next.pathname) === 'catalog.html' &&
+        catalogFileName(window.location.pathname) === 'catalog.html';
+    } catch (err) {
+      return false;
+    }
+  }
+
+  let dataReady = false;
+
+  function locationKey(href) {
+    const url = new URL(href, window.location.href);
+    return url.pathname + url.search + url.hash;
+  }
+
+  function go(url, replace) {
+    const next = typeof url === 'string' ? url : href(url);
+    const key = locationKey(next);
+    const current = window.location.pathname + window.location.search + window.location.hash;
+    try {
+      if (replace) window.history.replaceState({}, '', next);
+      else if (key !== current) window.history.pushState({}, '', next);
+    } catch (err) {
+      window.location.href = next;
+      return;
+    }
+    if (dataReady) render();
+    if (!window.location.hash) {
+      const top = document.getElementById('products') || titleEl;
+      if (top && typeof top.scrollIntoView === 'function') {
+        top.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        window.scrollTo(0, 0);
+      }
+    }
+  }
+
   function findById(list, id) {
     return (list || []).find((item) => item.id === id) || null;
   }
@@ -498,9 +546,7 @@
       const field = filtersEl.elements[item.key];
       if (field && field.value) nextFilters[item.key] = field.value;
     });
-    const url = href(Object.assign({}, state, { filters: nextFilters }));
-    window.history.replaceState({}, '', url);
-    render();
+    go(href(Object.assign({}, state, { filters: nextFilters })), true);
   }
 
   if (filtersEl) filtersEl.addEventListener('change', updateFilters);
@@ -513,13 +559,26 @@
     findForm.addEventListener('submit', (event) => {
       event.preventDefault();
       const state = readState();
-      const url = href(Object.assign({}, state, { q: queryInput ? queryInput.value.trim() : '' }));
-      window.history.pushState({}, '', url);
-      render();
+      go(href(Object.assign({}, state, { q: queryInput ? queryInput.value.trim() : '' })));
     });
   }
 
-  window.addEventListener('popstate', render);
+  document.addEventListener('click', (event) => {
+    if (event.defaultPrevented || event.button !== 0) return;
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    const link = event.target.closest('a[href]');
+    if (!link) return;
+    const target = link.getAttribute('target');
+    if (target && target !== '_self') return;
+    const hrefAttr = link.getAttribute('href');
+    if (!isCatalogPageHref(hrefAttr)) return;
+    event.preventDefault();
+    go(hrefAttr);
+  });
+
+  window.addEventListener('popstate', () => {
+    if (dataReady) render();
+  });
 
   function dataApi() {
     return window.Heisskraft || null;
@@ -550,6 +609,7 @@
     if (!Array.isArray(taxonomy.categories)) taxonomy.categories = [];
     if (!Array.isArray(taxonomy.applications)) taxonomy.applications = [];
     allProducts = Array.isArray(products) ? products : [];
+    dataReady = true;
     buildProductFuse();
     render();
     if (typeof Fuse !== 'function' && dataApi() && typeof dataApi().loadFuse === 'function') {
